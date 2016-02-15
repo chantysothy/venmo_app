@@ -7,12 +7,14 @@ import React, {
   Text,
   View,
   Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 
 var {width, height} = Dimensions.get('window');
 
 //import * as Carousel from 'react-native-carousel';
 var Carousel = require('react-native-carousel');
+var FacebookLoginManager = require('NativeModules').FacebookLoginManager;
 
 export default class LaunchCarousel extends Component {
   render() {
@@ -26,9 +28,23 @@ export default class LaunchCarousel extends Component {
         </View>
         <View style={styles.container}>
           <Text>Page 3</Text>
+          <TouchableHighlight
+            onPress={() => this._loginWithFacebook()} underlayColor='#3B0B0B'>
+            <Text> Login with Facebook</Text>
+          </TouchableHighlight>
         </View>
       </Carousel>
     );
+  }
+
+  _loginWithFacebook() {
+    FacebookLoginManager.newSession((error, data) => {
+      if (error) {
+        console.log('error ' + error);
+      } else {
+        console.log(data);
+      }
+    });
   }
 }
 
