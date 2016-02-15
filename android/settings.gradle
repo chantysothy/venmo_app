@@ -1,0 +1,3 @@
+rootProject.name = 'venmo_app'
+
+include ':app'
