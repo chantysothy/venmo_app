@@ -31,3 +31,5 @@ local.properties
 # node.js
 #
 npm-debug.log
+
+*.swp
