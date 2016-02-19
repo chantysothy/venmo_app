@@ -9,6 +9,7 @@
     "react-native": "^0.19.0",
     "react-native-carousel": "^0.4.4",
     "react-native-facebook-login": "^1.0.3",
+    "react-native-simple-store": "^0.1.0",
     "react-redux": "^3.1.0",
     "redux": "^3.0.5",
     "redux-logger": "^2.3.1",

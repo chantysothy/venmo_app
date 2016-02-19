@@ -2,7 +2,7 @@ import { REQUEST_LOGIN, RECEIVE_LOGIN, LOGOUT } from '../constants/actionTypes';
 import * as ajax from '../lib/ajax.js';
 import React from 'react-native'
 
-var ReactBridge = React.NativeModules.ReactBridge;
+var store = require('react-native-simple-store');
 
 function requestLogin() {
   return {
@@ -13,16 +13,20 @@ function requestLogin() {
 function receiveLogin(status, user, navigator) {
   return dispatch => {
     if (status == 200) {
-      navigator.push({
-        id: 'Home',
+      store.save('email', user.user.email).then(() => {
+        store.save('token', user.authentication_token).then(() => {
+          navigator.push({
+            id: 'Home',
+          });
+        });
+      });
+
+      dispatch({
+        type: RECEIVE_LOGIN,
+        user,
+        receivedAt: Date.now(),
       });
     }
-
-    dispatch({
-      type: RECEIVE_LOGIN,
-      user,
-      receivedAt: Date.now(),
-    });
   }
 }
 
@@ -38,11 +42,23 @@ exports.fetchFacebookLogin = function fetchFacebookLogin(id, token, navigator) {
   }
 }
 
+exports.fetchLoginWithToken = function fetchLoginWithToken(email, token, navigator) {
+  return dispatch => {
+    dispatch(requestLogin());
+    return ajax.loginWithToken(email, token)
+    .then(response => {
+      response.json()
+      .then(json => dispatch(receiveLogin(response.status, json.data, navigator)))
+    })
+    .catch(error => console.log(error));
+  }
+}
+
 exports.logout = function(navigator) {
   navigator.pop();
-  UserDefaults.removeItemForKey('email')
+  store.delete('email')
   .then(result => {
-    UserDefaults.removeItemForKey('token')
+    store.delete('token')
   });
 
   return {

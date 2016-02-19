@@ -12,7 +12,8 @@ import React, {
 
 import { connect } from 'react-redux/native';
 
-import { fetchFacebookLogin } from '../../actions/loginActions.js';
+import { fetchFacebookLogin, fetchLoginWithToken } from '../../actions/loginActions.js';
+import { withEmailAndToken } from '../../utils/utils';
 
 var {width, height} = Dimensions.get('window');
 
@@ -20,6 +21,12 @@ var Carousel = require('react-native-carousel');
 var FacebookLoginManager = require('NativeModules').FacebookLoginManager;
 
 class LaunchCarousel extends Component {
+  componentDidMount() {
+    withEmailAndToken((email, token) => {
+        this.props.dispatch(fetchLoginWithToken(email, token, this.props.navigator));
+    })
+  }
+
   render() {
     return (
       <Carousel indicatorSize={15} indicatorOffset={30} delay={1500}>

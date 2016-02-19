@@ -17,3 +17,16 @@ export function facebookCreateOrLogin(facebookId, facebookToken) {
     body: f,
   }));
 }
+
+export function loginWithToken(email, token) {
+  var f = new FormData();
+  f.append('email', email);
+  f.append('authentication_token', token);
+
+  var requestUrl = API_BASE + '/auth/login_with_token/'
+
+  return(fetch(requestUrl, {
+    method: 'post',
+    body: f,
+  }));
+}
