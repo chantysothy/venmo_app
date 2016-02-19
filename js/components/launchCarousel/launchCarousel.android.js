@@ -10,6 +10,10 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 
+import { connect } from 'react-redux/native';
+
+import { fetchFacebookLogin } from '../../actions/loginActions.js';
+
 var {width, height} = Dimensions.get('window');
 
 //import * as Carousel from 'react-native-carousel';
@@ -33,26 +37,22 @@ export default class LaunchCarousel extends Component {
           <Text>Page 3</Text>
 
           <TouchableHighlight
-            onPress={this._loginWithFacebook}>
+            onPress={() => this._loginWithFacebook()}>
             <Text> Touch me pls :) </Text>
           </TouchableHighlight>
-          {/* <FBLogin */}
-          {/*   onLogin={function(e){console.log(e)}} */}
-          {/*   onLogout={function(e){console.log(e)}} */}
-          {/*   onCancel={function(e){console.log(e)}} */}
-          {/*   onPermissionsMissing={function(e){console.log(e)}} */}
-          {/* /> */}
         </View>
       </Carousel>
     );
   }
 
   _loginWithFacebook() {
+    var self = this;
     FacebookLoginManager.loginWithPermissions(["email"], (error, data) => {
       if (error) {
         console.log('error ' + error);
       } else {
-        console.log(data);
+        // TODO use the actual token and id
+        self.props.dispatch(fetchFacebookLogin("id_here", "token_here", self.props.navigator));
       }
     });
   }
@@ -68,3 +68,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'magenta',
   },
 });
+
+module.exports = connect()(LaunchCarousel);

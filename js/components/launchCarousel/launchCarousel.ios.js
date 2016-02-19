@@ -10,13 +10,16 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 
+import { connect } from 'react-redux/native';
+
+import { fetchFacebookLogin } from '../../actions/loginActions.js';
+
 var {width, height} = Dimensions.get('window');
 
-//import * as Carousel from 'react-native-carousel';
 var Carousel = require('react-native-carousel');
 var FacebookLoginManager = require('NativeModules').FacebookLoginManager;
 
-export default class LaunchCarousel extends Component {
+class LaunchCarousel extends Component {
   render() {
     return (
       <Carousel indicatorSize={15} indicatorOffset={30} delay={1500}>
@@ -38,11 +41,12 @@ export default class LaunchCarousel extends Component {
   }
 
   _loginWithFacebook() {
+    var self = this;
     FacebookLoginManager.newSession((error, data) => {
       if (error) {
         console.log('error ' + error);
       } else {
-        console.log(data);
+        self.props.dispatch(fetchFacebookLogin(data.userId, data.token, self.props.navigator));
       }
     });
   }
@@ -58,3 +62,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'magenta',
   },
 });
+
+module.exports = connect()(LaunchCarousel);
