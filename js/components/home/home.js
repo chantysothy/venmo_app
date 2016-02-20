@@ -27,7 +27,7 @@ class Home extends Component {
         <View style={styles.container}>
           <Text>{user.email}</Text>
           <Text>{balance.balance_formatted}</Text>
-          <SocialFeed />
+          <SocialFeed style={styles.socialFeed}/>
         </View>
       );
     }

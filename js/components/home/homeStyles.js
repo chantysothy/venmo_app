@@ -16,6 +16,9 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  socialFeed: {
+    width: width
+  }
 });
 
 module.exports = styles;

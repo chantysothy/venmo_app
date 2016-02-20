@@ -8,13 +8,20 @@ var {
 var {width, height} = Dimensions.get('window');
 
 var styles = StyleSheet.create({
+  container: {
+    width: width,
+    marginBottom: 30
+  },
   feedItem: {
-    flex: 1,
+    width: width,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 5,
-    marginBottom: 5
+    paddingBottom: 5,
+    paddingTop: 5,
+    paddingLeft: 15,
+    borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,
   },
   feedItemThumbnail: {
     width: 50,

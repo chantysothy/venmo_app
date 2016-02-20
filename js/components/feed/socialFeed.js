@@ -46,21 +46,12 @@ class SocialFeed extends Component {
   }
 
   render() {
-    var socialFeed = this.props.feed.friendPayments.map((item) => {
-      return (
-        <FeedItem
-          key = { item.payment.id }
-          payment = { item.payment }
-          payee = { item.payee }
-          payer = { item.payer } />
-      )
-    });
-
     if (this.props.feed.isFetching) {
       return(<View><Text>Fetching...</Text></View>);
     } else {
       return (
         <ListView
+          style={styles.container}
           dataSource={ this.state.dataSource }
           renderRow={this.renderRow} />
       );
@@ -121,7 +112,6 @@ class FeedItem extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.feed);
   return {
     feed: state.feed
   }
