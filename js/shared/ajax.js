@@ -9,8 +9,15 @@ var url = require('url');
 function POST(requestUrl, data) {
   var f = new FormData();
   for (var key in data) {
-    f.append(key, data[key]);
+    if (typeof data[key] === "object") {
+      for (var innerKey in data[key]) {
+        f.append(`${key}[${innerKey}]`, data[key][innerKey]);
+      }
+    } else {
+      f.append(key, data[key]);
+    }
   }
+
   return fetch(requestUrl, {
     method: 'post',
     body: f
@@ -39,4 +46,19 @@ export function getSocialFeed(email, authentication_token) {
 export function getPrivateFeed(email, authentication_token) {
   var requestUrl = API_BASE + '/social/private_feed';
   return GET(requestUrl, { email, authentication_token } );
+}
+
+export function searchUsers(email, authentication_token, query) {
+  var requestUrl = API_BASE + '/users/search/'
+  return GET(requestUrl, { email, authentication_token, query } );
+}
+
+export function pay(email, authentication_token, paymentParams, nonce) {
+  var requestUrl = API_BASE + '/payments/'
+  return POST(requestUrl, {
+    email,
+    authentication_token,
+    payment_method_nonce: nonce,
+    payment: paymentParams,
+  });
 }

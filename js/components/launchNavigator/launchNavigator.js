@@ -4,6 +4,7 @@ var ReactBridge = require('react-native').NativeModules.ReactBridge;
 
 import LaunchCarousel from '../launchCarousel/launchCarousel';
 import Home from '../home/home';
+import CreatePayment from '../createPayment/createPayment';
 
 var {
   View,
@@ -16,6 +17,8 @@ export default class MelamineLaunch extends React.Component {
     switch(route.id) {
       case 'Home':
         return (<Home navigator={nav}/>);
+      case 'CreatePayment':
+        return (<CreatePayment navigator={nav}/>);
       case 'LaunchCarousel':
         return(<LaunchCarousel navigator={nav}/>);
     }

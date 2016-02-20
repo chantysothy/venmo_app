@@ -4,7 +4,7 @@ import {
   REQUEST_PRIVATE_FEED,
   RECEIVE_PRIVATE_FEED,
 } from '../constants/actionTypes';
-import * as ajax from '../lib/ajax.js';
+import * as ajax from '../shared/ajax'
 import React from 'react-native'
 
 function handleError(error) {

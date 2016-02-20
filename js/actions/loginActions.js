@@ -1,5 +1,5 @@
 import { REQUEST_LOGIN, RECEIVE_LOGIN, LOGOUT } from '../constants/actionTypes';
-import * as ajax from '../lib/ajax.js';
+import * as ajax from '../shared/ajax.js';
 import React from 'react-native'
 
 var store = require('react-native-simple-store');

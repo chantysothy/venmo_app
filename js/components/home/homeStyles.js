@@ -26,7 +26,6 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: "#900",
   },
-
   feedButtons: {
     marginTop: 10,
     marginBottom: 10,
@@ -37,7 +36,6 @@ var styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "white",
   },
-
   feedButton: {
     paddingLeft: 15,
     paddingRight: 15,
@@ -45,7 +43,6 @@ var styles = StyleSheet.create({
     paddingBottom: 5,
     borderColor: "white",
   },
-
   centerButton: {
     borderColor: "white",
     borderLeftWidth: 2,

@@ -1,14 +1,11 @@
 'use strict';
 
 import React, {
-  AppRegistry,
   Component,
-  StyleSheet,
   Text,
   View,
-  ScrollView,
-  Dimensions,
   TouchableHighlight,
+  Navigator,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -20,6 +17,7 @@ import { withEmailAndToken } from '../../utils/utils';
 var Icon = require('react-native-vector-icons/Ionicons');
 var styles = require('./homeStyles');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
+var textStyles = require('../../shared/textStyles');
 
 class Home extends Component {
 
@@ -39,7 +37,7 @@ class Home extends Component {
 
       return (
         <View style={styles.container}>
-          <ScrollableTabView initialPage={1} renderTabBar={() => <HomeNavBar />}>
+          <ScrollableTabView initialPage={1} renderTabBar={() => <HomeNavBar navigator={this.props.navigator}/>}>
             <Feed
               tabLabel="earth"
               style={styles.socialFeed}
@@ -90,8 +88,19 @@ class HomeNavBar extends Component {
           { this.renderButton("person-stalker", 1) }
           { this.renderButton("person", 2) }
         </View>
+        <TouchableHighlight
+          onPress={() => this._transitionToCreatePayment()}>
+          <Text style={[textStyles.text, {color: 'black'}]}>Pay</Text>
+        </TouchableHighlight>
       </View>
     )
+  }
+
+  _transitionToCreatePayment() {
+    this.props.navigator.push({
+      id: 'CreatePayment',
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+    });
   }
 }
 
