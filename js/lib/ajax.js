@@ -1,31 +1,37 @@
 'use strict';
 
 import { API_BASE } from '../constants/urls.js';
+var queryString = require('query-string');
 
 import React from 'react-native'
 var url = require('url');
 
-export function facebookCreateOrLogin(facebookToken) {
+function POST(requestUrl, data) {
   var f = new FormData();
-  f.append('facebook_token', encodeURIComponent(facebookToken));
-
-  var requestUrl = API_BASE + '/auth/login/'
-
-  return(fetch(requestUrl, {
+  for (var key in data) {
+    f.append(key, data[key]);
+  }
+  return fetch(requestUrl, {
     method: 'post',
-    body: f,
-  }));
+    body: f
+  });
 }
 
-export function loginWithToken(email, token) {
-  var f = new FormData();
-  f.append('email', email);
-  f.append('authentication_token', token);
+function GET(requestUrl, data) {
+  return fetch(requestUrl + '?' + queryString.stringify(data), { method: 'get' } );
+}
 
-  var requestUrl = API_BASE + '/auth/login_with_token/'
+export function facebookCreateOrLogin(facebookToken) {
+  var requestUrl = API_BASE + '/auth/login/'
+  return POST(requestUrl, { facebook_token: encodeURIComponent(facebookToken) });
+}
 
-  return(fetch(requestUrl, {
-    method: 'post',
-    body: f,
-  }));
+export function loginWithToken(email, authentication_token) {
+  var requestUrl = API_BASE + '/auth/login_with_token/';
+  return POST(requestUrl, { email, authentication_token });
+}
+
+export function getSocialFeed(email, authentication_token) {
+  var requestUrl = API_BASE + '/social/feed';
+  return GET(requestUrl, { email, authentication_token } );
 }

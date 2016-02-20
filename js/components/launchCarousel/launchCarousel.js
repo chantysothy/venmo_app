@@ -25,7 +25,7 @@ class LaunchCarousel extends Component {
   componentDidMount() {
     withEmailAndToken((email, token) => {
         this.props.dispatch(fetchLoginWithToken(email, token, this.props.navigator));
-    })
+    });
   }
 
   render() {

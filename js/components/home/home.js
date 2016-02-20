@@ -11,6 +11,7 @@ import React, {
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
+import SocialFeed from '../feed/socialFeed.js';
 
 var styles = require('./homeStyles');
 
@@ -26,6 +27,7 @@ class Home extends Component {
         <View style={styles.container}>
           <Text>{user.email}</Text>
           <Text>{balance.balance_formatted}</Text>
+          <SocialFeed />
         </View>
       );
     }
