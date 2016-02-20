@@ -23,17 +23,19 @@ var styles = StyleSheet.create({
     margin: 5,
   },
   feedItemRightContainer: {
-    flex: 1
+    flex: 1,
+    marginLeft: 5,
   },
   feedItemName: {
     fontWeight: 'bold',
   },
   feedItemSummary: {
     textAlign: 'left',
-    marginLeft: 5,
   },
   feedItemNote: {
-    marginLeft: 5,
+  },
+  timeAgo: {
+    color: '#C4C4C4'
   }
 });
 

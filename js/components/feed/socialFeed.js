@@ -17,6 +17,7 @@ import { fetchSocialFeed } from '../../actions/socialFeedActions.js';
 import { withEmailAndToken } from '../../utils/utils';
 
 var styles = require('./feedStyles.js');
+var TimeAgo = require('react-native-timeago');
 
 function isCharge(payment) {
   return payment.status == "pending";
@@ -104,6 +105,9 @@ class FeedItem extends Component {
             // source={{uri: this.props.payer.user.profile_photo_url }} />
             source={{uri: "https://tse3.mm.bing.net/th?id=OIP.M4e1cb51a66363d47c093c1ec7027fa77o2&pid=15.1" }} />
         <View style = { styles.feedItemRightContainer }>
+          <TimeAgo
+            style={styles.timeAgo}
+            time = {this.props.payment.updated_at} />
           { summary }
           <Text style={styles.feedItemNote}>
             <Text>
