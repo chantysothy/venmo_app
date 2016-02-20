@@ -16,8 +16,7 @@ import { connect } from 'react-redux/native';
 import { fetchSocialFeed } from '../../actions/socialFeedActions.js';
 import { withEmailAndToken } from '../../utils/utils';
 
-// var styles = require('./homeStyles');
-//
+var styles = require('./feedStyles.js');
 
 function isCharge(payment) {
   return payment.status == "pending";
@@ -83,27 +82,33 @@ class FeedItem extends Component {
     var payee = this.props.payee.user.first_name + " " + this.props.payee.user.last_name;
     var payer = this.props.payer.user.first_name + " " + this.props.payer.user.last_name;
     if (isCharge(this.props.payment)) {
-      var summary = payee + " charged " + payer + " " + this.props.payment.amount.amount_formatted;
+      var summary = (
+        <Text style={styles.feedItemSummary}>
+          <Text style={styles.feedItemName}>{ payee }</Text> charged <Text style={styles.feedItemName}> {payer} </Text>
+          <Text> { this.props.payment.amount.amount_formatted } </Text>
+        </Text>
+      )
     } else {
-      var summary = payer + " payed " + payee + " " + this.props.payment.amount.amount_formatted;
+      var summary = (
+        <Text style={styles.feedItemSummary}>
+          <Text style={styles.feedItemName}>{payer}</Text> paid <Text style={styles.feedItemName}> {payee} </Text>
+          <Text> { this.props.payment.amount.amount_formatted } </Text>
+        </Text>
+      )
     }
     return (
       <View
-        style = {{ margin: 10 }}>
-        <View>
+        style={styles.feedItem}>
           <Image
-            style={{height: 50, width: 50 }}
-            source={{uri: this.props.payer.user.profile_photo_url }} />
-          <Image
-            style={{height: 50, width: 50 }}
-            source={{uri: this.props.payee.user.profile_photo_url }} />
-        </View>
-        <View>
-          <Text>
-            { summary }
-          </Text>
-          <Text>
-            { this.props.payment.note }
+            style={styles.feedItemThumbnail}
+            // source={{uri: this.props.payer.user.profile_photo_url }} />
+            source={{uri: "https://tse3.mm.bing.net/th?id=OIP.M4e1cb51a66363d47c093c1ec7027fa77o2&pid=15.1" }} />
+        <View style = { styles.feedItemRightContainer }>
+          { summary }
+          <Text style={styles.feedItemNote}>
+            <Text>
+              { this.props.payment.note }
+            </Text>
           </Text>
         </View>
       </View>
