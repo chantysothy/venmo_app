@@ -30,10 +30,10 @@ function receiveLogin(status, user, navigator) {
   }
 }
 
-exports.fetchFacebookLogin = function fetchFacebookLogin(id, token, navigator) {
+exports.fetchFacebookLogin = function fetchFacebookLogin(token, navigator) {
   return dispatch => {
     dispatch(requestLogin());
-    return ajax.facebookCreateOrLogin(id, token)
+    return ajax.facebookCreateOrLogin(token)
     .then(response => {
       response.json()
       .then(json => dispatch(receiveLogin(response.status, json.data, navigator)))

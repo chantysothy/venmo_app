@@ -12,18 +12,22 @@ import React, {
 
 import { connect } from 'react-redux/native';
 
-import { fetchFacebookLogin } from '../../actions/loginActions.js';
+import { fetchFacebookLogin, fetchLoginWithToken } from '../../actions/loginActions.js';
+import { withEmailAndToken } from '../../utils/utils';
 
 var {width, height} = Dimensions.get('window');
 
-//import * as Carousel from 'react-native-carousel';
 var Carousel = require('react-native-carousel');
-var FacebookLoginManager = require('NativeModules').FacebookLoginManager;
-var {NativeModules} = require('react-native');
-var FBLogin = require('react-native-facebook-login');
-var FacebookLoginManager = NativeModules.FBLoginManager; // if needed
 
-export default class LaunchCarousel extends Component {
+var FacebookLoginManager = require('../../utils/facebookLoginManager')
+
+class LaunchCarousel extends Component {
+  componentDidMount() {
+    withEmailAndToken((email, token) => {
+        this.props.dispatch(fetchLoginWithToken(email, token, this.props.navigator));
+    })
+  }
+
   render() {
     return (
       <Carousel indicatorSize={15} indicatorOffset={30} delay={1500}>
@@ -35,10 +39,10 @@ export default class LaunchCarousel extends Component {
         </View>
         <View style={styles.container}>
           <Text>Page 3</Text>
-
           <TouchableHighlight
-            onPress={() => this._loginWithFacebook()}>
-            <Text> Touch me pls :) </Text>
+            underlayColor='#3B0B0B'
+            onPress={() => this._loginWithFacebook()} >
+            <Text> Login with Facebook </Text>
           </TouchableHighlight>
         </View>
       </Carousel>
@@ -47,12 +51,11 @@ export default class LaunchCarousel extends Component {
 
   _loginWithFacebook() {
     var self = this;
-    FacebookLoginManager.loginWithPermissions(["email"], (error, data) => {
+    FacebookLoginManager.newSession((error, data) => {
       if (error) {
         console.log('error ' + error);
       } else {
-        // TODO use the actual token and id
-        self.props.dispatch(fetchFacebookLogin("id_here", "token_here", self.props.navigator));
+        self.props.dispatch(fetchFacebookLogin(data.token, self.props.navigator));
       }
     });
   }
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'magenta',
+    backgroundColor: 'blue',
   },
 });
 
