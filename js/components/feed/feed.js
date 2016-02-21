@@ -16,8 +16,8 @@ import { connect } from 'react-redux/native';
 import { fetchSocialFeed } from '../../actions/socialFeedActions.js';
 import { withEmailAndToken } from '../../utils/utils';
 
+var TimeAgo = require('../../utils/timeAgo.js');
 var styles = require('./feedStyles.js');
-var TimeAgo = require('react-native-timeago');
 
 function isCharge(payment) {
   return payment.status == "pending";
@@ -86,21 +86,29 @@ class FeedItem extends Component {
       )
     }
     return (
-      <View
-        style={styles.feedItem}>
-          <Image
-            style={styles.feedItemThumbnail}
-            source={{uri: imageUrl }} />
+      <View style={styles.feedItem}>
+        <Image
+          style={styles.feedItemThumbnail}
+          source={{uri: imageUrl }} />
         <View style = { styles.feedItemRightContainer }>
-          <TimeAgo
-            style={styles.timeAgo}
-            time = {this.props.payment.updated_at} />
           { summary }
           <Text style={styles.feedItemNote}>
             <Text>
               { this.props.payment.note }
             </Text>
           </Text>
+          <TouchableHighlight
+            underlayColor="rgba(0,0,0,0)"
+            style={styles.commentLink}>
+            <Text style={styles.commentText}>
+              Comment
+            </Text>
+          </TouchableHighlight>
+        </View>
+        <View style={styles.timeAgoContainer}>
+          <TimeAgo
+            style={styles.timeAgo}
+            time = {this.props.payment.updated_at} />
         </View>
       </View>
     )

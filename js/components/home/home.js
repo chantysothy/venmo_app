@@ -74,6 +74,7 @@ class HomeNavBar extends Component {
     }
     return (
       <TouchableHighlight
+        underlayColor="red"
         style={buttonStyles}
         onPress={() => this.props.goToPage(pageId)}>
         <Icon name={iconName} size ={30} color={iconColor}/>

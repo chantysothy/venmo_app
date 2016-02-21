@@ -6,6 +6,31 @@ var {
 var moment = require('moment');
 var TimerMixin = require('react-timer-mixin');
 
+function fromNowShortHand(t){
+  var now = moment();
+  var daysDiff = now.diff(moment(t), 'days');
+  var hoursDiff = now.diff(moment(t), 'hours');
+  var minutesDiff = now.diff(moment(t), 'minutes');
+  var secondsDiff = now.diff(moment(t), 'seconds');
+
+  if (daysDiff > 0) {
+    return daysDiff.toString() + 'd';
+  }
+
+  if (hoursDiff > 0) {
+    return hoursDiff.toString() + 'h';
+  }
+
+  if (minutesDiff  > 0) {
+    return minutesDiff.toString() + 'm';
+  }
+
+  if (secondsDiff  > 0) {
+    return secondsDiff.toString() + 's';
+  }
+  return "OOOPS";
+}
+
 var TimeAgo = React.createClass({
   mixins: [TimerMixin],
   propTypes: {
@@ -17,7 +42,7 @@ var TimeAgo = React.createClass({
   getDefaultProps() {
     return {
       hideAgo: false,
-      interval: 60000
+      interval: 5000
     }
   },
 
@@ -36,9 +61,12 @@ var TimeAgo = React.createClass({
     this.forceUpdate();
   },
 
+
   render() {
     return (
-      <Text {...this.props}>{moment(this.props.time).fromNow(this.props.hideAgo)}</Text>
+      <Text {...this.props}>
+        {fromNowShortHand(this.props.time)}
+      </Text>
     );
   }
 });

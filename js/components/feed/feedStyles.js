@@ -14,6 +14,7 @@ var styles = StyleSheet.create({
   },
   feedItem: {
     width: width,
+    height: height / 6,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -41,8 +42,24 @@ var styles = StyleSheet.create({
   },
   feedItemNote: {
   },
+  timeAgoContainer: {
+    height: height / 6 - 10,
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
   timeAgo: {
-    color: '#C4C4C4'
+    marginTop: 10,
+    paddingRight: 10,
+    color: '#C4C4C4',
+    flex: 1,
+  },
+  commentLink: {
+    marginTop: 10,
+    underlayColor:"white",
+  },
+  commentText: {
+    color: "#999999"
   }
 });
 
