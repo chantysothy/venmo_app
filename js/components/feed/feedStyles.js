@@ -56,7 +56,6 @@ var styles = StyleSheet.create({
   },
   commentLink: {
     marginTop: 10,
-    underlayColor:"white",
   },
   commentText: {
     color: "#999999"
