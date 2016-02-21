@@ -3,7 +3,6 @@
 import React, {
   Component,
   Text,
-  ScrollView,
   TouchableHighlight,
   TextInput,
   View,
@@ -41,7 +40,7 @@ class CreatePayment extends Component {
         <View style={styles.amountTextContainer}>
           <Text style={[textStyles.text, styles.amountText]}>{amountFormatted}</Text>
         </View>
-        <GridView items={this.numberButtons} itemsPerRow={3} renderItem={(item) => this._renderNumberButton(item)}/>
+        <GridView items={this.numberButtons} itemsPerRow={3} renderItem={(item) => this._renderNumberButton(item)} scrollEnabled={false}/>
         <View style={styles.payButtonsContainer}>
           <TouchableHighlight
             style={[styles.payButtons, styles.requestButton]}
