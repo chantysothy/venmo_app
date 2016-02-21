@@ -83,14 +83,23 @@ class HomeNavBar extends Component {
   render() {
     return (
       <View style={styles.navbar}>
+        <TouchableHighlight
+          activeOpacity={0.5}
+          underlayColor="#900"
+          style={[styles.feedButton, styles.moreMenuButton]} >
+          <Icon name="navicon" size ={30} color="white"/>
+        </TouchableHighlight>
         <View style={styles.feedButtons}>
           { this.renderButton("earth", 0) }
           { this.renderButton("person-stalker", 1) }
           { this.renderButton("person", 2) }
         </View>
         <TouchableHighlight
-          onPress={() => this._transitionToCreatePayment()}>
-          <Text style={[textStyles.text, {color: 'black'}]}>Pay</Text>
+          activeOpacity={0.5}
+          underlayColor="#900"
+          style={[styles.feedButton, styles.createPaymentButton]}
+          onPress={this._transitionToCreatePayment.bind(this)}>
+          <Icon name="compose" size ={30} color="white"/>
         </TouchableHighlight>
       </View>
     )

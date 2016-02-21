@@ -20,6 +20,7 @@ function requestPayment() {
 function receivePayment(payment, navigator) {
   var popTo = _.find(navigator.getCurrentRoutes(), (elem) => elem.id === "Home");
   navigator.popToRoute(popTo);
+
   return dispatch => {
     dispatch({
       type: RECEIVE_PAYMENT,
@@ -42,10 +43,12 @@ exports.pay = function pay(email, token, toId, note, amount, navigator) {
     dispatch(requestPayment());
     return ajax.pay(email, token, payment, nonce)
     .then(response => {
-      dispatch(fetchSocialFeed(email, token));
-      dispatch(fetchPrivateFeed(email, token));
-      response.json()
-      .then(json => dispatch(receivePayment(json.data, navigator)))
+      dispatch(fetchSocialFeed(email, token)).then(() => {
+        dispatch(fetchPrivateFeed(email, token)).then(() => {
+          response.json()
+          .then(json => dispatch(receivePayment(json.data, navigator)))
+        })
+      });
     })
     .catch(error => console.log(error));
   }
