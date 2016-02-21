@@ -14,7 +14,6 @@ export default function user(state = defaultUserSearchState, action) {
     case REQUEST_USER_SEARCH:
       return Object.assign({}, state, {
         isFetching: true,
-        results: [],
       });
     case RECEIVE_USER_SEARCH:
       if (action.error) {
