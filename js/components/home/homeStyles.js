@@ -24,16 +24,18 @@ var styles = StyleSheet.create({
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: "#900",
   },
 
   feedButtons: {
     marginTop: 10,
+    marginBottom: 10,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
     borderWidth: 2,
-    borderColor: "#900",
+    borderColor: "white",
   },
 
   feedButton: {
@@ -41,10 +43,11 @@ var styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
+    borderColor: "white",
   },
 
   centerButton: {
-    borderColor: "#900",
+    borderColor: "white",
     borderLeftWidth: 2,
     borderRightWidth: 2,
   },

@@ -62,10 +62,10 @@ class Home extends Component {
 class HomeNavBar extends Component {
   renderButton(iconName, pageId) {
     var buttonStyles = [styles.feedButton];
-    var iconColor = "#900";
+    var iconColor = "white";
     if (this.props.activeTab === pageId) {
-      buttonStyles.push({ backgroundColor: "#900" });
-      iconColor = "white";
+      buttonStyles.push({ backgroundColor: "white" });
+      iconColor = "#900";
     }
 
     // If center button

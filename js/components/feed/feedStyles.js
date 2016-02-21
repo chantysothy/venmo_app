@@ -21,13 +21,13 @@ var styles = StyleSheet.create({
     paddingBottom: 5,
     paddingTop: 5,
     paddingLeft: 15,
-    borderBottomColor: 'lightgrey',
-    borderBottomWidth: 1,
+    borderTopColor: 'lightgrey',
+    borderTopWidth: 1,
   },
   feedItemThumbnail: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     margin: 5,
   },
   feedItemRightContainer: {
