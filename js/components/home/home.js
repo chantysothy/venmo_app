@@ -13,6 +13,7 @@ import React, {
 import { connect } from 'react-redux/native';
 import SocialFeed from '../feed/socialFeed.js';
 
+var Icon = require('react-native-vector-icons/Ionicons');
 var styles = require('./homeStyles');
 
 class Home extends Component {
@@ -36,19 +37,22 @@ class Home extends Component {
 class HomeNavBar extends Component {
   render() {
     return (
-      <View>
-        <View>
+      <View style={styles.navbar}>
+        <View style={styles.feedButtons}>
           <TouchableHighlight
+            style={styles.leftButton}
             onPress={this._goToPublicFeed}>
-            <Text> Friends </Text>
+            <Icon name="earth" size ={30} color="#900"/>
           </TouchableHighlight>
           <TouchableHighlight
+            style={styles.centerButton}
             onPress={this._goToFriendFeed}>
-            <Text> Friends </Text>
+            <Icon name="person-stalker" size={30} color="#900"/>
           </TouchableHighlight>
           <TouchableHighlight
+            style={styles.rightButton}
             onPress={this._goToPrivateProfile}>
-            <Text> Friends </Text>
+            <Icon name="person" size={30} color="#900"/>
           </TouchableHighlight>
         </View>
       </View>

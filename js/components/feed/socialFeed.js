@@ -93,8 +93,7 @@ class FeedItem extends Component {
         style={styles.feedItem}>
           <Image
             style={styles.feedItemThumbnail}
-            // source={{uri: this.props.payer.user.profile_photo_url }} />
-            source={{uri: "https://tse3.mm.bing.net/th?id=OIP.M4e1cb51a66363d47c093c1ec7027fa77o2&pid=15.1" }} />
+            source={{uri: this.props.payer.user.profile_photo_url }} />
         <View style = { styles.feedItemRightContainer }>
           <TimeAgo
             style={styles.timeAgo}
