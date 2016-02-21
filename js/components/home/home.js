@@ -25,12 +25,43 @@ class Home extends Component {
 
       return (
         <View style={styles.container}>
-          <Text>{user.email}</Text>
-          <Text>{balance.balance_formatted}</Text>
+          <HomeNavBar user={this.props.user}/>
           <SocialFeed style={styles.socialFeed}/>
         </View>
       );
     }
+  }
+}
+
+class HomeNavBar extends Component {
+  render() {
+    return (
+      <View>
+        <View>
+          <TouchableHighlight
+            onPress={this._goToPublicFeed}>
+            <Text> Friends </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={this._goToFriendFeed}>
+            <Text> Friends </Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={this._goToPrivateProfile}>
+            <Text> Friends </Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
+
+  _goToPublicFeed() {
+  }
+
+  _goToFriendFeed() {
+  }
+
+  _goToPrivateProfile() {
   }
 }
 
