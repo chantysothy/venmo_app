@@ -98,6 +98,7 @@ class FeedItem extends Component {
             </Text>
           </Text>
           <TouchableHighlight
+            activeOpacity={0.5}
             underlayColor="rgba(0,0,0,0)"
             style={styles.commentLink}>
             <Text style={styles.commentText}>

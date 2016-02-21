@@ -48,6 +48,16 @@ var styles = StyleSheet.create({
     borderLeftWidth: 2,
     borderRightWidth: 2,
   },
+  moreMenuButton: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+  },
+  createPaymentButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  }
 });
 
 module.exports = styles;
