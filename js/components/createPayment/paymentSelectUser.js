@@ -15,10 +15,10 @@ import { connect } from 'react-redux/native';
 import { fetchUsersSearch, clearUsersSearch } from '../../actions/userSearchActions'
 import { pay } from '../../actions/paymentActions'
 
-var styles = require('./searchStyles');
+var styles = require('./paymentSelectUserStyles');
 var textStyles = require('../../shared/textStyles');
 
-class Search extends Component {
+class PaymentSelectUser extends Component {
   constructor(props) {
     super(props);
 
@@ -27,9 +27,6 @@ class Search extends Component {
       note: "",
       to: null,
     }
-  }
-
-  componentWillMount() {
   }
 
   render() {
@@ -126,7 +123,7 @@ class Search extends Component {
     if (this.state.to === null) {
       // signal some error
     } else {
-      this.props.dispatch(pay(email, token, this.state.to.id, this.state.note, this.props.amount))
+      this.props.dispatch(pay(email, token, this.state.to.id, this.state.note, this.props.amount, this.props.navigator))
     }
   }
 }
@@ -140,4 +137,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps)(PaymentSelectUser)

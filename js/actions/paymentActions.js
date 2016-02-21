@@ -7,13 +7,19 @@ import {
 import * as ajax from '../shared/ajax.js';
 import React from 'react-native'
 
+import { fetchSocialFeed, fetchPrivateFeed } from './feedActions'
+
+var _ = require('lodash');
+
 function requestPayment() {
   return {
     type: REQUEST_PAYMENT
   };
 }
 
-function receivePayment(payment) {
+function receivePayment(payment, navigator) {
+  var popTo = _.find(navigator.getCurrentRoutes(), (elem) => elem.id === "Home");
+  navigator.popToRoute(popTo);
   return dispatch => {
     dispatch({
       type: RECEIVE_PAYMENT,
@@ -23,7 +29,7 @@ function receivePayment(payment) {
   }
 }
 
-exports.pay = function pay(email, token, toId, note, amount) {
+exports.pay = function pay(email, token, toId, note, amount, navigator) {
   var payment = {
     note,
     amount,
@@ -36,8 +42,10 @@ exports.pay = function pay(email, token, toId, note, amount) {
     dispatch(requestPayment());
     return ajax.pay(email, token, payment, nonce)
     .then(response => {
+      dispatch(fetchSocialFeed(email, token));
+      dispatch(fetchPrivateFeed(email, token));
       response.json()
-      .then(json => dispatch(receivePayment(json.data)))
+      .then(json => dispatch(receivePayment(json.data, navigator)))
     })
     .catch(error => console.log(error));
   }

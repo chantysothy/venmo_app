@@ -7,17 +7,15 @@ import React, {
   TextInput,
   View,
   LayoutAnimation,
+  Navigator,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
 
 var GridView = require('react-native-grid-view');
-var Modal = require('react-native-modalbox');
 
 var styles = require('./createPaymentStyles');
 var textStyles = require('../../shared/textStyles');
-
-import Search from './search'
 
 class CreatePayment extends Component {
   constructor(props) {
@@ -44,26 +42,14 @@ class CreatePayment extends Component {
         <View style={styles.payButtonsContainer}>
           <TouchableHighlight
             style={[styles.payButtons, styles.requestButton]}
-            onPress={() => this.setState({
-              postAmountModalVisible: true,
-              request: true
-            })}>
+            onPress={() => this._transitionToNextStep(true)}>
             <Text style={[textStyles.text, styles.payButtonsText]}>Request</Text>
           </TouchableHighlight>
           <TouchableHighlight style={styles.payButtons}
-            onPress={() => this.setState({
-              postAmountModalVisible: true,
-              request: false
-            })}>
+            onPress={() => this._transitionToNextStep(false)}>
             <Text style={[textStyles.text, styles.payButtonsText]}>Pay</Text>
           </TouchableHighlight>
         </View>
-        <Modal isOpen={this.state.postAmountModalVisible}
-          style={styles.modal} position="bottom"
-          onOpened={() => this.setState({postAmountModalVisible: true})}
-          onClosed={() => this.setState({postAmountModalVisible: false})}>
-          <Search amount={this.state.amount}/>
-        </Modal>
       </View>
     );
   }
@@ -81,6 +67,14 @@ class CreatePayment extends Component {
     LayoutAnimation.spring();
     this.setState({
       amount: item === "back" ? this.state.amount.slice(0, -1) : this.state.amount + item,
+    });
+  }
+
+  _transitionToNextStep(isRequest) {
+    this.props.navigator.push({
+      id: 'PaymentSelectUser',
+      amount: this.state.amount,
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
     });
   }
 }
