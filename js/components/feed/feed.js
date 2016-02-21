@@ -23,7 +23,7 @@ function isCharge(payment) {
   return payment.status == "pending";
 }
 
-class SocialFeed extends Component {
+class Feed extends Component {
   constructor(props) {
     super(props);
     this.state =  {
@@ -31,22 +31,17 @@ class SocialFeed extends Component {
     };
   }
 
-  componentDidMount() {
-    withEmailAndToken((email, token) => {
-        this.props.dispatch(fetchSocialFeed(email, token));
-    });
-  }
-
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.feed.friendPayments != this.props.feed.friendPayments) {
+    if (prevProps.feed != this.props.feed) {
+      console.log("Updating feed...");
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.props.feed.friendPayments)
+        dataSource: this.state.dataSource.cloneWithRows(this.props.feed)
       });
     }
   }
 
   render() {
-    if (this.props.feed.isFetching) {
+    if (this.props.isFetching) {
       return(<View><Text>Fetching...</Text></View>);
     } else {
       return (
@@ -74,6 +69,7 @@ class FeedItem extends Component {
     var payee = this.props.payee.user.first_name + " " + this.props.payee.user.last_name;
     var payer = this.props.payer.user.first_name + " " + this.props.payer.user.last_name;
     if (isCharge(this.props.payment)) {
+      var imageUrl = this.props.payee.user.profile_photo_url;
       var summary = (
         <Text style={styles.feedItemSummary}>
           <Text style={styles.feedItemName}>{ payee }</Text> charged <Text style={styles.feedItemName}> {payer} </Text>
@@ -81,6 +77,7 @@ class FeedItem extends Component {
         </Text>
       )
     } else {
+      var imageUrl = this.props.payer.user.profile_photo_url;
       var summary = (
         <Text style={styles.feedItemSummary}>
           <Text style={styles.feedItemName}>{payer}</Text> paid <Text style={styles.feedItemName}> {payee} </Text>
@@ -93,7 +90,7 @@ class FeedItem extends Component {
         style={styles.feedItem}>
           <Image
             style={styles.feedItemThumbnail}
-            source={{uri: this.props.payer.user.profile_photo_url }} />
+            source={{uri: imageUrl }} />
         <View style = { styles.feedItemRightContainer }>
           <TimeAgo
             style={styles.timeAgo}
@@ -110,10 +107,4 @@ class FeedItem extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    feed: state.feed
-  }
-}
-
-export default connect(mapStateToProps)(SocialFeed)
+exports.Feed = Feed;

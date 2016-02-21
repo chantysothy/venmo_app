@@ -35,3 +35,8 @@ export function getSocialFeed(email, authentication_token) {
   var requestUrl = API_BASE + '/social/feed';
   return GET(requestUrl, { email, authentication_token } );
 }
+
+export function getPrivateFeed(email, authentication_token) {
+  var requestUrl = API_BASE + '/social/private_feed';
+  return GET(requestUrl, { email, authentication_token } );
+}

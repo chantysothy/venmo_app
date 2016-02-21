@@ -13,7 +13,7 @@ var styles = StyleSheet.create({
   container: {
     height: height,
     width: width,
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
   },
   socialFeed: {
@@ -36,28 +36,18 @@ var styles = StyleSheet.create({
     borderColor: "#900",
   },
 
-  leftButton: {
+  feedButton: {
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
   },
-  centerButton: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 5,
-    paddingBottom: 5,
 
+  centerButton: {
     borderColor: "#900",
     borderLeftWidth: 2,
     borderRightWidth: 2,
   },
-  rightButton: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 5,
-    paddingBottom: 5,
-  }
 });
 
 module.exports = styles;

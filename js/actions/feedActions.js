@@ -52,7 +52,7 @@ exports.fetchPrivateFeed = function(email, token) {
   return dispatch => {
     dispatch({ type:  REQUEST_PRIVATE_FEED });
 
-    return ajax.getSocialFeed(email, token)
+    return ajax.getPrivateFeed(email, token)
                .then( response => {
                  if (response.status == 200) {
                    response.json()
