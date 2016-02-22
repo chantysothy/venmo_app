@@ -24,7 +24,7 @@ var SideMenu = require('react-native-side-menu');
 class Home extends Component {
   constructor(props){
     super(props)
-    this.state = { sideMenuOpen: true, }
+    this.state = { sideMenuOpen: false, }
   }
 
   componentDidMount() {
