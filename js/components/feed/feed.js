@@ -32,6 +32,12 @@ class Feed extends Component {
     };
   }
 
+  componentDidMount() {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(this.props.feed)
+      });
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.feed != this.props.feed) {
       console.log("Updating feed...");
