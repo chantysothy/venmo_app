@@ -13,6 +13,7 @@ import React, {
 import { connect } from 'react-redux/native';
 
 var GridView = require('react-native-grid-view');
+var Animatable = require('react-native-animatable');
 
 var styles = require('./createPaymentStyles');
 var textStyles = require('../../shared/textStyles');
@@ -35,9 +36,10 @@ class CreatePayment extends Component {
 
     return(
       <View style={styles.container}>
-        <View style={styles.amountTextContainer}>
+        <Animatable.View ref="amountTextContainer" style={styles.amountTextContainer}
+          easing="ease-in-out">
           <Text style={[textStyles.text, styles.amountText]}>{amountFormatted}</Text>
-        </View>
+        </Animatable.View>
         <GridView items={this.numberButtons} itemsPerRow={3} renderItem={(item) => this._renderNumberButton(item)} scrollEnabled={false}/>
         <View style={styles.payButtonsContainer}>
           <TouchableHighlight
@@ -65,9 +67,18 @@ class CreatePayment extends Component {
 
   _onNumberButtonPress(item) {
     LayoutAnimation.spring();
-    this.setState({
-      amount: item === "back" ? this.state.amount.slice(0, -1) : this.state.amount + item,
-    });
+
+    // some validations
+    if ((this.state.amount === "" && item === "0") ||
+      (this.state.amount.indexOf(".") != -1 && item === ".") ||
+      (this.state.amount === "" && item === "back") ||
+      ((this.state.amount.indexOf(".") != -1 && item !== "back" && this.state.amount.indexOf(".") + 2 < this.state.amount.length))) {
+      this.refs.amountTextContainer.wobble(500)
+    } else {
+      this.setState({
+        amount: item === "back" ? this.state.amount.slice(0, -1) : this.state.amount + item,
+      });
+    }
   }
 
   _transitionToNextStep(isRequest) {

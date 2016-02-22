@@ -42,15 +42,17 @@ exports.pay = function pay(email, token, toId, note, amount, navigator) {
   return dispatch => {
     dispatch(requestPayment());
     return ajax.pay(email, token, payment, nonce)
-    .then(response => {
-      dispatch(fetchSocialFeed(email, token)).then(() => {
-        dispatch(fetchPrivateFeed(email, token)).then(() => {
-          response.json()
-          .then(json => dispatch(receivePayment(json.data, navigator)))
-        })
-      });
-    })
-    .catch(error => console.log(error));
+               .then(response => {
+                 var promiseAll = Promise.all([
+                   dispatch(fetchSocialFeed(email, token)),
+                   dispatch(fetchPrivateFeed(email, token))
+                 ])
+                 promiseAll.then(() => {
+                     response.json()
+                     .then(json => dispatch(receivePayment(json.data, navigator)))
+                 });
+               })
+               .catch(error => console.log(error));
   }
 }
 
