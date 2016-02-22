@@ -10,6 +10,7 @@ import React, {
 
 import { connect } from 'react-redux/native';
 import { Feed } from '../feed/feed.js';
+import { Menu } from '../sideMenu/sideMenu.js';
 
 import { fetchSocialFeed, fetchPrivateFeed } from '../../actions/feedActions.js';
 import { withEmailAndToken } from '../../utils/utils';
@@ -18,8 +19,13 @@ var Icon = require('react-native-vector-icons/Ionicons');
 var styles = require('./homeStyles');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var textStyles = require('../../shared/textStyles');
+var SideMenu = require('react-native-side-menu');
 
 class Home extends Component {
+  constructor(props){
+    super(props)
+    this.state = { sideMenuOpen: true, }
+  }
 
   componentDidMount() {
     withEmailAndToken((email, token) => {
@@ -34,26 +40,53 @@ class Home extends Component {
     } else {
       var user = this.props.user.params.user;
       var balance = this.props.user.params.balance;
+      var menu = <Menu user={user} balance={balance}/>
 
       return (
-        <View style={styles.container}>
-          <ScrollableTabView initialPage={1} renderTabBar={() => <HomeNavBar navigator={this.props.navigator}/>}>
-            <Feed
-              tabLabel="earth"
-              style={styles.socialFeed}
-              feed={this.props.feed.friendPayments} />
-            <Feed
-              tabLabel="stalker-person"
-              style={styles.socialFeed}
-              feed={this.props.feed.friendPayments} />
-            <Feed
-              tabLabel="person"
-              style={styles.socialFeed}
-              feed={this.props.feed.privatePayments} />
-          </ScrollableTabView>
-        </View>
+        <SideMenu
+          menu={menu}
+          openMenuOffset={200}
+          onChange={this._onSideMenuToggle.bind(this)}
+          isOpen={this.state.sideMenuOpen}>
+          <View style={styles.container}>
+            <ScrollableTabView
+              initialPage={1}
+              renderTabBar={this._renderSideMenu.bind(this)}>
+              <Feed
+                tabLabel="earth"
+                style={styles.socialFeed}
+                feed={this.props.feed.friendPayments} />
+              <Feed
+                tabLabel="stalker-person"
+                style={styles.socialFeed}
+                feed={this.props.feed.friendPayments} />
+              <Feed
+                tabLabel="person"
+                style={styles.socialFeed}
+                feed={this.props.feed.privatePayments} />
+            </ScrollableTabView>
+          </View>
+        </SideMenu>
       );
     }
+  }
+
+  _toggleSideMenu() {
+    console.log(this.state);
+    this.setState({ sideMenuOpen: !this.state.sideMenuOpen });
+  }
+
+  _onSideMenuToggle(isOpen) {
+    console.log("TOGGLED BRO", isOpen);
+    this.setState({sideMenuOpen: isOpen });
+  }
+
+  _renderSideMenu() {
+    return (
+      <HomeNavBar
+        toggleSideMenu={this._toggleSideMenu.bind(this)}
+        navigator={this.props.navigator}/>
+    )
   }
 }
 
@@ -86,6 +119,7 @@ class HomeNavBar extends Component {
         <TouchableHighlight
           activeOpacity={0.5}
           underlayColor="#900"
+          onPress={this.props.toggleSideMenu}
           style={[styles.feedButton, styles.moreMenuButton]} >
           <Icon name="navicon" size ={30} color="white"/>
         </TouchableHighlight>

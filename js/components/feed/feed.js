@@ -28,6 +28,7 @@ class Feed extends Component {
     super(props);
     this.state =  {
       dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+                              .cloneWithRows(this.props.feed)
     };
   }
 
@@ -72,7 +73,7 @@ class FeedItem extends Component {
       var imageUrl = this.props.payee.user.profile_photo_url;
       var summary = (
         <Text style={styles.feedItemSummary}>
-          <Text style={styles.feedItemName}>{ payee }</Text> charged <Text style={styles.feedItemName}> {payer} </Text>
+          <Text style={styles.feedItemName}>{ payee }</Text> charged <Text style={styles.feedItemName}>{payer}</Text>
           <Text> { this.props.payment.amount.amount_formatted } </Text>
         </Text>
       )
@@ -80,7 +81,7 @@ class FeedItem extends Component {
       var imageUrl = this.props.payer.user.profile_photo_url;
       var summary = (
         <Text style={styles.feedItemSummary}>
-          <Text style={styles.feedItemName}>{payer}</Text> paid <Text style={styles.feedItemName}> {payee} </Text>
+          <Text style={styles.feedItemName}>{payer}</Text> paid <Text style={styles.feedItemName}>{payee}</Text>
           <Text> { this.props.payment.amount.amount_formatted } </Text>
         </Text>
       )

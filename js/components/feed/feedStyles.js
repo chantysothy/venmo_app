@@ -10,7 +10,8 @@ var {width, height} = Dimensions.get('window');
 var styles = StyleSheet.create({
   container: {
     width: width,
-    marginBottom: 30
+    marginBottom: 30,
+    backgroundColor: "white"
   },
   feedItem: {
     width: width,
@@ -29,6 +30,8 @@ var styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     margin: 5,
+    borderColor: 'black',
+    borderWidth: 1,
   },
   feedItemRightContainer: {
     flex: 1,
