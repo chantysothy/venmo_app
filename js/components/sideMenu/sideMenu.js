@@ -23,8 +23,8 @@ class Menu extends Component {
       <View style={styles.container}>
         <ProfileSummary
           user={this.props.user}
-          balance={this.props.balance}
-        />
+          balance={this.props.balance} />
+        <NavigationsMenu navigator={this.props.navigator} />
       </View>
     );
   }
@@ -47,6 +47,28 @@ class ProfileSummary extends Component {
         </View>
       </View>
     )
+  }
+}
+
+class NavigationsMenu extends Component {
+  render() {
+    return (
+      <View style={styles.menuItems}>
+        <TouchableHighlight
+          style={styles.menuItem}
+          underlayColor='rgba(0,0,0,0.1)'
+          onPress={this._transitionToUserProfile.bind(this)}>
+          <Text> Profile </Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+
+  _transitionToUserProfile() {
+    this.props.navigator.push({
+      id: 'CreatePayment',
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+    });
   }
 }
 

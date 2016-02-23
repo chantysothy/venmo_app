@@ -6,6 +6,7 @@ import LaunchCarousel from '../launchCarousel/launchCarousel';
 import Home from '../home/home';
 import CreatePayment from '../createPayment/createPayment';
 import PaymentSelectUser from  '../createPayment/paymentSelectUser';
+//import UserProfile from  '../userProfile/userProfile.js';
 
 var {
   View,

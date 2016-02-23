@@ -32,8 +32,14 @@ var styles = StyleSheet.create({
   rightContainer: {
     paddingLeft: 10,
     justifyContent: 'center',
+  },
+  menuItems: {
+    marginTop: 10,
+    marginLeft: 15,
+    marginRight: 15,
+  },
+  menuItem: {
   }
-
 });
 
 module.exports = styles;

@@ -40,7 +40,7 @@ class Home extends Component {
     } else {
       var user = this.props.user.params.user;
       var balance = this.props.user.params.balance;
-      var menu = <Menu user={user} balance={balance}/>
+      var menu = <Menu user={user} balance={balance} navigator={this.props.navigator}/>
 
       return (
         <SideMenu
