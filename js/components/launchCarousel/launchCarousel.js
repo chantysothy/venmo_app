@@ -24,7 +24,7 @@ var FacebookLoginManager = require('../../utils/facebookLoginManager')
 class LaunchCarousel extends Component {
   componentDidMount() {
     withEmailAndToken((email, token) => {
-        this.props.dispatch(fetchLoginWithToken(email, token, this.props.navigator));
+      this.props.dispatch(fetchLoginWithToken(email, token, this.props.navigator));
     });
   }
 

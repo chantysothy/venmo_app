@@ -6,7 +6,7 @@ import LaunchCarousel from '../launchCarousel/launchCarousel';
 import Home from '../home/home';
 import CreatePayment from '../createPayment/createPayment';
 import PaymentSelectUser from  '../createPayment/paymentSelectUser';
-//import UserProfile from  '../userProfile/userProfile.js';
+import UserProfile from  '../userProfile/userProfile.js';
 
 var {
   View,
@@ -25,6 +25,8 @@ export default class MelamineLaunch extends React.Component {
         return(<PaymentSelectUser amount={route.amount} navigator={nav}/>);
       case 'LaunchCarousel':
         return(<LaunchCarousel navigator={nav}/>);
+      case 'UserProfile':
+        return(<UserProfile navigator={nav}/>);
     }
   }
 

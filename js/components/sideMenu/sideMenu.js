@@ -66,7 +66,7 @@ class NavigationsMenu extends Component {
 
   _transitionToUserProfile() {
     this.props.navigator.push({
-      id: 'CreatePayment',
+      id: 'UserProfile',
       sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
     });
   }
