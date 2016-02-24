@@ -10,17 +10,15 @@ var {width, height} = Dimensions.get('window');
 var styles = StyleSheet.create({
   container: {
     width: width,
-    marginBottom: 30,
     backgroundColor: "white"
   },
   feedItem: {
     width: width,
-    height: height / 6,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 5,
-    paddingTop: 5,
+    paddingBottom: 10,
+    paddingTop: 10,
     paddingLeft: 15,
     borderTopColor: 'lightgrey',
     borderTopWidth: 1,
@@ -46,7 +44,6 @@ var styles = StyleSheet.create({
   feedItemNote: {
   },
   timeAgoContainer: {
-    height: height / 6 - 10,
     justifyContent: 'flex-start',
     flexDirection: 'column',
     alignItems: 'flex-start',

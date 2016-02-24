@@ -41,7 +41,6 @@ var styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
-    borderColor: "white",
   },
   centerButton: {
     borderColor: "white",
