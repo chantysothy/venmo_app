@@ -14,6 +14,7 @@ import { connect } from 'react-redux/native';
 
 var GridView = require('react-native-grid-view');
 var Animatable = require('react-native-animatable');
+var Icon = require('react-native-vector-icons/Ionicons');
 
 var styles = require('./createPaymentStyles');
 var textStyles = require('../../shared/textStyles');
@@ -57,10 +58,15 @@ class CreatePayment extends Component {
   }
 
   _renderNumberButton(item) {
+    if(item === "back") {
+      var text = <Icon name="backspace-outline" size={30} color="white"/>;
+    } else {
+      var text = <Text style={[textStyles.text, styles.numberButtonText]}>{item}</Text>;
+    }
     return(
       <TouchableHighlight key={item} activeOpacity={.9} underlayColor={"#0b777f"}
         onPress={() => this._onNumberButtonPress(item)} style={styles.numberButton}>
-        <Text style={[textStyles.text, styles.numberButtonText]}>{item}</Text>
+        {text}
       </TouchableHighlight>
     );
   }
