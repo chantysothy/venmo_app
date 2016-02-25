@@ -40,6 +40,17 @@ class PaymentSelectUser extends Component {
           {this.state.to.display_name}
         </Text>
       </TouchableHighlight>
+      var noteView =
+        <View style={styles.noteContainer}>
+          <TextInput
+            style={[textStyles.text, styles.textInput, styles.textInputNote]}
+            onChangeText={(note) => this.setState({note: note})}
+            placeholder="What's it for?"
+            value={this.state.note}
+            ref="textInputNote"
+            multiline
+          />
+        </View>
     } else {
       var toView = <TextInput
         style={[textStyles.text, styles.textInput, styles.textInputTo]}
@@ -49,13 +60,15 @@ class PaymentSelectUser extends Component {
         autoFocus={true}
         value={this.state.query}
       />
-      var resultsContainer =
+
+      // if query is null or blank, don't show result container
+      var resultsContainer = this.state.query === "" || this.state.query === null ? null :
         <View style={styles.searchResultsContainer}>
           <ListView style={styles.searchResults}
             dataSource={this.props.searchResultsDataSource}
             keyboardShouldPersistTaps={true}
             renderRow={(r) => this._renderSearchResult(r)} />
-        </View>
+        </View>;
     }
 
     return(
@@ -66,22 +79,10 @@ class PaymentSelectUser extends Component {
           forwardDisabled={!(this.state.to && this.state.note.length > 0)}
           forward={() => this._submitPayment()}/>
         <View style={styles.row}>
-          <Text style={textStyles.text}>To:</Text>
+          <Text style={[textStyles.text, styles.text]}>To:</Text>
           {toView}
         </View>
-        <View style={styles.row}>
-          <Text style={textStyles.text}>Note:</Text>
-          <TextInput
-            style={[textStyles.text, styles.textInput, styles.textInputNote]}
-            onChangeText={(note) => this.setState({note: note})}
-            placeholder="What's it for?"
-            returnKeyType="send"
-            value={this.state.note}
-            ref="textInputNote"
-            enablesReturnKeyAutomatically
-            onSubmitEditing={() => this._submitPayment()}
-          />
-        </View>
+        {noteView}
         {resultsContainer}
       </View>
     );
