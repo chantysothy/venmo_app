@@ -12,7 +12,6 @@ var colors = require('../../constants/colors.js');
 var styles = StyleSheet.create({
   container: {
     width: width,
-    backgroundColor: "white"
   },
   feedItem: {
     width: width,

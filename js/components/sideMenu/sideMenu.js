@@ -55,16 +55,29 @@ class NavigationsMenu extends Component {
     return (
       <View style={styles.menuItems}>
         <TouchableHighlight
-          style={styles.menuItem}
-          underlayColor='rgba(0,0,0,0.1)'
+          underlayColor='rgba(255,255,255,0.1)'
           onPress={this._transitionToUserProfile.bind(this)}>
-          <Text> Profile </Text>
+          <View style={styles.menuItem}>
+            <Icon style={styles.iconLabel} name="person" size={30} color="white"/>
+            <Text style={textStyles.text}> Profile </Text>
+          </View>
         </TouchableHighlight>
         <TouchableHighlight
-          style={styles.menuItem}
-          underlayColor='rgba(0,0,0,0.1)'
+          underlayColor='rgba(255,255,255,0.1)'
           onPress={this._transitionToCharges.bind(this)}>
-          <Text> Charges </Text>
+
+          <View style={styles.menuItem}>
+            <Icon style={styles.iconLabel} name="android-alert"  size={30} color="white"/>
+            <Text style={textStyles.text}> Charges </Text>
+          </View>
+        </TouchableHighlight>
+        <TouchableHighlight
+          underlayColor='rgba(255,255,255,0.1)'
+          onPress={this._transitionToSettings.bind(this)}>
+          <View style={styles.menuItem}>
+            <Icon style={styles.iconLabel} name="gear-a" size={30} color="white"/>
+            <Text style={textStyles.text}> Settings </Text>
+          </View>
         </TouchableHighlight>
       </View>
     );
@@ -78,6 +91,13 @@ class NavigationsMenu extends Component {
   }
 
   _transitionToCharges() {
+    this.props.navigator.push({
+      id: 'Charges',
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+    });
+  }
+
+  _transitionToSettings() {
     this.props.navigator.push({
       id: 'Charges',
       sceneConfig: Navigator.SceneConfigs.FloatFromBottom,

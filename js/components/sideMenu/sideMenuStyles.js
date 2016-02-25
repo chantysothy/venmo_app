@@ -12,7 +12,7 @@ var colors = require('../../constants/colors.js');
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.darkgrey,
+    backgroundColor: colors.verydarkgrey,
     height: height,
     width: 200,
   },
@@ -41,8 +41,20 @@ var styles = StyleSheet.create({
   },
   menuItem: {
     padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "black",
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.grey,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  rightMenuItem: {
+    flex: 1
+  },
+  iconLabel: {
+    width: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   }
 });
 

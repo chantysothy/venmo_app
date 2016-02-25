@@ -33,3 +33,24 @@ exports.fetchCharges = function(email, token) {
                .catch(handleError);
   }
 }
+
+exports.payPendingCharge = function(email, token, paymentId) {
+  var nonce = "fake-valid-nonce"
+
+  return dispatch => {
+    dispatch(requestPayment());
+    return ajax.payPendingCharge(email, token, paymentId, nonce)
+               .then(response => {
+                 var promiseAll = Promise.all([
+                   dispatch(fetchSocialFeed(email, token)),
+                   dispatch(fetchPrivateFeed(email, token))
+                 ])
+                 promiseAll.then(() => {
+                     response.json()
+                     .then(json => dispatch(receivePayment(json.data, navigator)))
+                 });
+               })
+               .catch(error => console.log(error));
+  }
+}
+

@@ -6,7 +6,7 @@ var queryString = require('query-string');
 import React from 'react-native'
 var url = require('url');
 
-function POST(requestUrl, data) {
+function formatData(data){
   var f = new FormData();
   for (var key in data) {
     if (typeof data[key] === "object") {
@@ -17,10 +17,20 @@ function POST(requestUrl, data) {
       f.append(key, data[key]);
     }
   }
+  return f;
+}
 
+function PUT(requestUrl, data) {
+  return fetch(requestUrl, {
+    method: 'put',
+    body: formatData(data)
+  });
+}
+
+function POST(requestUrl, data) {
   return fetch(requestUrl, {
     method: 'post',
-    body: f
+    body: formatData(data)
   });
 }
 
@@ -65,6 +75,15 @@ export function pay(email, authentication_token, paymentParams, nonce) {
     authentication_token,
     payment_method_nonce: nonce,
     payment: paymentParams,
+  });
+}
+
+export function payPendingCharge(email, authentication_token, payment_id, nonce){
+  var requestUrl = API_BASE + '/payments/' + payment_id.toString() + '/pay_pending_charge';
+  return PUT(requestUrl, {
+    email,
+    authentication_token,
+    payment_method_nonce: nonce,
   });
 }
 
