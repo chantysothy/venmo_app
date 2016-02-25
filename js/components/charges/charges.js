@@ -12,7 +12,7 @@ import React, {
 
 import { connect } from 'react-redux/native';
 import { withEmailAndToken } from '../../utils/utils';
-import { fetchCharges } from '../../actions/chargesActions.js';
+import { fetchCharges, payPendingCharge } from '../../actions/chargesActions.js';
 import { Feed } from '../feed/feed.js';
 
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -39,12 +39,11 @@ class Charges extends Component {
           <ChargeList
             style={styles.socialFeed}
             isFetching={false}
+            dispatch={this.props.dispatch}
             charges={charges} />
         </View>
       </View>
     );
-  }
-  _payCharge(charge) {
   }
 }
 
@@ -73,16 +72,16 @@ class ChargeList extends Component {
         <ListView
           style={styles.container}
           dataSource={ this.state.dataSource }
-          renderRow={this.renderRow} />
+          renderRow={this.renderRow.bind(this)} />
       );
     }
   }
 
   renderRow(item) {
-    console.log(item);
     return (
       <Charge
         key = { item.payment.id }
+        dispatch={this.props.dispatch}
         payment = { item.payment }
         payee = { item.payee }
         payer = { item.payer } />
@@ -127,6 +126,7 @@ class Charge extends Component {
             <TouchableHighlight
               activeOpacity={0.5}
               underlayColor="green"
+              onPress={this._payCharge.bind(this)}
               style={[styles.button, styles.payButton]}>
               <Text style={textStyles.text}>
                 Pay
@@ -134,10 +134,14 @@ class Charge extends Component {
             </TouchableHighlight>
           </View>
         </View>
-        <View style={styles.timeAgoContainer}>
-        </View>
       </View>
     )
+  }
+
+  _payCharge() {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(payPendingCharge(email, token, this.props.payment.id));
+    });
   }
 }
 function mapStateToProps(state){
