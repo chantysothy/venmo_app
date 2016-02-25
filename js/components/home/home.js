@@ -81,12 +81,10 @@ class Home extends Component {
   }
 
   _toggleSideMenu() {
-    console.log(this.state);
     this.setState({ sideMenuOpen: !this.state.sideMenuOpen });
   }
 
   _onSideMenuToggle(isOpen) {
-    console.log("TOGGLED BRO", isOpen);
     this.setState({sideMenuOpen: isOpen });
   }
 
@@ -120,7 +118,7 @@ class HomeNavBar extends Component {
     }
     return (
       <TouchableHighlight
-        underlayColor="red"
+        underlayColor="green"
         style={buttonStyles}
         onPress={() => this.props.goToPage(pageId)}>
         <Icon name={iconName} size ={30} color={iconColor}/>

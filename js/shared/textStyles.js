@@ -12,6 +12,12 @@ var styles = StyleSheet.create({
     fontSize: 15,
     color: 'white',
   },
+  bold: {
+    fontWeight: 'bold',
+  },
+  black: {
+    color: 'black',
+  }
 });
 
 module.exports = styles;

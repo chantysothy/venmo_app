@@ -8,10 +8,11 @@ var {
 } = React;
 
 var {width, height} = Dimensions.get('window');
+var colors = require('../../constants/colors.js');
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: "grey",
+    backgroundColor: colors.darkgrey,
     height: height,
     width: 200,
   },
@@ -34,11 +35,14 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
   },
   menuItems: {
-    marginTop: 10,
+    marginTop: 100,
     marginLeft: 15,
     marginRight: 15,
   },
   menuItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "black",
   }
 });
 
