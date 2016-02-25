@@ -44,7 +44,7 @@ class CreatePayment extends Component {
           easing="ease-in-out">
           <Text style={[textStyles.text, styles.amountText]}>{amountFormatted}</Text>
         </Animatable.View>
-        <GridView items={this.numberButtons} itemsPerRow={3} renderItem={(item) => this._renderNumberButton(item)} scrollEnabled={false}/>
+        <GridView items={this.numberButtons} itemsPerRow={3} renderItem={(item) => this._renderNumberButton(item)} scrollEnabled={false} style={styles.numberButtonsContainer}/>
         <View style={styles.payButtonsContainer}>
           <TouchableHighlight
             style={[styles.payButtons, styles.requestButton]}

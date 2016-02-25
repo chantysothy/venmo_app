@@ -20,15 +20,19 @@ var styles = StyleSheet.create({
     paddingTop: 12,
   },
   amountTextContainer: {
-    height: height / 3,
+    flex: 1,
     justifyContent: 'center',
   },
   amountText: {
-    fontSize: 40,
+    fontSize: 80,
+    fontWeight: '700',
+  },
+  numberButtonsContainer: {
+    flex: 2,
   },
   numberButton: {
     width: width / 3.5,
-    height: height / 10,
+    height: height / 11,
     alignItems: 'center',
     justifyContent: 'center',
   },
