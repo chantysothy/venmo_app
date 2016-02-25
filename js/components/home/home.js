@@ -6,6 +6,7 @@ import React, {
   View,
   TouchableHighlight,
   Navigator,
+  Platform,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -36,6 +37,13 @@ class Home extends Component {
   }
 
   render() {
+    var homeStyles = [styles.container];
+    // Handle the hardware back press if on Android
+    if (Platform.OS == 'ios') {
+      homeStyles.push(styles.iosContainer);
+    }
+
+
     if (this.props.user.isFetching) {
       return(<View><Text>Fetching...</Text></View>);
     } else {
@@ -49,7 +57,7 @@ class Home extends Component {
           openMenuOffset={200}
           onChange={this._onSideMenuToggle.bind(this)}
           isOpen={this.state.sideMenuOpen}>
-          <View style={styles.container}>
+          <View style={homeStyles}>
             <ScrollableTabView
               initialPage={1}
               renderTabBar={this._renderSideMenu.bind(this)}>

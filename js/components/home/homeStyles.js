@@ -12,10 +12,12 @@ import colors from '../../constants/colors';
 var {width, height} = Dimensions.get('window');
 
 var styles = StyleSheet.create({
+  iosContainer: {
+    paddingTop: 20,
+  },
   container: {
     height: height,
     width: width,
-    paddingTop: 20,
     alignItems: 'stretch',
     justifyContent: 'center',
     backgroundColor: colors.green,
