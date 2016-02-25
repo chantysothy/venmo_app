@@ -7,6 +7,8 @@ var {
   Dimensions,
 } = React;
 
+import colors from '../../constants/colors';
+
 var {width, height} = Dimensions.get('window');
 
 var styles = StyleSheet.create({
@@ -14,7 +16,7 @@ var styles = StyleSheet.create({
     height: height,
     width: width,
     alignItems: 'center',
-    backgroundColor: '#0D8E96',
+    backgroundColor: colors.green,
     padding: 30,
   },
   amountTextContainer: {
@@ -49,11 +51,11 @@ var styles = StyleSheet.create({
   },
   requestButton: {
     borderRightWidth: 1,
-    borderRightColor: '#0D8E96',
+    borderRightColor: colors.green,
   },
   payButtonsText: {
     fontSize: 28,
-    color: '#0D8E96',
+    color: colors.green,
   },
   modal: {
     height: height - 40,
