@@ -13,6 +13,7 @@ var {
   Navigator,
   Text,
   Platform,
+  StatusBarIOS,
 } = React;
 
 export default class MelamineLaunch extends React.Component {
@@ -31,6 +32,8 @@ export default class MelamineLaunch extends React.Component {
         }
         return false;
       });
+    } else {
+      StatusBarIOS.setStyle('light-content');
     }
   }
 
