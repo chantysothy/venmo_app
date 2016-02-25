@@ -17,7 +17,7 @@ var styles = StyleSheet.create({
     width: width,
     alignItems: 'center',
     backgroundColor: colors.green,
-    padding: 30,
+    paddingTop: 12,
   },
   amountTextContainer: {
     height: height / 3,

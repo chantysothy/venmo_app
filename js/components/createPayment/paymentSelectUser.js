@@ -12,8 +12,10 @@ import React, {
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
-import { fetchUsersSearch, clearUsersSearch } from '../../actions/userSearchActions'
-import { pay } from '../../actions/paymentActions'
+import { fetchUsersSearch, clearUsersSearch } from '../../actions/userSearchActions';
+import { pay } from '../../actions/paymentActions';
+
+import TitleBar from '../titleBar/titleBar';
 
 var styles = require('./paymentSelectUserStyles');
 var textStyles = require('../../shared/textStyles');
@@ -58,6 +60,11 @@ class PaymentSelectUser extends Component {
 
     return(
       <View style={styles.container}>
+        <TitleBar text={"£" + this.props.amount.replace("-", "")}
+          back={() => this.props.navigator.pop()}
+          forwardText={this.props.amount < 0 ? "Request" : "Pay"}
+          forwardDisabled={!(this.state.to && this.state.note.length > 0)}
+          forward={() => this._submitPayment()}/>
         <View style={styles.row}>
           <Text style={textStyles.text}>To:</Text>
           {toView}

@@ -16,6 +16,8 @@ var GridView = require('react-native-grid-view');
 var Animatable = require('react-native-animatable');
 var Icon = require('react-native-vector-icons/Ionicons');
 
+import TitleBar from '../titleBar/titleBar';
+
 var styles = require('./createPaymentStyles');
 var textStyles = require('../../shared/textStyles');
 
@@ -37,6 +39,7 @@ class CreatePayment extends Component {
 
     return(
       <View style={styles.container}>
+        <TitleBar text="" back={() => this.props.navigator.pop()}/>
         <Animatable.View ref="amountTextContainer" style={styles.amountTextContainer}
           easing="ease-in-out">
           <Text style={[textStyles.text, styles.amountText]}>{amountFormatted}</Text>
@@ -88,9 +91,11 @@ class CreatePayment extends Component {
   }
 
   _transitionToNextStep(isRequest) {
+    var amount = isRequest ? "-" + this.state.amount : this.state.amount;
+
     this.props.navigator.push({
       id: 'PaymentSelectUser',
-      amount: this.state.amount,
+      amount: amount,
       sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
     });
   }
