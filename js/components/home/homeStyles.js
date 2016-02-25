@@ -15,6 +15,7 @@ var styles = StyleSheet.create({
   container: {
     height: height,
     width: width,
+    paddingTop: 20,
     alignItems: 'stretch',
     justifyContent: 'center',
     backgroundColor: colors.green,
