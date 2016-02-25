@@ -11,6 +11,7 @@ import React, {
 import { connect } from 'react-redux/native';
 import { Feed } from '../feed/feed.js';
 import { Menu } from '../sideMenu/sideMenu.js';
+import colors from '../../constants/colors.js';
 
 import { fetchSocialFeed, fetchPrivateFeed } from '../../actions/feedActions.js';
 import { withEmailAndToken } from '../../utils/utils';
@@ -96,7 +97,7 @@ class HomeNavBar extends Component {
     var iconColor = "white";
     if (this.props.activeTab === pageId) {
       buttonStyles.push({ backgroundColor: "white" });
-      iconColor = "#900";
+      iconColor = colors.green;
     }
 
     // If center button
@@ -118,7 +119,7 @@ class HomeNavBar extends Component {
       <View style={styles.navbar}>
         <TouchableHighlight
           activeOpacity={0.5}
-          underlayColor="#900"
+          underlayColor={colors.green}
           onPress={this.props.toggleSideMenu}
           style={[styles.feedButton, styles.moreMenuButton]} >
           <Icon name="navicon" size ={30} color="white"/>
@@ -130,7 +131,7 @@ class HomeNavBar extends Component {
         </View>
         <TouchableHighlight
           activeOpacity={0.5}
-          underlayColor="#900"
+          underlayColor={colors.green}
           style={[styles.feedButton, styles.createPaymentButton]}
           onPress={this._transitionToCreatePayment.bind(this)}>
           <Icon name="compose" size ={30} color="white"/>

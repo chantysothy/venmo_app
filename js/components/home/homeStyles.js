@@ -7,6 +7,8 @@ var {
   Dimensions,
 } = React;
 
+import colors from '../../constants/colors';
+
 var {width, height} = Dimensions.get('window');
 
 var styles = StyleSheet.create({
@@ -15,6 +17,7 @@ var styles = StyleSheet.create({
     width: width,
     alignItems: 'stretch',
     justifyContent: 'center',
+    backgroundColor: colors.green,
   },
   socialFeed: {
     width: width
@@ -24,7 +27,7 @@ var styles = StyleSheet.create({
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#900",
+    backgroundColor: colors.green,
   },
   feedButtons: {
     marginTop: 10,
