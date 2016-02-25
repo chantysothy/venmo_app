@@ -18,6 +18,7 @@ import { withEmailAndToken } from '../../utils/utils';
 
 var TimeAgo = require('../../utils/timeAgo.js');
 var styles = require('./feedStyles.js');
+var textStyles = require('../../shared/textStyles.js');
 
 function isCharge(payment) {
   return payment.status == "pending";
@@ -71,16 +72,20 @@ class FeedItem extends Component {
     if (isCharge(this.props.payment)) {
       var imageUrl = this.props.payee.user.profile_photo_url;
       var summary = (
-        <Text style={styles.feedItemSummary}>
-          <Text style={styles.feedItemName}>{ payee }</Text> charged <Text style={styles.feedItemName}>{payer}</Text>
+        <Text style={[textStyles.text, textStyles.black, styles.feedItemSummary]}>
+          <Text style={[styles.feedItemName]}>{payee} </Text>
+          charged
+          <Text style={styles.feedItemName}> {payer}</Text>
           <Text> { this.props.payment.amount.amount_formatted } </Text>
         </Text>
       )
     } else {
       var imageUrl = this.props.payer.user.profile_photo_url;
       var summary = (
-        <Text style={styles.feedItemSummary}>
-          <Text style={styles.feedItemName}>{payer}</Text> paid <Text style={styles.feedItemName}>{payee}</Text>
+        <Text style={[textStyles.text, textStyles.black, styles.feedItemSummary]}>
+          <Text style={[styles.feedItemName]}>{payer} </Text>
+          paid
+          <Text style={[styles.feedItemName]}> {payee}</Text>
           <Text> { this.props.payment.amount.amount_formatted } </Text>
         </Text>
       )
@@ -92,7 +97,7 @@ class FeedItem extends Component {
           source={{uri: imageUrl }} />
         <View style = { styles.feedItemRightContainer }>
           { summary }
-          <Text style={styles.feedItemNote}>
+          <Text style={[textStyles.text, styles.feedItemNote]}>
             <Text>
               { this.props.payment.note }
             </Text>
@@ -101,14 +106,14 @@ class FeedItem extends Component {
             activeOpacity={0.5}
             underlayColor="rgba(0,0,0,0)"
             style={styles.commentLink}>
-            <Text style={styles.commentText}>
+            <Text style={[textStyles.text, styles.commentText]}>
               Comment
             </Text>
           </TouchableHighlight>
         </View>
         <View style={styles.timeAgoContainer}>
           <TimeAgo
-            style={styles.timeAgo}
+            style={[textStyles.text, styles.timeAgo]}
             time = {this.props.payment.updated_at} />
         </View>
       </View>

@@ -6,6 +6,7 @@ var {
 } = React;
 
 var {width, height} = Dimensions.get('window');
+var colors = require('../../constants/colors.js');
 
 var styles = StyleSheet.create({
   container: {
@@ -42,6 +43,7 @@ var styles = StyleSheet.create({
     textAlign: 'left',
   },
   feedItemNote: {
+    color: colors.darkgrey,
   },
   timeAgoContainer: {
     justifyContent: 'flex-start',
