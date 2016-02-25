@@ -109,8 +109,14 @@ class HomeNavBar extends Component {
     }
 
     // If center button
+    if (pageId == 0) {
+      buttonStyles.push(styles.leftButton);
+    }
     if (pageId == 1) {
       buttonStyles.push(styles.centerButton);
+    }
+    if (pageId == 2) {
+      buttonStyles.push(styles.rightButton);
     }
     return (
       <TouchableHighlight
