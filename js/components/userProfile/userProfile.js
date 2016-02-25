@@ -23,6 +23,10 @@ class UserProfile extends Component {
     var balance = this.props.user.params.balance;
     var imageUrl = user.profile_photo_url;
     var fullName = user.first_name + " " + user.last_name;
+    var displayName = user.display_name;
+    var phone_number = user.phone_number;
+    var about = user.about;
+    var email = user.email;
     return (
       <View style={styles.container}>
         <Image
@@ -31,7 +35,10 @@ class UserProfile extends Component {
         <View
           style={styles.rightContainer}>
           <Text style={styles.profileName}> { fullName } </Text>
+          <Text style={styles.profileName}> { email } </Text>
+          <Text style={styles.profileName}> { phone_number } </Text>
           <Text style={styles.profileName}> { balance.balance_formatted } </Text>
+          <Text style={styles.about}> { about } </Text>
         </View>
       </View>
     );

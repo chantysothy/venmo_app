@@ -60,6 +60,12 @@ class NavigationsMenu extends Component {
           onPress={this._transitionToUserProfile.bind(this)}>
           <Text> Profile </Text>
         </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.menuItem}
+          underlayColor='rgba(0,0,0,0.1)'
+          onPress={this._transitionToCharges.bind(this)}>
+          <Text> Charges </Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -67,6 +73,13 @@ class NavigationsMenu extends Component {
   _transitionToUserProfile() {
     this.props.navigator.push({
       id: 'UserProfile',
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+    });
+  }
+
+  _transitionToCharges() {
+    this.props.navigator.push({
+      id: 'Charges',
       sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
     });
   }

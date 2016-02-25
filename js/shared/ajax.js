@@ -48,6 +48,11 @@ export function getPrivateFeed(email, authentication_token) {
   return GET(requestUrl, { email, authentication_token } );
 }
 
+export function getCharges(email, authentication_token) {
+  var requestUrl = API_BASE + '/payments/my_charges';
+  return GET(requestUrl, { email, authentication_token } );
+}
+
 export function searchUsers(email, authentication_token, query) {
   var requestUrl = API_BASE + '/users/search/'
   return GET(requestUrl, { email, authentication_token, query } );
@@ -62,3 +67,4 @@ export function pay(email, authentication_token, paymentParams, nonce) {
     payment: paymentParams,
   });
 }
+
