@@ -92,9 +92,11 @@ class CreatePayment extends Component {
 
     // some validations
     if ((this.state.amount === "" && item === "0") ||
-      (this.state.amount.indexOf(".") != -1 && item === ".") ||
-      (this.state.amount === "" && item === "back") ||
-      ((this.state.amount.indexOf(".") != -1 && item !== "back" && this.state.amount.indexOf(".") + 2 < this.state.amount.length))) {
+      (item === "." && this.state.amount.indexOf(".") != -1) ||
+      (item === "back" && this.state.amount === "") ||
+      // TODO: explain why an amount > 100 isn't allowed
+      (item !== "back" && parseFloat(this.state.amount + item) > 100.00) ||
+      (item !== "back" && this.state.amount.indexOf(".") != -1 && this.state.amount.indexOf(".") + 2 < this.state.amount.length)) {
       this.refs.amountTextContainer.wobble(500)
     } else {
       this.setState({
