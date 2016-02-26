@@ -107,6 +107,15 @@ class CreatePayment extends Component {
 
   _transitionToNextStep(isRequest) {
     var amount = isRequest ? "-" + this.state.amount : this.state.amount;
+    if (amount.indexOf(".") !== -1) {
+      if (amount.length === amount.indexOf(".") + 2) {
+        // there is one number after the decimal point
+        amount += "0";
+      } else {
+        // there are zero
+        amount += "00"
+      }
+    }
 
     this.props.navigator.push({
       id: 'PaymentSelectUser',
