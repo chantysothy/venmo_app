@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+var Button = require('react-native-button');
 
 var styles = require('./titleBarStyles');
 var textStyles = require('../../shared/textStyles');
@@ -19,15 +20,19 @@ export default class TitleBar extends Component {
 
   render() {
     var backButton = this.props.back ? (
-      <TouchableHighlight style={styles.backButton} onPress={this.props.back}>
-        <Text style={[textStyles.text, styles.text]}>Back</Text>
-      </TouchableHighlight>
+      <Button containerStyle={styles.backButton} onPress={this.props.back}
+        style={[textStyles.text, styles.text]}>
+        Back
+      </Button>
     ) : null;
 
     var forwardButton = this.props.forward ? (
-        <TouchableHighlight style={styles.forwardButton} onPress={this.props.forward}>
-          <Text style={[textStyles.text, styles.text, this.props.forwardDisabled ? styles.forwardTextDisabled : null]}>{this.props.forwardText}</Text>
-        </TouchableHighlight>
+      <Button containerStyle={styles.forwardButton} onPress={this.props.forward}
+        disabled={this.props.forwardDisabled}
+        styleDisabled={styles.forwardTextDisabled}
+        style={[textStyles.text, styles.text]}>
+        {this.props.forwardText}
+        </Button>
     ) : null;
 
     return (

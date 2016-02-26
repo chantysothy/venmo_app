@@ -15,11 +15,14 @@ import { connect } from 'react-redux/native';
 var GridView = require('react-native-grid-view');
 var Animatable = require('react-native-animatable');
 var Icon = require('react-native-vector-icons/Ionicons');
+var Button = require('react-native-button');
 
 import TitleBar from '../titleBar/titleBar';
 
 var styles = require('./createPaymentStyles');
 var textStyles = require('../../shared/textStyles');
+
+import colors from '../../constants/colors';
 
 class CreatePayment extends Component {
   constructor(props) {
@@ -46,18 +49,28 @@ class CreatePayment extends Component {
         </Animatable.View>
         <GridView items={this.numberButtons} itemsPerRow={3} renderItem={(item) => this._renderNumberButton(item)} scrollEnabled={false} style={styles.numberButtonsContainer}/>
         <View style={styles.payButtonsContainer}>
-          <TouchableHighlight
-            style={[styles.payButtons, styles.requestButton]}
+          <Button
+            style={[textStyles.text, styles.payButtonsText]}
+            containerStyle={[styles.payButtons, styles.requestButton]}
+            disabled={this._paymentInvalid()}
+            styleDisabled={{color: colors.veryLightGreen}}
             onPress={() => this._transitionToNextStep(true)}>
-            <Text style={[textStyles.text, styles.payButtonsText]}>Request</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.payButtons}
+            Request
+          </Button>
+          <Button containerStyle={styles.payButtons}
+            style={[textStyles.text, styles.payButtonsText]}
+            disabled={this._paymentInvalid()}
+            styleDisabled={{color: colors.veryLightGreen}}
             onPress={() => this._transitionToNextStep(false)}>
-            <Text style={[textStyles.text, styles.payButtonsText]}>Pay</Text>
-          </TouchableHighlight>
+            Pay
+          </Button>
         </View>
       </View>
     );
+  }
+
+  _paymentInvalid() {
+    return !parseInt(this.state.amount.replace(".", "")) > 0
   }
 
   _renderNumberButton(item) {
