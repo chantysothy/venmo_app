@@ -6,20 +6,20 @@ var {
 } = React;
 
 var {width, height} = Dimensions.get('window');
+var colors = require('../../constants/colors.js');
 
 var styles = StyleSheet.create({
   container: {
     width: width,
-    marginBottom: 30
+    backgroundColor: "white"
   },
   feedItem: {
     width: width,
-    height: height / 6,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 5,
-    paddingTop: 5,
+    paddingBottom: 10,
+    paddingTop: 10,
     paddingLeft: 15,
     borderTopColor: 'lightgrey',
     borderTopWidth: 1,
@@ -29,6 +29,8 @@ var styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     margin: 5,
+    borderColor: 'black',
+    borderWidth: 1,
   },
   feedItemRightContainer: {
     flex: 1,
@@ -41,9 +43,9 @@ var styles = StyleSheet.create({
     textAlign: 'left',
   },
   feedItemNote: {
+    color: colors.darkgrey,
   },
   timeAgoContainer: {
-    height: height / 6 - 10,
     justifyContent: 'flex-start',
     flexDirection: 'column',
     alignItems: 'flex-start',

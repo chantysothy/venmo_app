@@ -7,14 +7,20 @@ var {
   Dimensions,
 } = React;
 
+import colors from '../../constants/colors';
+
 var {width, height} = Dimensions.get('window');
 
 var styles = StyleSheet.create({
+  iosContainer: {
+    paddingTop: 20,
+  },
   container: {
     height: height,
     width: width,
     alignItems: 'stretch',
     justifyContent: 'center',
+    backgroundColor: colors.green,
   },
   socialFeed: {
     width: width
@@ -24,9 +30,8 @@ var styles = StyleSheet.create({
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#900",
+    backgroundColor: colors.green,
   },
-
   feedButtons: {
     marginTop: 10,
     marginBottom: 10,
@@ -36,21 +41,38 @@ var styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 2,
     borderColor: "white",
+    backgroundColor: colors.green,
   },
-
   feedButton: {
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 5,
     paddingBottom: 5,
-    borderColor: "white",
+    backgroundColor: 'rgba(0,0,0,0)',
   },
-
+  leftButton: {
+    borderTopLeftRadius: 5, // TODO Modify styles once borderTopRightRadius bug fixed in RN
+    borderBottomLeftRadius: 5,
+  },
   centerButton: {
     borderColor: "white",
     borderLeftWidth: 2,
     borderRightWidth: 2,
   },
+  rightButton: {
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+  },
+  moreMenuButton: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+  },
+  createPaymentButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  }
 });
 
 module.exports = styles;

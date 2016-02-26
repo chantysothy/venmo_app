@@ -25,10 +25,7 @@ function fromNowShortHand(t){
     return minutesDiff.toString() + 'm';
   }
 
-  if (secondsDiff  > 0) {
-    return secondsDiff.toString() + 's';
-  }
-  return "OOOPS";
+  return "Just now";
 }
 
 var TimeAgo = React.createClass({

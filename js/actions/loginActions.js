@@ -1,5 +1,5 @@
 import { REQUEST_LOGIN, RECEIVE_LOGIN, LOGOUT } from '../constants/actionTypes';
-import * as ajax from '../lib/ajax.js';
+import * as ajax from '../shared/ajax.js';
 import React from 'react-native'
 
 var store = require('react-native-simple-store');
@@ -44,13 +44,16 @@ exports.fetchFacebookLogin = function fetchFacebookLogin(token, navigator) {
 
 exports.fetchLoginWithToken = function fetchLoginWithToken(email, token, navigator) {
   return dispatch => {
+    if (email === null || token === null) {
+      return;
+    }
     dispatch(requestLogin());
     return ajax.loginWithToken(email, token)
-    .then(response => {
-      response.json()
-      .then(json => dispatch(receiveLogin(response.status, json.data, navigator)))
-    })
-    .catch(error => console.log(error));
+               .then(response => {
+                   response.json()
+                           .then(json => dispatch(receiveLogin(response.status, json.data, navigator)))
+               })
+               .catch(error => console.log(error));
   }
 }
 
