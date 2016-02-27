@@ -19,6 +19,7 @@ import TitleBar from '../titleBar/titleBar';
 
 var Icon = require('react-native-vector-icons/Ionicons');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
+var ControlledRefreshableListView = require('react-native-refreshable-listview/lib/ControlledRefreshableListView');
 
 var styles = require('./chargesStyles.js');
 var textStyles = require('../../shared/textStyles');
@@ -28,7 +29,7 @@ class Charges extends Component {
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       withEmailAndToken((email, token) => {
-          this.props.dispatch(fetchCharges(email, token));
+        this.props.dispatch(fetchCharges(email, token));
       });
     });
   }
@@ -45,12 +46,19 @@ class Charges extends Component {
         <View style={styles.chargeListContainer}>
           <ChargeList
             style={styles.socialFeed}
-            isFetching={false}
+            isFetching={this.props.charges.isFetching}
+            refreshCharges={this._refreshCharges.bind(this)}
             dispatch={this.props.dispatch}
             charges={charges} />
         </View>
       </View>
     );
+  }
+
+  _refreshCharges() {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(fetchCharges(email, token));
+    });
   }
 }
 
@@ -72,16 +80,15 @@ class ChargeList extends Component {
   }
 
   render() {
-    if (this.props.isFetching) {
-      return(<View><Text>Fetching...</Text></View>);
-    } else {
-      return (
-        <ListView
-          style={styles.container}
-          dataSource={ this.state.dataSource }
-          renderRow={this.renderRow.bind(this)} />
-      );
-    }
+    return (
+      <ControlledRefreshableListView
+        style={styles.container}
+        dataSource={ this.state.dataSource }
+        renderRow={this.renderRow.bind(this)}
+        onRefresh={this.props.refreshCharges}
+        isRefreshing={this.props.charges.isFetching}
+      />
+    );
   }
 
   renderRow(item) {

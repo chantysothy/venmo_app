@@ -16,6 +16,7 @@ import { connect } from 'react-redux/native';
 import { fetchSocialFeed } from '../../actions/socialFeedActions.js';
 import { withEmailAndToken } from '../../utils/utils';
 
+var ControlledRefreshableListView = require('react-native-refreshable-listview/lib/ControlledRefreshableListView');
 var TimeAgo = require('../../utils/timeAgo.js');
 var styles = require('./feedStyles.js');
 var textStyles = require('../../shared/textStyles.js');
@@ -50,10 +51,12 @@ class Feed extends Component {
 
   render() {
     return (
-      <ListView
+      <ControlledRefreshableListView
         style={styles.container}
         dataSource={ this.state.dataSource }
         renderRow={this.renderRow}
+        onRefresh={this.props.refreshFeed}
+        isRefreshing={this.props.isFetching}
        />
     );
   }
