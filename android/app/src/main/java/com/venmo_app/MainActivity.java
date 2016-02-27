@@ -10,6 +10,8 @@ import java.util.List;
 
 import com.magus.fblogin.FacebookLoginPackage;
 
+import ca.jaysoo.extradimensions.ExtraDimensionsPackage;
+
 public class MainActivity extends ReactActivity {
 
     /**
@@ -38,8 +40,9 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-        new VectorIconsPackage(),
-          new FacebookLoginPackage() // <------ add the package
+          new VectorIconsPackage(),
+          new FacebookLoginPackage(),
+          new ExtraDimensionsPackage(this)
         );
     }
 }

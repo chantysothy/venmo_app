@@ -11,6 +11,7 @@
     "react-native-animatable": "^0.5.0",
     "react-native-button": "^1.4.2",
     "react-native-carousel": "^0.4.4",
+    "react-native-extra-dimensions-android": "^0.17.0",
     "react-native-facebook-login": "^1.0.3",
     "react-native-grid-view": "^0.3.7",
     "react-native-scrollable-tab-view": "^0.3.7",
