@@ -80,8 +80,6 @@ exports.payPendingCharge = function(email, token, paymentId) {
 }
 
 exports.declinePendingCharge = function(email, token, paymentId) {
-  var nonce = "fake-valid-nonce"
-
   return dispatch => {
     dispatch({ type:  REQUEST_DECLINE_PAYMENT });
     return ajax.declinePendingCharge(email, token, paymentId)

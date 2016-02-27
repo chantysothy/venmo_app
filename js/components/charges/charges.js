@@ -13,7 +13,7 @@ import React, {
 
 import { connect } from 'react-redux/native';
 import { withEmailAndToken } from '../../utils/utils';
-import { fetchCharges, payPendingCharge } from '../../actions/chargesActions.js';
+import { fetchCharges, payPendingCharge, declinePendingCharge } from '../../actions/chargesActions.js';
 import { Feed } from '../feed/feed.js';
 import TitleBar from '../titleBar/titleBar';
 
@@ -124,6 +124,7 @@ class Charge extends Component {
           <View style={styles.buttonContainer}>
             <TouchableHighlight
               activeOpacity={0.5}
+              onPress={this._declineCharge.bind(this)}
               underlayColor="rgba(0,0,0,0.5)"
               style={[styles.button, styles.declineButton]}>
               <Text style={[textStyles.text, textStyles.black]}>
@@ -148,6 +149,12 @@ class Charge extends Component {
   _payCharge() {
     withEmailAndToken((email, token) => {
       this.props.dispatch(payPendingCharge(email, token, this.props.payment.id));
+    });
+  }
+
+  _declineCharge() {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(declinePendingCharge(email, token, this.props.payment.id));
     });
   }
 }
