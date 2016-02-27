@@ -19,7 +19,6 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   textInput: {
-    height: 40,
     fontSize: 20,
     paddingHorizontal: 10,
     color: 'black',

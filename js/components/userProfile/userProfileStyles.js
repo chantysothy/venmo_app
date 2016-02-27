@@ -29,6 +29,7 @@ var styles = StyleSheet.create({
   },
   profileName: {
     fontWeight: 'bold',
+    fontSize: 20,
   },
   rightContainer: {
     paddingLeft: 10,

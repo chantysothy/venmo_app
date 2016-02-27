@@ -36,12 +36,12 @@ class UserProfile extends Component {
           forwardText="Done"
           forward={() => this.props.navigator.pop()}/>
         <View style={styles.profile}>
+          <Text style={styles.profileName}> { fullName } </Text>
           <Image
             style={styles.profilePhoto}
             source={{uri: imageUrl }} />
           <View
             style={styles.rightContainer}>
-            <Text style={styles.profileName}> { fullName } </Text>
             <Text style={styles.profileName}> { email } </Text>
             <Text style={styles.profileName}> { phone_number } </Text>
             <Text style={styles.profileName}> { balance.balance_formatted } </Text>
@@ -56,7 +56,8 @@ class UserProfile extends Component {
 
 function mapStateToProps(state){
   return {
-    user: state.user
+    user: state.user,
+    feed: state.feed
   };
 }
 

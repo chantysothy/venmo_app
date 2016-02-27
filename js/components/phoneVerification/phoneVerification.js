@@ -159,6 +159,7 @@ class PhoneVerification extends Component {
   }
 
   _continueToHome() {
+    this.props.dispatch(resetPhoneVerification(''));
     this.props.navigator.push({
       id: 'Home'
     });
