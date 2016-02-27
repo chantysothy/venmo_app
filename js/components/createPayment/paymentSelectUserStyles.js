@@ -43,6 +43,7 @@ var styles = StyleSheet.create({
     width: width,
   },
   textInputNote: {
+    textAlignVertical: 'top',
     height: 60,
     flex: 1,
   },
