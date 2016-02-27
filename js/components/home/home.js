@@ -7,6 +7,7 @@ import React, {
   TouchableHighlight,
   Navigator,
   Platform,
+  InteractionManager,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -26,19 +27,24 @@ var SideMenu = require('react-native-side-menu');
 class Home extends Component {
   constructor(props){
     super(props)
-    this.state = { sideMenuOpen: false, }
+    this.state = {
+      sideMenuOpen: false,
+      alreadyRendered: false,
+    }
   }
 
   componentDidMount() {
-    withEmailAndToken((email, token) => {
-        this.props.dispatch(fetchSocialFeed(email, token));
-        this.props.dispatch(fetchPrivateFeed(email, token));
+    InteractionManager.runAfterInteractions(() => {
+      withEmailAndToken((email, token) => {
+          this.props.dispatch(fetchSocialFeed(email, token));
+          this.props.dispatch(fetchPrivateFeed(email, token));
+      });
     });
   }
 
   render() {
     var homeStyles = [styles.container];
-    // Handle the hardware back press if on Android
+
     if (Platform.OS == 'ios') {
       homeStyles.push(styles.iosContainer);
     }
@@ -55,6 +61,7 @@ class Home extends Component {
         <SideMenu
           menu={menu}
           openMenuOffset={200}
+          disableGestures={true}
           onChange={this._onSideMenuToggle.bind(this)}
           isOpen={this.state.sideMenuOpen}>
           <View style={homeStyles}>
@@ -64,20 +71,38 @@ class Home extends Component {
               <Feed
                 tabLabel="earth"
                 style={styles.socialFeed}
-                feed={this.props.feed.friendPayments} />
+                feed={this.props.feed.friendPayments}
+                isFetching={this.props.feed.isFetching}
+                refreshFeed={this._refreshSocialFeed.bind(this)} />
               <Feed
                 tabLabel="stalker-person"
                 style={styles.socialFeed}
-                feed={this.props.feed.friendPayments} />
+                feed={this.props.feed.friendPayments}
+                isFetching={this.props.feed.isFetching}
+                refreshFeed={this._refreshSocialFeed.bind(this)} />
               <Feed
                 tabLabel="person"
                 style={styles.socialFeed}
-                feed={this.props.feed.privatePayments} />
+                feed={this.props.feed.privatePayments}
+                isFetching={this.props.feed.isFetching}
+                refreshFeed={this._refreshPrivateFeed.bind(this)} />
             </ScrollableTabView>
           </View>
         </SideMenu>
       );
     }
+  }
+
+  _refreshSocialFeed() {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(fetchSocialFeed(email, token));
+    });
+  }
+
+  _refreshPrivateFeed() {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(fetchPrivateFeed(email, token));
+    });
   }
 
   _toggleSideMenu() {

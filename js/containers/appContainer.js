@@ -8,11 +8,11 @@ import rootReducer from '../reducers';
 
 import LaunchNavigator from '../components/launchNavigator/launchNavigator';
 
-const logger = createLogger();
+const logger = createLogger(); // XXX Remove in production
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,
-  logger
+  logger // XXX Remove in production
 )(createStore);
 
 const store = createStoreWithMiddleware(rootReducer);

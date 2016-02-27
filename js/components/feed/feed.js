@@ -24,34 +24,38 @@ function isCharge(payment) {
   return payment.status == "pending";
 }
 
+var dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+
 class Feed extends Component {
   constructor(props) {
     super(props);
     this.state =  {
-      dataSource: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
-                              .cloneWithRows(this.props.feed)
+      dataSource: dataSource.cloneWithRows(this.props.feed)
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.feed !== this.props.feed) {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(this.props.feed)
-      });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.feed !== this.props.feed) {
+      // DO NOT REMOVE LINE BELOW. Critical for performance.
+      // It flushes out the old datasource
+      this.setState({ dataSource: dataSource.cloneWithRows([])});
+
+      setTimeout(() => {
+        this.setState({
+          dataSource: dataSource.cloneWithRows(nextProps.feed)
+        });
+      }, 1000);
     }
   }
 
   render() {
-    if (this.props.isFetching) {
-      return(<View><Text>Fetching...</Text></View>);
-    } else {
-      return (
-        <ListView
-          style={styles.container}
-          dataSource={ this.state.dataSource }
-          renderRow={this.renderRow} />
-      );
-    }
+    return (
+      <ListView
+        style={styles.container}
+        dataSource={ this.state.dataSource }
+        renderRow={this.renderRow}
+       />
+    );
   }
 
   renderRow(item) {

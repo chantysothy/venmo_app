@@ -8,6 +8,7 @@ import React, {
   TouchableHighlight,
   ListView,
   Navigator,
+  InteractionManager,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -23,9 +24,11 @@ var textStyles = require('../../shared/textStyles');
 var TimeAgo = require('../../utils/timeAgo.js');
 
 class Charges extends Component {
-  componentWillMount() {
-    withEmailAndToken((email, token) => {
-        this.props.dispatch(fetchCharges(email, token));
+  componentDidMount() {
+    InteractionManager.runAfterInteractions(() => {
+      withEmailAndToken((email, token) => {
+          this.props.dispatch(fetchCharges(email, token));
+      });
     });
   }
 
