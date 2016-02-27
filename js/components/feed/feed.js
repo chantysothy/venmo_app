@@ -44,7 +44,7 @@ class Feed extends Component {
         this.setState({
           dataSource: dataSource.cloneWithRows(nextProps.feed)
         });
-      }, 1000);
+      }, 1);
     }
   }
 
