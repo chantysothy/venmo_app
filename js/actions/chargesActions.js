@@ -60,6 +60,8 @@ exports.payPendingCharge = function(email, token, paymentId) {
     return ajax.payPendingCharge(email, token, paymentId, nonce)
                .then(response => {
                  dispatch(fetchCharges(email, token));
+                 dispatch(fetchSocialFeed(email, token));
+                 dispatch(fetchPrivateFeed(email, token));
                  response.json().then(json => dispatch(receiveChargePayment(json.data)));
                })
                .catch(error => console.log(error));

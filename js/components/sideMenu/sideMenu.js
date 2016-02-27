@@ -76,7 +76,7 @@ class NavigationsMenu extends Component {
           onPress={this._transitionToSettings.bind(this)}>
           <View style={styles.menuItem}>
             <Icon style={styles.iconLabel} name="gear-a" size={30} color="white"/>
-            <Text style={textStyles.text}> Settings </Text>
+            <Text style={textStyles.text}> Change Phone </Text>
           </View>
         </TouchableHighlight>
       </View>
@@ -99,7 +99,7 @@ class NavigationsMenu extends Component {
 
   _transitionToSettings() {
     this.props.navigator.push({
-      id: 'Charges',
+      id: 'PhoneVerification',
       sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
     });
   }

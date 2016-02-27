@@ -52,7 +52,7 @@ var styles = StyleSheet.create({
     flex: 1
   },
   iconLabel: {
-    width: 50,
+    width: 40,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
