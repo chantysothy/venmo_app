@@ -10,6 +10,7 @@ import {
 import * as ajax from '../shared/ajax.js';
 import React from 'react-native'
 
+import { initBraintreeWithToken, braintreeNonce } from '../shared/braintree';
 var _ = require('lodash');
 
 function handleError(error) {
@@ -63,19 +64,28 @@ function fetchCharges(email, token) {
 
 exports.fetchCharges = fetchCharges;
 
-exports.payPendingCharge = function(email, token, paymentId) {
-  var nonce = "fake-valid-nonce"
+exports.payPendingCharge = function(user, paymentId) {
+  var email = user.user.email;
+  var token = user.authentication_token;
 
+  var noncePromise = () => new Promise((resolve) => { resolve("") });
+  if (!user.user.braintree_account) {
+    noncePromise = braintreeNonce;
+  }
   return dispatch => {
     dispatch({ type:  REQUEST_CHARGE_PAYMENT });
-    return ajax.payPendingCharge(email, token, paymentId, nonce)
-               .then(response => {
-                 dispatch(fetchCharges(email, token));
-                 dispatch(fetchSocialFeed(email, token));
-                 dispatch(fetchPrivateFeed(email, token));
-                 response.json().then(json => dispatch(receiveChargePayment(json.data)));
-               })
-               .catch(error => console.log(error));
+    initBraintreeWithToken().then(() => {
+      noncePromise().then((nonce) => {
+        ajax.payPendingCharge(email, token, paymentId, nonce)
+            .then(response => {
+              dispatch(fetchCharges(email, token));
+              dispatch(fetchSocialFeed(email, token));
+              dispatch(fetchPrivateFeed(email, token));
+              response.json().then(json => dispatch(receiveChargePayment(json.data)));
+            })
+            .catch(error => console.log(error));
+      });
+    });
   }
 }
 

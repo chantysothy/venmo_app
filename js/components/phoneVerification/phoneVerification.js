@@ -121,9 +121,6 @@ class PhoneVerification extends Component {
           <Text>
             { message }
           </Text>
-          <Text>
-            REMOVE ME. { this.props.phoneVerification.pin }
-          </Text>
         </View>
       </View>
     );
@@ -143,9 +140,11 @@ class PhoneVerification extends Component {
   }
 
   _registerPhoneNumber() {
-    withEmailAndToken((email, token) => {
-      this.props.dispatch(registerPhoneNumber(email, token, this.state.phoneNumber));
-    });
+    if (!this.props.isRegistering) {
+      withEmailAndToken((email, token) => {
+        this.props.dispatch(registerPhoneNumber(email, token, this.state.phoneNumber));
+      });
+    }
   }
 
   _resetPhoneVerification() {

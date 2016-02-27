@@ -45,6 +45,7 @@ class Charges extends Component {
           forward={() => this.props.navigator.pop()}/>
         <View style={styles.chargeListContainer}>
           <ChargeList
+            user={this.props.user}
             style={styles.socialFeed}
             isFetching={this.props.charges.isFetching}
             refreshCharges={this._refreshCharges.bind(this)}
@@ -101,6 +102,7 @@ class ChargeList extends Component {
         key = { item.payment.id }
         dispatch={this.props.dispatch}
         payment = { item.payment }
+        user = { this.props.user }
         payee = { item.payee }
         payer = { item.payer } />
     )
@@ -158,9 +160,7 @@ class Charge extends Component {
   }
 
   _payCharge() {
-    withEmailAndToken((email, token) => {
-      this.props.dispatch(payPendingCharge(email, token, this.props.payment.id));
-    });
+    this.props.dispatch(payPendingCharge(this.props.user.params, this.props.payment.id));
   }
 
   _declineCharge() {
@@ -171,6 +171,7 @@ class Charge extends Component {
 }
 function mapStateToProps(state){
   return {
+    user: state.user,
     charges: state.charges
   };
 }

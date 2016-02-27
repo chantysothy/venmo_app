@@ -9,7 +9,12 @@ export function braintreeNonce() {
 }
 
 export function initBraintreeWithToken() {
-  ajax.getClientToken().then((resonse) => {
-    resonse.json().then((json) => client_token = json.client_token);
+  return new Promise((resolve, reject) => {
+    ajax.getClientToken().then((response) => {
+      response.json().then((json) => {
+        client_token = json.client_token;
+        resolve();
+      });
+    });
   });
 }

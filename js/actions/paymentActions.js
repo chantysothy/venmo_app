@@ -33,14 +33,13 @@ function receivePayment(payment, navigator) {
 }
 
 exports.pay = function pay(user, payment, navigator) {
-  var email = user.user.email;
+  var email = user.params.email;
   var token = user.authentication_token;
   var parsedAmountCents = parseFloat(payment.amount) * 100;
 
   var noncePromise = () => new Promise((resolve) => { resolve("") });
 
   if (parsedAmountCents > 0 && parsedAmountCents > user.balance.balance_cents && !user.user.braintree_account) {
-    debugger;
     noncePromise = braintreeNonce;
   }
 
