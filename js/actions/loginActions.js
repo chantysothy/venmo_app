@@ -15,9 +15,15 @@ function receiveLogin(status, user, navigator) {
     if (status == 200) {
       store.save('email', user.user.email).then(() => {
         store.save('token', user.authentication_token).then(() => {
-          navigator.push({
-            id: 'Home',
-          });
+          if (user.user.phone_number === null) {
+            navigator.push({
+              id: 'PhoneVerification',
+            });
+          } else {
+            navigator.push({
+              id: 'Home',
+            });
+          }
         });
       });
 

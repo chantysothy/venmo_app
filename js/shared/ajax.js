@@ -48,6 +48,16 @@ export function loginWithToken(email, authentication_token) {
   return POST(requestUrl, { email, authentication_token });
 }
 
+export function registerPhoneNumber(email, authentication_token, phone_number) {
+  var requestUrl = API_BASE +'/auth/register_phone_number'
+  return POST(requestUrl, { email, authentication_token, phone_number });
+}
+
+export function verifyPhoneNumber(email, authentication_token, phone_number, pin) {
+  var requestUrl = API_BASE +'/auth/verify_phone_number'
+  return POST(requestUrl, { email, authentication_token, phone_number, pin });
+}
+
 export function getPublicFeed(email, authentication_token) {
   var requestUrl = API_BASE + '/social/public_feed';
   return GET(requestUrl, { email, authentication_token } );

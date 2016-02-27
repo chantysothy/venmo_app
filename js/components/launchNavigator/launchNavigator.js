@@ -8,6 +8,7 @@ import CreatePayment from '../createPayment/createPayment';
 import PaymentSelectUser from  '../createPayment/paymentSelectUser';
 import UserProfile from  '../userProfile/userProfile.js';
 import Charges from  '../charges/charges.js';
+import PhoneVerification from '../phoneVerification/phoneVerification.js';
 
 var {
   View,
@@ -24,12 +25,14 @@ export default class MelamineLaunch extends React.Component {
     // Handle the hardware back press if on Android
     if (Platform.OS == 'android') {
       React.BackAndroid.addEventListener('hardwareBackPress', () => {
-        // Require the route list to have more than 2 routes.
-        // This is because in addition the home route, there will also be the
-        // launchCarousel, and we do not want to log the user out by pressing back.
-        if (this._navigator !== null && this._navigator.getCurrentRoutes().length > 2) {
-          this._navigator.pop();
-          return true;
+        if (this._navigator !== null) {
+          var currentRoutes = this._navigator.getCurrentRoutes();
+          var currentRoute = currentRoutes[currentRoutes.length - 1];
+          console.log(currentRoute);
+          if (currentRoute.id != 'Home') {
+            this._navigator.pop();
+            return true;
+          }
         }
         return false;
       });
@@ -53,6 +56,8 @@ export default class MelamineLaunch extends React.Component {
         return(<UserProfile navigator={nav}/>);
       case 'Charges':
         return(<Charges navigator={nav}/>);
+      case 'PhoneVerification':
+        return(<PhoneVerification navigator={nav}/>);
     }
   }
 
