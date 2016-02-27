@@ -1,6 +1,6 @@
-var {
+import React, {
   Dimensions,
-} = React;
+} from 'react-native';
 
 module.exports = function() {
   return Dimensions.get('window');
