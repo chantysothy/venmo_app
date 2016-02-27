@@ -12,9 +12,11 @@ import React, {
 import { connect } from 'react-redux/native';
 
 import TitleBar from '../titleBar/titleBar';
+import { fetchPrivateFeed } from '../../actions/feedActions.js';
+import { Feed } from '../feed/feed.js';
+import { withEmailAndToken } from '../../utils/utils';
 
 var Icon = require('react-native-vector-icons/Ionicons');
-var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 var styles = require('./userProfileStyles.js');
 var textStyles = require('../../shared/textStyles');
@@ -40,16 +42,22 @@ class UserProfile extends Component {
           <Image
             style={styles.profilePhoto}
             source={{uri: imageUrl }} />
-          <View
-            style={styles.rightContainer}>
-            <Text style={styles.profileName}> { email } </Text>
-            <Text style={styles.profileName}> { phone_number } </Text>
-            <Text style={styles.profileName}> { balance.balance_formatted } </Text>
-            <Text style={styles.about}> { about } </Text>
-          </View>
+          <Text style={styles.details}> { email } {phone_number} </Text>
+          <Text style={styles.details}> Balance:  { balance.balance_formatted } </Text>
+          <Feed
+            style={styles.privateFeed}
+            feed={this.props.feed.privatePayments}
+            isFetching={this.props.feed.isFetching}
+            refreshFeed={this._refreshPrivateFeed.bind(this)} />
         </View>
       </View>
     );
+  }
+
+  _refreshPrivateFeed() {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(fetchPrivateFeed(email, token));
+    });
   }
 }
 

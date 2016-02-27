@@ -33,7 +33,7 @@ function receivePayment(payment, navigator) {
 }
 
 exports.pay = function pay(user, payment, navigator) {
-  var email = user.params.email;
+  var email = user.user.email;
   var token = user.authentication_token;
   var parsedAmountCents = parseFloat(payment.amount) * 100;
 

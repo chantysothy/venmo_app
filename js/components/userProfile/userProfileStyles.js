@@ -16,32 +16,43 @@ var styles = StyleSheet.create({
     width: width,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    flexDirection: 'column'
   },
   profile: {
-    marginTop: 30,
+    marginTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
   profilePhoto: {
-    height: 150,
-    width: 150,
-    borderRadius: 75,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
     borderWidth: 1,
     borderColor: 'black',
   },
   profileName: {
     fontWeight: 'bold',
     fontSize: 20,
+    marginBottom: 5
+  },
+  details: {
+    fontSize: 15,
   },
   rightContainer: {
     paddingLeft: 10,
     justifyContent: 'center',
+    flex: 1,
   },
   menuItems: {
     marginTop: 10,
     marginLeft: 15,
     marginRight: 15,
   },
-  menuItem: {
-  }
+  privateFeed: {
+    width: width,
+    flex: 1,
+  },
 });
 
 module.exports = styles;
