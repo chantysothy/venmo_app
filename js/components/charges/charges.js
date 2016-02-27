@@ -20,7 +20,6 @@ import TitleBar from '../titleBar/titleBar';
 
 var Icon = require('react-native-vector-icons/Ionicons');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
-var ControlledRefreshableListView = require('react-native-refreshable-listview/lib/ControlledRefreshableListView');
 
 var styles = require('./chargesStyles.js');
 var textStyles = require('../../shared/textStyles');

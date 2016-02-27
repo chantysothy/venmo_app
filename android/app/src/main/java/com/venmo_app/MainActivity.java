@@ -12,7 +12,11 @@ import com.magus.fblogin.FacebookLoginPackage;
 
 import ca.jaysoo.extradimensions.ExtraDimensionsPackage;
 
+import com.surialabs.rn.braintree.BraintreePackage;
+import android.content.Intent;
+
 public class MainActivity extends ReactActivity {
+    private BraintreePackage mBraintreePackage;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -38,11 +42,23 @@ public class MainActivity extends ReactActivity {
    */
     @Override
     protected List<ReactPackage> getPackages() {
+      mBraintreePackage = new BraintreePackage(this);
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new VectorIconsPackage(),
           new FacebookLoginPackage(),
-          new ExtraDimensionsPackage(this)
+          new ExtraDimensionsPackage(this),
+          mBraintreePackage
         );
+    }
+
+    /**
+     * For Braintree
+     */
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+      super.onActivityResult(requestCode, resultCode, data);
+
+      mBraintreePackage.handleActivityResult(requestCode, resultCode, data);
     }
 }

@@ -124,4 +124,5 @@ dependencies {
     compile "com.facebook.react:react-native:0.19.+"
     compile project(':react-native-facebook-login')
     compile project(':ExtraDimensions')
+    compile project(':react-native-braintree')
 }

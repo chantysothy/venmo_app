@@ -8,3 +8,6 @@ project(':react-native-vector-icons').projectDir = new File(rootProject.projectD
 
 include ':ExtraDimensions', ':app'
 project(':ExtraDimensions').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-extra-dimensions-android/android')
+
+include ':react-native-braintree'
+project(':react-native-braintree').projectDir = new File(settingsDir, '../node_modules/react-native-braintree-android')
