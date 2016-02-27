@@ -1,3 +1,6 @@
+import React from 'react-native';
+var _ = require('lodash');
+
 import {
   REQUEST_PAYMENT,
   RECEIVE_PAYMENT,
@@ -5,11 +8,10 @@ import {
 } from '../constants/actionTypes';
 
 import * as ajax from '../shared/ajax.js';
-import React from 'react-native'
 
-import { fetchSocialFeed, fetchPrivateFeed } from './feedActions'
+import { fetchSocialFeed, fetchPrivateFeed } from './feedActions';
 
-var _ = require('lodash');
+import { braintreeNonce } from '../shared/braintree';
 
 function requestPayment() {
   return {
@@ -30,29 +32,34 @@ function receivePayment(payment, navigator) {
   }
 }
 
-exports.pay = function pay(email, token, toId, note, amount, navigator) {
-  var payment = {
-    note,
-    amount,
-    other_id: toId,
-    audience: "public",
-  };
-  var nonce = "fake-valid-nonce"
+exports.pay = function pay(user, payment, navigator) {
+  var email = user.user.email;
+  var token = user.authentication_token;
+  var parsedAmountCents = parseFloat(payment.amount) * 100;
+
+  var noncePromise = () => new Promise((resolve) => { resolve("") });
+
+  if (parsedAmountCents > 0 && parsedAmountCents > user.balance.balance_cents && !user.user.braintree_account) {
+    debugger;
+    noncePromise = braintreeNonce;
+  }
 
   return dispatch => {
     dispatch(requestPayment());
-    return ajax.pay(email, token, payment, nonce)
-               .then(response => {
-                 var promiseAll = Promise.all([
-                   dispatch(fetchSocialFeed(email, token)),
-                   dispatch(fetchPrivateFeed(email, token))
-                 ])
-                 promiseAll.then(() => {
-                     response.json()
-                     .then(json => dispatch(receivePayment(json.data, navigator)))
-                 });
-               })
-               .catch(error => console.log(error));
+    noncePromise().then((nonce) => {
+      return ajax.pay(email, token, payment, nonce)
+                 .then(response => {
+                   var promiseAll = Promise.all([
+                     dispatch(fetchSocialFeed(email, token)),
+                     dispatch(fetchPrivateFeed(email, token))
+                   ])
+                   promiseAll.then(() => {
+                       response.json()
+                       .then(json => dispatch(receivePayment(json.data, navigator)))
+                   });
+                 })
+                 .catch(error => console.log(error));
+    });
   }
 }
 

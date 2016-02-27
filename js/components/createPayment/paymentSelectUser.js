@@ -14,6 +14,7 @@ import React, {
 import { connect } from 'react-redux/native';
 import { fetchUsersSearch, clearUsersSearch } from '../../actions/userSearchActions';
 import { pay } from '../../actions/paymentActions';
+import { initBraintreeWithToken } from '../../shared/braintree';
 
 import TitleBar from '../titleBar/titleBar';
 
@@ -29,6 +30,10 @@ class PaymentSelectUser extends Component {
       note: "",
       to: null,
     }
+  }
+
+  componentWillMount() {
+    initBraintreeWithToken();
   }
 
   render() {
@@ -125,14 +130,12 @@ class PaymentSelectUser extends Component {
   }
 
   _submitPayment() {
-    var email = this.props.user.user.email;
-    var token = this.props.user.authentication_token;
-
-    if (this.state.to === null) {
-      // signal some error
-    } else {
-      this.props.dispatch(pay(email, token, this.state.to.id, this.state.note, this.props.amount, this.props.navigator))
-    }
+    this.props.dispatch(pay(this.props.user, {
+      note: this.state.note,
+      other_id: this.state.to.id,
+      amount: this.props.amount,
+      audience: "public",
+    }, this.props.navigator));
   }
 }
 

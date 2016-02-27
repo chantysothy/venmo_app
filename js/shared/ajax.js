@@ -107,3 +107,7 @@ export function payPendingCharge(email, authentication_token, payment_id, nonce)
   });
 }
 
+export function getClientToken() {
+  var requestUrl = API_BASE + '/client_token';
+  return GET(requestUrl);
+}
