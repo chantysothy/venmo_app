@@ -74,7 +74,7 @@ class Home extends Component {
                 style={styles.socialFeed}
                 feed={this.props.feed.publicPayments}
                 isFetching={this.props.feed.isFetching}
-                refreshFeed={this._refreshSocialFeed.bind(this)} />
+                refreshFeed={this._refreshPublicFeed.bind(this)} />
               <Feed
                 tabLabel="stalker-person"
                 style={styles.socialFeed}
@@ -94,6 +94,11 @@ class Home extends Component {
     }
   }
 
+  _refreshPublicFeed() {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(fetchPublicFeed(email, token));
+    });
+  }
   _refreshSocialFeed() {
     withEmailAndToken((email, token) => {
       this.props.dispatch(fetchSocialFeed(email, token));
