@@ -48,8 +48,13 @@ export function loginWithToken(email, authentication_token) {
   return POST(requestUrl, { email, authentication_token });
 }
 
+export function getPublicFeed(email, authentication_token) {
+  var requestUrl = API_BASE + '/social/public_feed';
+  return GET(requestUrl, { email, authentication_token } );
+}
+
 export function getSocialFeed(email, authentication_token) {
-  var requestUrl = API_BASE + '/social/feed';
+  var requestUrl = API_BASE + '/social/friend_feed';
   return GET(requestUrl, { email, authentication_token } );
 }
 

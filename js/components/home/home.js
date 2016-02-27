@@ -15,7 +15,7 @@ import { Feed } from '../feed/feed.js';
 import { Menu } from '../sideMenu/sideMenu.js';
 import colors from '../../constants/colors.js';
 
-import { fetchSocialFeed, fetchPrivateFeed } from '../../actions/feedActions.js';
+import { fetchSocialFeed, fetchPrivateFeed, fetchPublicFeed } from '../../actions/feedActions.js';
 import { withEmailAndToken } from '../../utils/utils';
 
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -36,6 +36,7 @@ class Home extends Component {
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       withEmailAndToken((email, token) => {
+          this.props.dispatch(fetchPublicFeed(email, token));
           this.props.dispatch(fetchSocialFeed(email, token));
           this.props.dispatch(fetchPrivateFeed(email, token));
       });
@@ -71,7 +72,7 @@ class Home extends Component {
               <Feed
                 tabLabel="earth"
                 style={styles.socialFeed}
-                feed={this.props.feed.friendPayments}
+                feed={this.props.feed.publicPayments}
                 isFetching={this.props.feed.isFetching}
                 refreshFeed={this._refreshSocialFeed.bind(this)} />
               <Feed
