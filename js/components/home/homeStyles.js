@@ -4,12 +4,12 @@ var React = require('react-native');
 
 var {
   StyleSheet,
-  Dimensions,
 } = React;
 
 import colors from '../../constants/colors';
+import getDimensions from '../../shared/dimensions';
 
-var {width, height} = Dimensions.get('window');
+var {width, height} = getDimensions();
 
 var styles = StyleSheet.create({
   iosContainer: {

@@ -4,20 +4,22 @@ var React = require('react-native');
 
 var {
   StyleSheet,
-  Dimensions,
 } = React;
 
 import colors from '../../constants/colors';
 
-var {width, height} = Dimensions.get('window');
+import getDimensions from '../../shared/dimensions';
+var {width, height} = getDimensions();
 
 var styles = StyleSheet.create({
+  iosContainer: {
+    paddingTop: 12,
+  },
   container: {
     height: height,
     width: width,
     alignItems: 'center',
     backgroundColor: colors.green,
-    paddingTop: 12,
   },
   amountTextContainer: {
     flex: 1,

@@ -2,10 +2,10 @@
 
 var {
   StyleSheet,
-  Dimensions,
 } = React;
 
-var {width, height} = Dimensions.get('window');
+import getDimensions from '../../shared/dimensions';
+var {width, height} = getDimensions();
 
 var colors = require('../../constants/colors.js');
 

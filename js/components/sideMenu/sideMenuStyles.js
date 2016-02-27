@@ -4,11 +4,12 @@ var React = require('react-native');
 
 var {
   StyleSheet,
-  Dimensions,
 } = React;
 
-var {width, height} = Dimensions.get('window');
 var colors = require('../../constants/colors.js');
+
+import getDimensions from '../../shared/dimensions';
+var {width, height} = getDimensions();
 
 var styles = StyleSheet.create({
   container: {

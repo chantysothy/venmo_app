@@ -8,6 +8,7 @@ import React, {
   View,
   LayoutAnimation,
   Navigator,
+  Platform,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -40,8 +41,13 @@ class CreatePayment extends Component {
   render() {
     var amountFormatted = this.state.amount === "" ? "£0" : "£" + this.state.amount;
 
+    var containerStyles = [styles.container];
+    if (Platform.OS == 'ios') {
+      containerStyles.push(styles.iosContainer);
+    }
+
     return(
-      <View style={styles.container}>
+      <View style={containerStyles}>
         <TitleBar text="" back={() => this.props.navigator.pop()}/>
         <Animatable.View ref="amountTextContainer" style={styles.amountTextContainer}
           easing="ease-in-out">
