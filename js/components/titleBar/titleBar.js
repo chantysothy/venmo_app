@@ -36,13 +36,13 @@ export default class TitleBar extends Component {
         </Button>
     ) : null;
 
-    var barStyle = [styles.bar];
+    var barStyles = [styles.bar];
     if (Platform.OS == 'ios') {
-      barStyle.push(styles.iosBar);
+      barStyles.push(styles.iosBar);
     }
 
     return (
-      <View style={styles.bar}>
+      <View style={barStyles}>
         {backButton}
         <Text style={[textStyles.text, styles.text, styles.titleText]}>{this.props.text}</Text>
         {forwardButton}
