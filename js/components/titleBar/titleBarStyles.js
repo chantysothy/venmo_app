@@ -12,9 +12,11 @@ import colors from '../../constants/colors'
 var {width, height} = Dimensions.get('window');
 
 var styles = StyleSheet.create({
+  iosBar: {
+    paddingTop: 35,
+  },
   bar: {
     flexDirection: 'row',
-    paddingTop: 35,
     backgroundColor: colors.green,
     height: 75,
     width: width,

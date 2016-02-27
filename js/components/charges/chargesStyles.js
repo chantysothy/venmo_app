@@ -11,7 +11,11 @@ var colors = require('../../constants/colors.js');
 
 var styles = StyleSheet.create({
   container: {
+    height: height,
     width: width,
+  },
+  chargeListContainer: {
+    flex: 1
   },
   feedItem: {
     width: width,

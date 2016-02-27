@@ -11,6 +11,7 @@ var {
   View,
   TouchableHighlight,
   Component,
+  Platform
 } = React;
 
 export default class TitleBar extends Component {
@@ -34,6 +35,11 @@ export default class TitleBar extends Component {
         {this.props.forwardText}
         </Button>
     ) : null;
+
+    var barStyle = [styles.bar];
+    if (Platform.OS == 'ios') {
+      barStyle.push(styles.iosBar);
+    }
 
     return (
       <View style={styles.bar}>

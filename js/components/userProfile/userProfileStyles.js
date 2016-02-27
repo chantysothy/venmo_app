@@ -16,12 +16,9 @@ var styles = StyleSheet.create({
     width: width,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 30,
   },
   profile: {
     marginTop: 30,
-    marginLeft: 15,
-    flexDirection: 'row',
   },
   profilePhoto: {
     height: 150,

@@ -15,6 +15,7 @@ import { connect } from 'react-redux/native';
 import { withEmailAndToken } from '../../utils/utils';
 import { fetchCharges, payPendingCharge } from '../../actions/chargesActions.js';
 import { Feed } from '../feed/feed.js';
+import TitleBar from '../titleBar/titleBar';
 
 var Icon = require('react-native-vector-icons/Ionicons');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
@@ -37,8 +38,11 @@ class Charges extends Component {
 
     return (
       <View style={styles.container}>
-        <View
-          style={styles.rightContainer}>
+        <TitleBar text="Charges"
+          back={() => this.props.navigator.pop()}
+          forwardText="Done"
+          forward={() => this.props.navigator.pop()}/>
+        <View style={styles.chargeListContainer}>
           <ChargeList
             style={styles.socialFeed}
             isFetching={false}

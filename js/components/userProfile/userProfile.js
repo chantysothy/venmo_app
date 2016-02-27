@@ -11,6 +11,8 @@ import React, {
 
 import { connect } from 'react-redux/native';
 
+import TitleBar from '../titleBar/titleBar';
+
 var Icon = require('react-native-vector-icons/Ionicons');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 
@@ -29,16 +31,22 @@ class UserProfile extends Component {
     var email = user.email;
     return (
       <View style={styles.container}>
-        <Image
-          style={styles.profilePhoto}
-          source={{uri: imageUrl }} />
-        <View
-          style={styles.rightContainer}>
-          <Text style={styles.profileName}> { fullName } </Text>
-          <Text style={styles.profileName}> { email } </Text>
-          <Text style={styles.profileName}> { phone_number } </Text>
-          <Text style={styles.profileName}> { balance.balance_formatted } </Text>
-          <Text style={styles.about}> { about } </Text>
+        <TitleBar text="Profile"
+          back={() => this.props.navigator.pop()}
+          forwardText="Done"
+          forward={() => this.props.navigator.pop()}/>
+        <View style={styles.profile}>
+          <Image
+            style={styles.profilePhoto}
+            source={{uri: imageUrl }} />
+          <View
+            style={styles.rightContainer}>
+            <Text style={styles.profileName}> { fullName } </Text>
+            <Text style={styles.profileName}> { email } </Text>
+            <Text style={styles.profileName}> { phone_number } </Text>
+            <Text style={styles.profileName}> { balance.balance_formatted } </Text>
+            <Text style={styles.about}> { about } </Text>
+          </View>
         </View>
       </View>
     );
