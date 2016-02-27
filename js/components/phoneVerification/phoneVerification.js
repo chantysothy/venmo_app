@@ -27,7 +27,7 @@ class PhoneVerification extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phoneNumber: '4252781682'
+      phoneNumber: ''
     };
   }
   render() {

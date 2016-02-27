@@ -93,6 +93,11 @@ export function pay(email, authentication_token, paymentParams, nonce) {
   });
 }
 
+export function declinePendingCharge(email, authentication_token, payment_id){
+  var requestUrl = API_BASE + '/payments/' + payment_id.toString() + '/decline_pending_charge';
+  return PUT(requestUrl, { email, authentication_token });
+}
+
 export function payPendingCharge(email, authentication_token, payment_id, nonce){
   var requestUrl = API_BASE + '/payments/' + payment_id.toString() + '/pay_pending_charge';
   return PUT(requestUrl, {

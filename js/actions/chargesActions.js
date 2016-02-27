@@ -3,6 +3,8 @@ import {
   RECEIVE_CHARGES,
   REQUEST_CHARGE_PAYMENT,
   RECEIVE_CHARGE_PAYMENT,
+  REQUEST_DECLINE_PAYMENT,
+  RECEIVE_DECLINE_PAYMENT,
 } from '../constants/actionTypes';
 
 import * as ajax from '../shared/ajax.js';
@@ -29,6 +31,15 @@ function receiveChargePayment(parsedResponse) {
   return dispatch => {
     dispatch({
       type: RECEIVE_CHARGE_PAYMENT,
+      receivedAt: Date.now()
+    });
+  }
+}
+
+function receiveDeclinePayment(parsedResponse) {
+  return dispatch => {
+    dispatch({
+      type: RECEIVE_DECLINE_PAYMENT,
       receivedAt: Date.now()
     });
   }
@@ -68,3 +79,18 @@ exports.payPendingCharge = function(email, token, paymentId) {
   }
 }
 
+exports.declinePendingCharge = function(email, token, paymentId) {
+  var nonce = "fake-valid-nonce"
+
+  return dispatch => {
+    dispatch({ type:  REQUEST_DECLINE_PAYMENT });
+    return ajax.declinePendingCharge(email, token, paymentId)
+               .then(response => {
+                 dispatch(fetchCharges(email, token));
+                 dispatch(fetchSocialFeed(email, token));
+                 dispatch(fetchPrivateFeed(email, token));
+                 response.json().then(json => dispatch(receiveChargePayment(json.data)));
+               })
+               .catch(error => console.log(error));
+  }
+}
