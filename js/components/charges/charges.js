@@ -9,6 +9,7 @@ import React, {
   ListView,
   Navigator,
   InteractionManager,
+  RefreshControl,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -81,12 +82,16 @@ class ChargeList extends Component {
 
   render() {
     return (
-      <ControlledRefreshableListView
+      <ListView
         style={styles.container}
         dataSource={ this.state.dataSource }
         renderRow={this.renderRow.bind(this)}
-        onRefresh={this.props.refreshCharges}
-        isRefreshing={this.props.charges.isFetching}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.props.isFetching}
+            onRefresh={this.props.refreshCharges.bind(this)}
+            enabled={true}
+          />}
       />
     );
   }
