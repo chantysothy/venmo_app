@@ -9,7 +9,10 @@ import React, {
   View,
   ListView,
   Image,
+  Platform,
 } from 'react-native';
+
+var Spinner = require('react-native-spinkit');
 
 import { connect } from 'react-redux/native';
 import { fetchUsersSearch, clearUsersSearch } from '../../actions/userSearchActions';
@@ -17,6 +20,7 @@ import { pay } from '../../actions/paymentActions';
 import { initBraintreeWithToken } from '../../shared/braintree';
 
 import TitleBar from '../titleBar/titleBar';
+import { green } from '../../constants/colors';
 
 var styles = require('./paymentSelectUserStyles');
 var textStyles = require('../../shared/textStyles');
@@ -76,8 +80,17 @@ class PaymentSelectUser extends Component {
         </View>;
     }
 
+    if (Platform.OS == 'ios') {
+      var spinner = <Spinner style={styles.spinner}
+        isVisible={this.props.paymentIsFetching} size={100}
+        type='Pulse' color={green} />
+    } else {
+      // set spinner here
+    }
+
     return(
       <View style={styles.container}>
+        {spinner}
         <TitleBar text={"£" + this.props.amount.replace("-", "")}
           back={() => this.props.navigator.pop()}
           forwardText={this.props.amount < 0 ? "Request" : "Pay"}
@@ -145,6 +158,7 @@ function mapStateToProps(state) {
   return {
     user: state.user.params,
     searchResultsDataSource: dataSource.cloneWithRows(state.userSearchResults.results),
+    paymentIsFetching: state.payment.isFetching,
   };
 }
 

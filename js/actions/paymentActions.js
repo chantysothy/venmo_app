@@ -44,8 +44,8 @@ exports.pay = function pay(user, payment, navigator) {
   }
 
   return dispatch => {
-    dispatch(requestPayment());
     noncePromise().then((nonce) => {
+      dispatch(requestPayment());
       return ajax.pay(email, token, payment, nonce)
                  .then(response => {
                    var promiseAll = Promise.all([

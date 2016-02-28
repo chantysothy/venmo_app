@@ -1,6 +1,6 @@
 import {
   REQUEST_PAYMENT,
-  RECEIVE_LOGIN,
+  RECEIVE_PAYMENT,
   CLEAR_PAYMENT
 } from '../constants/actionTypes';
 
@@ -10,7 +10,7 @@ const defaultPaymentState = {
   params: {},
 };
 
-export default function user(state = defaultUserState, action) {
+export default function payment(state = defaultPaymentState, action) {
   switch (action.type) {
     case REQUEST_PAYMENT:
       return Object.assign({}, state, {
@@ -28,7 +28,7 @@ export default function user(state = defaultUserState, action) {
         });
       }
     case CLEAR_PAYMENT:
-      return defaultUserState;
+      return defaultPaymentState;
     default:
       return state;
   }

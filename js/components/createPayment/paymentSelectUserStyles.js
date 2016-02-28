@@ -88,6 +88,11 @@ var styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
   },
+  spinner: {
+    position: 'absolute',
+    top: (height / 3) - 50,
+    left: (width / 2) - 50,
+  },
 });
 
 module.exports = styles;
