@@ -18,7 +18,7 @@ export function initBraintreeWithToken() {
   return new Promise((resolve, reject) => {
     ajax.getClientToken().then((response) => {
       response.json().then((json) => {
-        BTClient.setup(json.client_token):
+        BTClient.setup(json.client_token);
         resolve();
       });
     });
