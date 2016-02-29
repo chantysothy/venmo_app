@@ -58,7 +58,7 @@ class LaunchCarousel extends Component {
       this.setState({
         underPageVisible: true,
       });
-    }, 400);
+    }, 800);
   }
 
   render() {
@@ -89,7 +89,7 @@ class LaunchCarousel extends Component {
     switch (page) {
       case 1:
         return (
-          <View style={{marginTop: -height * 2/3 }}>
+          <View style={styles.firstPage}>
             <View style={styles.fullHeight}>
               <Text style={[textStyles.text, textStyles.headerText]}>Welcome to Venmo</Text>
               <Text style={[textStyles.text, textStyles.subheaderText]}>
@@ -177,9 +177,18 @@ const styles = StyleSheet.create({
     width: width,
     height: height,
   },
+  firstPage: {
+    backgroundColor: colors.green,
+    width: width,
+    height: height,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
   page: {
     backgroundColor: colors.green,
     width: width,
+    marginTop: height * 2/3 ,
     height: height / 3,
     justifyContent: 'center',
     alignItems: 'center',
@@ -203,6 +212,7 @@ const styles = StyleSheet.create({
     height: 80,
   },
   underPage: {
+    position: 'absolute',
     height: height / 3 * 2,
     width: width,
     backgroundColor: colors.darkGreen,
