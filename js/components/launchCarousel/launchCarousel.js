@@ -58,7 +58,7 @@ class LaunchCarousel extends Component {
       this.setState({
         underPageVisible: true,
       });
-    }, 800);
+    }, 400);
   }
 
   render() {
@@ -68,14 +68,17 @@ class LaunchCarousel extends Component {
         style={[styles.mock, { transform: this.state.pan.getTranslateTransform(), }]}
         source={{uri: 'https://transfer.sh/iyxKu/iphone.png'}} />
       var underPageGreenContainer = <View style={styles.underPageGreenContainer}/>
+      var underPage = (
+        <View style={[styles.underPage, styles.notVisible]}>
+          {image}
+          {underPageGreenContainer}
+        </View>
+      );
     }
 
     return(
       <View style={styles.container}>
-        <View style={styles.underPage}>
-          {image}
-          {underPageGreenContainer}
-        </View>
+        { underPage }
         <ViewPager
           dataSource={this.dataSource}
           renderPage={this._renderPage.bind(this)}
@@ -176,6 +179,7 @@ const styles = StyleSheet.create({
   container: {
     width: width,
     height: height,
+    backgroundColor: colors.green,
   },
   firstPage: {
     backgroundColor: colors.green,
