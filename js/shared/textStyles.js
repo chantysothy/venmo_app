@@ -11,6 +11,15 @@ var styles = StyleSheet.create({
     fontFamily: 'Avenir',
     fontSize: 15,
     color: 'white',
+    textAlign: 'center',
+  },
+  headerText: {
+    fontWeight: '700',
+    fontSize: 45,
+  },
+  subheaderText: {
+    fontWeight: '500',
+    fontSize: 20,
   },
   bold: {
     fontWeight: 'bold',

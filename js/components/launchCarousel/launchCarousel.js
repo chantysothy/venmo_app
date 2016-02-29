@@ -8,6 +8,8 @@ import React, {
   View,
   Dimensions,
   TouchableHighlight,
+  Animated,
+  Easing,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -18,7 +20,8 @@ import { withEmailAndToken } from '../../utils/utils';
 import * as colors from '../../constants/colors';
 import * as textStyles from '../../shared/textStyles';
 
-var {width, height} = Dimensions.get('window');
+import getDimensions from '../../shared/dimensions';
+var {width, height} = getDimensions();
 
 var FacebookLoginManager = require('../../utils/facebookLoginManager')
 var ViewPager = require('react-native-viewpager');
@@ -27,13 +30,21 @@ class LaunchCarousel extends Component {
   constructor(props) {
     super(props);
 
-    var pages = [1,2,3];
-
+    var pages = [1, 2, 3, 4];
     var dataSource = new ViewPager.DataSource({
       pageHasChanged: (p1, p2) => p1 !== p2,
     });
-
     this.dataSource = dataSource.cloneWithPages(pages);
+
+    this.mockStartCoordinates = {
+      x: width / 10,
+      y: height,
+    };
+
+    this.state = {
+      pan: new Animated.ValueXY(this.mockStartCoordinates),
+      underPageVisible: false,
+    };
   }
 
   componentWillMount() {
@@ -42,14 +53,33 @@ class LaunchCarousel extends Component {
     });
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        underPageVisible: true,
+      });
+    }, 400);
+  }
+
   render() {
+    if (this.state.underPageVisible) {
+      var image = <Animated.Image
+        resizeMode="contain"
+        style={[styles.mock, { transform: this.state.pan.getTranslateTransform(), }]}
+        source={{uri: 'https://transfer.sh/iyxKu/iphone.png'}} />
+      var underPageGreenContainer = <View style={styles.underPageGreenContainer}/>
+    }
+
     return(
       <View style={styles.container}>
-        <View style={styles.underPage}/>
+        <View style={styles.underPage}>
+          {image}
+          {underPageGreenContainer}
+        </View>
         <ViewPager
           dataSource={this.dataSource}
           renderPage={this._renderPage.bind(this)}
-          onChangePage={this._onChangePage.bind(this)}
+          willChangePage={this._onChangePage.bind(this)}
           isLoop={false}/>
       </View>
     );
@@ -59,16 +89,23 @@ class LaunchCarousel extends Component {
     switch (page) {
       case 1:
         return (
-          <View style={[styles.page]}>
+          <View style={{marginTop: -height * 2/3 }}>
             <View style={styles.fullHeight}>
-              <Text style={textStyles.text}>Welcome to Venmo</Text>
+              <Text style={[textStyles.text, textStyles.headerText]}>Welcome to Venmo</Text>
+              <Text style={[textStyles.text, textStyles.subheaderText]}>
+                Here are a few things you should know before getting started.
+              </Text>
             </View>
         </View>);
       case 2:
         return (<View style={styles.page}>
-          <Text style={textStyles.text}>This is the 2nd page</Text>
+          <Text style={[textStyles.text, textStyles.subheaderText]}>Send or request money, with just a tap.</Text>
         </View>);
       case 3:
+        return (<View style={styles.page}>
+          <Text style={[textStyles.text, textStyles.subheaderText]}>See what your friends are paying for.</Text>
+        </View>);
+      case 4:
         return (<View style={styles.page}>
           <TouchableHighlight
             underlayColor='#3B0B0B'
@@ -82,11 +119,42 @@ class LaunchCarousel extends Component {
     }
   }
 
-  _onChangePage(page) {
-    switch (page) {
+  _onChangePage(pageIndex) {
+    var sendMoneyCoordinates = {
+      x: width / 10,
+      y: height / 3,
+    };
+
+    var socialFeedCoordinates = {
+      x: width / 10,
+      y: 20,
+    }
+
+    switch(pageIndex) {
+      case 0:
+        Animated.sequence([
+          Animated.timing(this.state.pan, {
+            toValue: this.mockStartCoordinates,
+            easing: Easing.inOut(Easing.cubic),
+          }),
+        ]).start();
+        return;
       case 1:
+        Animated.sequence([
+          Animated.timing(this.state.pan, {
+            toValue: sendMoneyCoordinates,
+            easing: Easing.inOut(Easing.cubic),
+            duration: 600,
+          }),
+        ]).start();
+        return;
       case 2:
-      case 3:
+        Animated.sequence([
+          Animated.timing(this.state.pan, {
+            toValue: socialFeedCoordinates,
+            easing: Easing.inOut(Easing.cubic),
+          }),
+        ]).start();
       default:
         return (<View/>);
     }
@@ -112,16 +180,18 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: colors.green,
     width: width,
-    height: height / 2,
+    height: height / 3,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   fullHeight: {
-    height: height * 1.5,
+    height: height,
     width: width,
     backgroundColor: colors.green,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
   loginButton: {
     width: width - 80,
@@ -133,9 +203,20 @@ const styles = StyleSheet.create({
     height: 80,
   },
   underPage: {
-    height: height / 2,
+    height: height / 3 * 2,
     width: width,
-    backgroundColor: 'transparent',
+    backgroundColor: colors.darkGreen,
+  },
+  underPageGreenContainer: {
+    position: 'absolute',
+    top: height / 3 * 2,
+    height: height / 3,
+    width: width,
+    backgroundColor: colors.green,
+  },
+  mock: {
+    height: .8 * width * 2.32,
+    width: width * .8,
   },
 });
 
