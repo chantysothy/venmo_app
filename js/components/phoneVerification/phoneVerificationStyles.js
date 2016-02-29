@@ -23,6 +23,10 @@ var styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: 'black',
     marginBottom: 10,
+    height: 50,
+    width: width - 40,
+    borderColor: 'black',
+    borderWidth: 1,
   },
   explanation: {
     fontSize: 20,
