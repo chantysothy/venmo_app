@@ -393,6 +393,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = H9Q9DT5435;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "venmo_app" */;
@@ -690,6 +693,7 @@
 			baseConfigurationReference = C1BAB7055C7971AE4EF42C37 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -708,7 +712,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "su.davidh.venmo-app";
+				PRODUCT_BUNDLE_IDENTIFIER = su.davidh.cashew;
 				PRODUCT_NAME = venmo_app;
 			};
 			name = Debug;
@@ -718,6 +722,7 @@
 			baseConfigurationReference = 5A468300DAF56D9EA76855FA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -735,7 +740,7 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "su.davidh.venmo-app";
+				PRODUCT_BUNDLE_IDENTIFIER = su.davidh.cashew;
 				PRODUCT_NAME = venmo_app;
 			};
 			name = Release;
