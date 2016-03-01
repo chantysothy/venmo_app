@@ -117,10 +117,12 @@ class CreatePayment extends Component {
       if (amount.length === amount.indexOf(".") + 2) {
         // there is one number after the decimal point
         amount += "0";
-      } else {
+      } else if (amount.length === amount.indexOf(".") + 1) {
         // there are zero
         amount += "00"
       }
+    } else {
+        amount += ".00"
     }
 
     this.props.navigator.push({
