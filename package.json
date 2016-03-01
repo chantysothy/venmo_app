@@ -12,6 +12,7 @@
     "react-native-braintree": "git://github.com/dvdhsu/react-native-braintree.git",
     "react-native-braintree-android": "^0.2.0",
     "react-native-button": "^1.4.2",
+    "react-native-code-push": "^1.7.3-beta",
     "react-native-extra-dimensions-android": "^0.17.0",
     "react-native-facebook-login": "^1.0.3",
     "react-native-grid-view": "^0.3.7",
