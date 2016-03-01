@@ -7,11 +7,25 @@ import {
   RECEIVE_PUBLIC_FEED,
 } from '../constants/actionTypes';
 
+const PLACE_HOLDER = {
+  isPlaceholder: true
+};
+
+const PLACE_HOLDER_PAYMENTS = [];
+for (var i = 0; i < 15; i++) {
+  PLACE_HOLDER_PAYMENTS.push({
+    isPlaceholder: true,
+    payment: { id: i },
+    payee: {},
+    payer: {},
+  });
+}
+
 const defaultSocialFeedState = {
   isFetching: false,
-  friendPayments: [],
-  privatePayments: [],
-  publicPayments: [],
+  friendPayments: PLACE_HOLDER_PAYMENTS,
+  privatePayments: PLACE_HOLDER_PAYMENTS,
+  publicPayments: PLACE_HOLDER_PAYMENTS,
 };
 
 export default function socialFeed(state = defaultSocialFeedState, action) {

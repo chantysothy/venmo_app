@@ -14,6 +14,23 @@ var styles = StyleSheet.create({
     width: width,
     backgroundColor: "white",
   },
+  longBox: {
+    flex: 1,
+    height: 15,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  shortBox: {
+    width: 80,
+    height: 15,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  greyBox: {
+    backgroundColor: "#C9C9C9",
+    borderRadius: 0,
+    borderWidth: 0,
+  },
   feedItem: {
     width: width,
     flexDirection: 'row',
