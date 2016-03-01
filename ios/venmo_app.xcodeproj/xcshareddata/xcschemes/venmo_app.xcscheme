@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "venmo_app.app"
+               BuildableName = "Cashew.app"
                BlueprintName = "Cashew"
                ReferencedContainer = "container:venmo_app.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "venmo_app.app"
+            BuildableName = "Cashew.app"
             BlueprintName = "Cashew"
             ReferencedContainer = "container:venmo_app.xcodeproj">
          </BuildableReference>
@@ -66,9 +66,9 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      buildConfiguration = "Release"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "venmo_app.app"
+            BuildableName = "Cashew.app"
             BlueprintName = "Cashew"
             ReferencedContainer = "container:venmo_app.xcodeproj">
          </BuildableReference>
@@ -99,7 +99,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "venmo_app.app"
+            BuildableName = "Cashew.app"
             BlueprintName = "Cashew"
             ReferencedContainer = "container:venmo_app.xcodeproj">
          </BuildableReference>

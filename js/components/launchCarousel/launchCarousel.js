@@ -97,7 +97,7 @@ class LaunchCarousel extends Component {
             <View style={styles.fullHeight}>
               <Text style={[textStyles.text, textStyles.headerText]}>Cashew</Text>
               <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>
-                Here are a few things you should know before getting started.
+                Here's what you'll need to know to get started.
               </Text>
             </View>
         </View>);
