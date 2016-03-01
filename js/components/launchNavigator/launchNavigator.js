@@ -9,6 +9,7 @@ import PaymentSelectUser from  '../createPayment/paymentSelectUser';
 import UserProfile from  '../userProfile/userProfile.js';
 import Charges from  '../charges/charges.js';
 import PhoneVerification from '../phoneVerification/phoneVerification.js';
+import Settings from '../settings/settings.js';
 
 var {
   View,
@@ -58,6 +59,8 @@ export default class MelamineLaunch extends React.Component {
         return(<Charges navigator={nav}/>);
       case 'PhoneVerification':
         return(<PhoneVerification navigator={nav}/>);
+      case 'Settings':
+        return(<Settings navigator={nav}/>);
     }
   }
 

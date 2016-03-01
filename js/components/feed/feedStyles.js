@@ -27,7 +27,7 @@ var styles = StyleSheet.create({
     marginBottom: 10,
   },
   greyBox: {
-    backgroundColor: "#C9C9C9",
+    backgroundColor: colors.grey,
     borderRadius: 0,
     borderWidth: 0,
   },
