@@ -10,6 +10,7 @@ import UserProfile from  '../userProfile/userProfile.js';
 import Charges from  '../charges/charges.js';
 import PhoneVerification from '../phoneVerification/phoneVerification.js';
 import Settings from '../settings/settings.js';
+import codePush from "react-native-code-push";
 
 var PushNotificationManager = require('../../utils/pushNotificationManager');
 
@@ -46,6 +47,7 @@ export default class MelamineLaunch extends React.Component {
   }
 
   componentWillMount() {
+    codePush.sync();
     PushNotificationManager.getUserId();
     this.subscription = NativeAppEventEmitter.addListener('onesignalIdReceived', (onesignalId) => {
         console.log(onesignalId);
