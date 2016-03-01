@@ -23,6 +23,7 @@ var Icon = require('react-native-vector-icons/Ionicons');
 var styles = require('./settingsStyles.js');
 var textStyles = require('../../shared/textStyles');
 var colors = require('../../constants/colors.js');
+var store = require('react-native-simple-store');
 
 class Settings extends Component {
   constructor(props) {
@@ -51,11 +52,13 @@ class Settings extends Component {
           <MenuButton
             text="Invite Your friends" />
           <MenuButton
-            text="Change Your Phone Number" />
+            text="Change Your Phone Number"
+            onPress={this._transitionToChangePhone.bind(this)} />
           <MenuButton
             text="Withdraw to Bank" />
           <MenuButton
-            text="Logout" />
+            text="Logout"
+            onPress={this._logout.bind(this)} />
           <View style={styles.header}>
             <Text style={[textStyles.text, styles.header]}>
               Information and Support
@@ -69,6 +72,22 @@ class Settings extends Component {
       </View>
     );
   }
+
+  _logout() {
+    store.save('email', '').then(() => {
+      store.save('token', '').then(() => {
+        this.props.navigator.pop();
+        this.props.navigator.pop();
+      })
+    });
+  }
+
+  _transitionToChangePhone() {
+    this.props.navigator.push({
+      id: 'PhoneVerification',
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+    });
+  }
 }
 
 class MenuButton extends Component {
@@ -76,6 +95,7 @@ class MenuButton extends Component {
     return (
       <TouchableHighlight
         underlayColor={colors.grey}
+        onPress={this.props.onPress}
         style={styles.menuButton}>
         <View style={styles.menuButtonTextContainer}>
           <View style={{flex: 1,}}>

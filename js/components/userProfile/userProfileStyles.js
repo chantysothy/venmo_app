@@ -25,9 +25,9 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   profilePhoto: {
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 80,
+    width: 80,
+    borderRadius: 40,
     borderWidth: 1,
     borderColor: 'black',
   },
