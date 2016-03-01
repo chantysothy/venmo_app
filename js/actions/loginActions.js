@@ -36,10 +36,10 @@ function receiveLogin(status, user, navigator) {
   }
 }
 
-exports.fetchFacebookLogin = function fetchFacebookLogin(token, onesignalId, navigator) {
+exports.fetchFacebookLogin = function fetchFacebookLogin(token, navigator) {
   return dispatch => {
     dispatch(requestLogin());
-    return ajax.facebookCreateOrLogin(token, onesignalId)
+    return ajax.facebookCreateOrLogin(token)
     .then(response => {
       response.json()
       .then(json => dispatch(receiveLogin(response.status, json.data, navigator)))

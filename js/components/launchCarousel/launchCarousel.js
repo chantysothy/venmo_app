@@ -24,7 +24,6 @@ import getDimensions from '../../shared/dimensions';
 var {width, height} = getDimensions();
 
 var FacebookLoginManager = require('../../utils/facebookLoginManager')
-var PushNotificationManager = require('../../utils/pushNotificationManager');
 
 var ViewPager = require('react-native-viewpager');
 
@@ -171,9 +170,7 @@ class LaunchCarousel extends Component {
       if (error) {
         console.log('error ' + error);
       } else {
-        PushNotificationManager.getUserId((userId) => {
-          self.props.dispatch(fetchFacebookLogin(data.token, userId, self.props.navigator));
-        });
+        self.props.dispatch(fetchFacebookLogin(data.token, self.props.navigator));
       }
     });
   }

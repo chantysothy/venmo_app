@@ -1,13 +1,23 @@
 #import "PushNotificationManager.h"
+#import "RCTBridge.h"
+#import "RCTEventDispatcher.h"
 
 @implementation PushNotificationManager
 
+@synthesize bridge = _bridge;
+
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(getUserId:(RCTResponseSenderBlock)callback) {
+RCT_EXPORT_METHOD(getUserId) {
   self.oneSignal = [[OneSignal alloc] init];
   [self.oneSignal IdsAvailable:^(NSString* userId, NSString* pushToken) {
-      callback(@[userId, pushToken]);
+    if (pushToken != nil) {
+      [self.bridge.eventDispatcher sendAppEventWithName:@"onesignalIdReceived"
+                                               body:@{@"onesignalId": userId, @"pushToken": pushToken}];
+    } else {
+      [self.bridge.eventDispatcher sendAppEventWithName:@"onesignalIdReceived"
+                                               body:@{@"onesignalId": userId}];
+    }
   }];
 };
 

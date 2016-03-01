@@ -11,12 +11,15 @@ import Charges from  '../charges/charges.js';
 import PhoneVerification from '../phoneVerification/phoneVerification.js';
 import Settings from '../settings/settings.js';
 
+var PushNotificationManager = require('../../utils/pushNotificationManager');
+
 var {
   View,
   Navigator,
   Text,
   Platform,
   StatusBarIOS,
+  NativeAppEventEmitter,
 } = React;
 
 export default class MelamineLaunch extends React.Component {
@@ -40,6 +43,18 @@ export default class MelamineLaunch extends React.Component {
     } else {
       StatusBarIOS.setStyle('light-content');
     }
+  }
+
+  componentWillMount() {
+    PushNotificationManager.getUserId();
+    this.subscription = NativeAppEventEmitter.addListener('onesignalIdReceived', (onesignalId) => {
+        console.log(onesignalId);
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.subscription.remove();
   }
 
   renderScene(route, nav) {
