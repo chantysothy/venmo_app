@@ -10,3 +10,7 @@ exports = module.exports = {}
 exports.newSession = function(onComplete) {
   androidFacebookLoginManager.loginWithPermissions(PERMISSIONS_TO_INCLUDE, onComplete);
 }
+
+exports.logout = function(onComplete) {
+  androidFacebookLoginManager.logout(onComplete);
+}

@@ -169,6 +169,9 @@ class LaunchCarousel extends Component {
     FacebookLoginManager.newSession((error, data) => {
       if (error) {
         console.log('error ' + error);
+        FacebookLoginManager.logout(() => {
+          this._loginWithFacebook();
+        });
       } else {
         self.props.dispatch(fetchFacebookLogin(data.token, self.props.navigator));
       }
