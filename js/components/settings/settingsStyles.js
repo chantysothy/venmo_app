@@ -30,7 +30,6 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   menuButtonTextContainer: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
