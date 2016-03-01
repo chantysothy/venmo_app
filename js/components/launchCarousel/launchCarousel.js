@@ -94,19 +94,19 @@ class LaunchCarousel extends Component {
         return (
           <View style={styles.firstPage}>
             <View style={styles.fullHeight}>
-              <Text style={[textStyles.text, textStyles.headerText]}>Welcome to Venmo</Text>
-              <Text style={[textStyles.text, textStyles.subheaderText]}>
+              <Text style={[textStyles.text, textStyles.headerText, textStyles.centered]}>Welcome to Venmo</Text>
+              <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>
                 Here are a few things you should know before getting started.
               </Text>
             </View>
         </View>);
       case 2:
         return (<View style={styles.page}>
-          <Text style={[textStyles.text, textStyles.subheaderText]}>Send or request money, with just a tap.</Text>
+          <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>Send or request money, with just a tap.</Text>
         </View>);
       case 3:
         return (<View style={styles.page}>
-          <Text style={[textStyles.text, textStyles.subheaderText]}>See what your friends are paying for.</Text>
+          <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>See what your friends are paying for.</Text>
         </View>);
       case 4:
         return (<View style={styles.page}>

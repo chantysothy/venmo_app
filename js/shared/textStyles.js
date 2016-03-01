@@ -11,6 +11,8 @@ var styles = StyleSheet.create({
     fontFamily: 'Avenir',
     fontSize: 15,
     color: 'white',
+  },
+  centered: {
     textAlign: 'center',
   },
   headerText: {
