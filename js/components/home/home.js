@@ -23,6 +23,7 @@ var styles = require('./homeStyles');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var textStyles = require('../../shared/textStyles');
 var SideMenu = require('react-native-side-menu');
+var PushNotificationManager = require('../../utils/pushNotificationManager');
 
 class Home extends Component {
   constructor(props){
@@ -41,6 +42,8 @@ class Home extends Component {
           this.props.dispatch(fetchPrivateFeed(email, token));
       });
     });
+
+    PushNotificationManager.registerForPushNotifications();
   }
 
   render() {

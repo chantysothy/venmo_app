@@ -36,7 +36,7 @@
    * on the same Wi-Fi network.
    */
 
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+  jsCodeLocation = [NSURL URLWithString:@"http://169.254.216.218:8081/index.ios.bundle?platform=ios&dev=true"];
 
   /**
    * OPTION 2
@@ -56,6 +56,12 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  self.oneSignal = [[OneSignal alloc] initWithLaunchOptions:launchOptions
+                                                      appId:@"8194c1ad-a745-4c25-abb6-4b965af7abdb"
+                                         handleNotification:nil
+                                               autoRegister: false];
+  
   return YES;
 }
 

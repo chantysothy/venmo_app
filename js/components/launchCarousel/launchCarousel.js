@@ -24,6 +24,8 @@ import getDimensions from '../../shared/dimensions';
 var {width, height} = getDimensions();
 
 var FacebookLoginManager = require('../../utils/facebookLoginManager')
+var PushNotificationManager = require('../../utils/pushNotificationManager');
+
 var ViewPager = require('react-native-viewpager');
 
 class LaunchCarousel extends Component {
@@ -94,7 +96,7 @@ class LaunchCarousel extends Component {
         return (
           <View style={styles.firstPage}>
             <View style={styles.fullHeight}>
-              <Text style={[textStyles.text, textStyles.headerText, textStyles.centered]}>Welcome to Venmo</Text>
+              <Text style={[textStyles.text, textStyles.headerText]}>Cashew</Text>
               <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>
                 Here are a few things you should know before getting started.
               </Text>
@@ -169,7 +171,9 @@ class LaunchCarousel extends Component {
       if (error) {
         console.log('error ' + error);
       } else {
-        self.props.dispatch(fetchFacebookLogin(data.token, self.props.navigator));
+        PushNotificationManager.getUserId((userId) => {
+          self.props.dispatch(fetchFacebookLogin(data.token, userId, self.props.navigator));
+        });
       }
     });
   }
@@ -203,7 +207,7 @@ const styles = StyleSheet.create({
     width: width,
     backgroundColor: colors.green,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     paddingHorizontal: 30,
   },
   loginButton: {

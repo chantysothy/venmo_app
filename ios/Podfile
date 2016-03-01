@@ -4,7 +4,7 @@ pod 'React', :path => '../node_modules/react-native', :subspecs => [
   'RCTImage',
   'RCTNetwork',
   'RCTText',
-  'RCTWebSocket'
+  'RCTWebSocket',
 ]
 pod 'react-native-braintree', :path => '../node_modules/react-native-braintree'
 pod 'OneSignal'

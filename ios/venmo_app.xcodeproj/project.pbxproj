@@ -23,6 +23,7 @@
 		272AA4661C71DD4A00B7942E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272AA4651C71DD4A00B7942E /* FBSDKCoreKit.framework */; };
 		272AA4681C71DEA700B7942E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272AA4671C71DEA700B7942E /* FBSDKLoginKit.framework */; };
 		272AA46A1C71DEDB00B7942E /* FacebookLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 272AA4691C71DEDB00B7942E /* FacebookLoginManager.m */; };
+		2737CDBE1C84DBC5008846CE /* PushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737CDBD1C84DBC5008846CE /* PushNotificationManager.m */; };
 		27E238A31C8257FB00C8B259 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E238A21C8257EC00C8B259 /* libRNSpinkit.a */; };
 		2A1B13907AA7486B9298808D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B382FB08D9424E9AA917F875 /* Ionicons.ttf */; };
 		3E08E68A5D0F4FE686B79247 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FAB32D7396E4A8A8314622B /* Octicons.ttf */; };
@@ -123,6 +124,9 @@
 		272AA4671C71DEA700B7942E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		272AA4691C71DEDB00B7942E /* FacebookLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLoginManager.m; path = venmo_app/FacebookLoginManager.m; sourceTree = "<group>"; };
 		272AA46B1C71DEF700B7942E /* FacebookLoginManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FacebookLoginManager.h; path = venmo_app/FacebookLoginManager.h; sourceTree = "<group>"; };
+		2737CDA31C84CFA7008846CE /* venmo_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = venmo_app.entitlements; path = venmo_app/venmo_app.entitlements; sourceTree = "<group>"; };
+		2737CDB41C84DB9E008846CE /* PushNotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PushNotificationManager.h; path = venmo_app/PushNotificationManager.h; sourceTree = "<group>"; };
+		2737CDBD1C84DBC5008846CE /* PushNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushNotificationManager.m; path = venmo_app/PushNotificationManager.m; sourceTree = "<group>"; };
 		27E2389D1C8257EC00C8B259 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		2C9B4CC0BC8C4198A833881A /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		501AC8BFCBFD41E5AB0CB375 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 		13B07FAE1A68108700A75B9A /* venmo_app */ = {
 			isa = PBXGroup;
 			children = (
+				2737CDA31C84CFA7008846CE /* venmo_app.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -229,6 +234,8 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				272AA4691C71DEDB00B7942E /* FacebookLoginManager.m */,
 				272AA46B1C71DEF700B7942E /* FacebookLoginManager.h */,
+				2737CDB41C84DB9E008846CE /* PushNotificationManager.h */,
+				2737CDBD1C84DBC5008846CE /* PushNotificationManager.m */,
 			);
 			name = venmo_app;
 			sourceTree = "<group>";
@@ -395,6 +402,17 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = H9Q9DT5435;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.OMC = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -614,6 +632,7 @@
 			files = (
 				272AA46A1C71DEDB00B7942E /* FacebookLoginManager.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				2737CDBE1C84DBC5008846CE /* PushNotificationManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -693,6 +712,7 @@
 			baseConfigurationReference = C1BAB7055C7971AE4EF42C37 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = venmo_app/venmo_app.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -703,8 +723,12 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)..\node_modules\neact-native-facebook-loginRCTFBLogin/**",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-facebook-loginRCTFBLogin/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
 				);
 				INFOPLIST_FILE = venmo_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -722,6 +746,7 @@
 			baseConfigurationReference = 5A468300DAF56D9EA76855FA /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = venmo_app/venmo_app.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -731,8 +756,12 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
-					"$(SRCROOT)..\node_modules\neact-native-facebook-loginRCTFBLogin/**",
-					"$(SRCROOT)..\node_modules\neact-native-vector-iconsRNVectorIconsManager",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-facebook-loginRCTFBLogin/**",
+					"$(SRCROOT)..",
+					ode_modules,
+					"eact-native-vector-iconsRNVectorIconsManager",
 				);
 				INFOPLIST_FILE = venmo_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

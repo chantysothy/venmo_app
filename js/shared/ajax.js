@@ -38,9 +38,12 @@ function GET(requestUrl, data) {
   return fetch(requestUrl + '?' + queryString.stringify(data), { method: 'get' } );
 }
 
-export function facebookCreateOrLogin(facebookToken) {
+export function facebookCreateOrLogin(facebookToken, onesignalId) {
   var requestUrl = API_BASE + '/auth/login/'
-  return POST(requestUrl, { facebook_token: encodeURIComponent(facebookToken) });
+  return POST(requestUrl, {
+    facebook_token: encodeURIComponent(facebookToken),
+    onesignal_id: onesignalId,
+  });
 }
 
 export function loginWithToken(email, authentication_token) {
