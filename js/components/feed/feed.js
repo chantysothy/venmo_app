@@ -128,14 +128,6 @@ class FeedItem extends Component {
               { this.props.item.payment.note }
             </Text>
           </Text>
-          <TouchableHighlight
-            activeOpacity={0.5}
-            underlayColor="rgba(0,0,0,0)"
-            style={styles.commentLink}>
-            <Text style={[textStyles.text, styles.commentText]}>
-              Comment
-            </Text>
-          </TouchableHighlight>
         </View>
         <View style={styles.timeAgoContainer}>
           <TimeAgo
