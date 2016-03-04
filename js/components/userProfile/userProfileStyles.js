@@ -19,10 +19,10 @@ var styles = StyleSheet.create({
     flexDirection: 'column'
   },
   profile: {
-    marginTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    paddingBottom: 10,
   },
   profilePhoto: {
     height: 80,
@@ -39,17 +39,8 @@ var styles = StyleSheet.create({
   details: {
     fontSize: 15,
   },
-  rightContainer: {
-    paddingLeft: 10,
-    justifyContent: 'center',
-    flex: 1,
-  },
-  menuItems: {
-    marginTop: 10,
-    marginLeft: 15,
-    marginRight: 15,
-  },
   privateFeed: {
+    paddingTop: 20,
     width: width,
     flex: 1,
   },

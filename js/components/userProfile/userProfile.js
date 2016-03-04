@@ -23,14 +23,6 @@ var textStyles = require('../../shared/textStyles');
 
 class UserProfile extends Component {
   render() {
-    var user = this.props.user.params.user;
-    var balance = this.props.user.params.balance;
-    var imageUrl = user.profile_photo_url;
-    var fullName = user.first_name + " " + user.last_name;
-    var displayName = user.display_name;
-    var phone_number = user.phone_number;
-    var about = user.about;
-    var email = user.email;
     return (
       <View style={styles.container}>
         <TitleBar text="Profile"
@@ -38,14 +30,9 @@ class UserProfile extends Component {
           forwardText="Done"
           forward={() => this.props.navigator.pop()}/>
         <View style={styles.profile}>
-          <Text style={styles.profileName}> { fullName } </Text>
-          <Image
-            style={styles.profilePhoto}
-            source={{uri: imageUrl }} />
-          <Text style={styles.details}> { email } {phone_number} </Text>
-          <Text style={styles.details}> Balance:  { balance.balance_formatted } </Text>
           <Feed
             style={styles.privateFeed}
+            renderHeader={() => this._renderHeader()}
             feed={this.props.feed.privatePayments}
             isFetching={this.props.feed.isFetching}
             refreshFeed={this._refreshPrivateFeed.bind(this)} />
@@ -58,6 +45,26 @@ class UserProfile extends Component {
     withEmailAndToken((email, token) => {
       this.props.dispatch(fetchPrivateFeed(email, token));
     });
+  }
+
+  _renderHeader() {
+    var user = this.props.user.params.user;
+    var balance = this.props.user.params.balance;
+    var imageUrl = user.profile_photo_url;
+    var fullName = user.first_name + " " + user.last_name;
+    var displayName = user.display_name;
+    var phone_number = user.phone_number;
+    var about = user.about;
+    var email = user.email;
+
+    return (<View style={styles.profile}>
+      <Text style={styles.profileName}> { fullName } </Text>
+      <Image
+        style={styles.profilePhoto}
+        source={{uri: imageUrl }} />
+      <Text style={styles.details}> { email } {phone_number} </Text>
+      <Text style={styles.details}> Balance:  { balance.balance_formatted } </Text>
+    </View>);
   }
 }
 

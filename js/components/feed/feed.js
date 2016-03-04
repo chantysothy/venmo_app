@@ -53,6 +53,7 @@ class Feed extends Component {
     return (
       <ListView
         style={styles.container}
+        renderHeader={this.props.renderHeader}
         dataSource={ this.state.dataSource }
         renderRow={this.renderRow}
         refreshControl={
