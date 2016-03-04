@@ -43,7 +43,7 @@ class Home extends Component {
       });
     });
 
-    PushNotificationManager.registerForPushNotifications();
+    //PushNotificationManager.registerForPushNotifications();
   }
 
   render() {
