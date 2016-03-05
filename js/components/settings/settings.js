@@ -38,9 +38,7 @@ class Settings extends Component {
     return (
       <View style={styles.container}>
         <TitleBar text="Settings"
-          back={() => this.props.navigator.pop()}
-          forwardText="Done"
-          forward={() => this.props.navigator.pop()}/>
+          back={() => this.props.navigator.pop()} />
         <ScrollView style={styles.body}>
           <View style={styles.header}>
             <Text style={[textStyles.text, styles.sectionHeaderText]}>

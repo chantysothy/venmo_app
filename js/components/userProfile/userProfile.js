@@ -23,20 +23,18 @@ var textStyles = require('../../shared/textStyles');
 
 class UserProfile extends Component {
   render() {
+    var name = this.props.user.params.user.first_name;
+
     return (
       <View style={styles.container}>
-        <TitleBar text="Profile"
-          back={() => this.props.navigator.pop()}
-          forwardText="Done"
-          forward={() => this.props.navigator.pop()}/>
-        <View style={styles.profile}>
-          <Feed
-            style={styles.privateFeed}
-            renderHeader={() => this._renderHeader()}
-            feed={this.props.feed.privatePayments}
-            isFetching={this.props.feed.isFetching}
-            refreshFeed={this._refreshPrivateFeed.bind(this)} />
-        </View>
+        <TitleBar text={name}
+          back={() => this.props.navigator.pop()} />
+        <Feed
+          style={styles.privateFeed}
+          renderHeader={() => this._renderHeader()}
+          feed={this.props.feed.privatePayments}
+          isFetching={this.props.feed.isFetching}
+          refreshFeed={this._refreshPrivateFeed.bind(this)} />
       </View>
     );
   }
