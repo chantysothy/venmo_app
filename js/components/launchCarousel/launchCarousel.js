@@ -126,12 +126,12 @@ class LaunchCarousel extends Component {
   _onChangePage(pageIndex) {
     var sendMoneyCoordinates = {
       x: width / 10,
-      y: height / 3,
+      y: height < 500 ? height / 2.8 : height / 2.5,
     };
 
     var socialFeedCoordinates = {
       x: width / 10,
-      y: 20,
+      y: 0,
     }
 
     switch(pageIndex) {
@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
+    paddingHorizontal: 20,
   },
   fullHeight: {
     height: height,
