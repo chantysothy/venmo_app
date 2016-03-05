@@ -1,5 +1,5 @@
 var urls = {
-  API_BASE: 'http://venmo.serious.engineering/v1',
+  API_BASE: 'https://api.trycashew.com/v1',
 }
 
 module.exports = urls;
