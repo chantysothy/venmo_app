@@ -37,21 +37,29 @@ class Charges extends Component {
   render() {
     var charges = this.props.charges.charges;
 
-    return (
-      <View style={styles.container}>
-        <TitleBar text="Charges"
-          back={() => this.props.navigator.pop()}
-          forwardText="Done"
-          forward={() => this.props.navigator.pop()}/>
-        <View style={styles.chargeListContainer}>
-          <ChargeList
-            user={this.props.user}
-            style={styles.socialFeed}
-            isFetching={this.props.charges.isFetching}
-            refreshCharges={this._refreshCharges.bind(this)}
-            dispatch={this.props.dispatch}
-            charges={charges} />
+    if (charges.length == 0) {
+      var charges =
+        <View>
+          <Text style={[textStyles.text, styles.noChargesText]}>
+            You've got no charges. Hooray!
+          </Text>
         </View>
+    } else {
+      var charges = <ChargeList
+          user={this.props.user}
+          style={styles.socialFeed}
+          isFetching={this.props.charges.isFetching}
+          refreshCharges={this._refreshCharges.bind(this)}
+          dispatch={this.props.dispatch}
+          charges={charges} />
+    }
+
+    return(
+      <View style={styles.container}>
+        <TitleBar text="Charges" back={() => this.props.navigator.pop()} />
+          <View style={styles.chargeListContainer}>
+            {charges}
+          </View>
       </View>
     );
   }

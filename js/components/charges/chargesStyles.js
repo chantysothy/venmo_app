@@ -15,7 +15,8 @@ var styles = StyleSheet.create({
     width: width,
   },
   chargeListContainer: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
   },
   feedItem: {
     width: width,
@@ -84,7 +85,11 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  }
+  },
+  noChargesText: {
+    padding: 30,
+    color: 'black',
+  },
 });
 
 module.exports = styles;
