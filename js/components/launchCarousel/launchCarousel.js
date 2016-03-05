@@ -67,7 +67,7 @@ class LaunchCarousel extends Component {
       var image = <Animated.Image
         resizeMode="contain"
         style={[styles.mock, { transform: this.state.pan.getTranslateTransform(), }]}
-        source={{uri: 'https://transfer.sh/iyxKu/iphone.png'}} />
+        source={require('./iphone.png')} />
       var underPageGreenContainer = <View style={styles.underPageGreenContainer}/>
       var underPage = (
         <View style={[styles.underPage, styles.notVisible]}>
