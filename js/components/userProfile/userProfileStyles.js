@@ -19,6 +19,7 @@ var styles = StyleSheet.create({
     flexDirection: 'column'
   },
   profile: {
+    paddingTop: 10,
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
@@ -42,6 +43,7 @@ var styles = StyleSheet.create({
   privateFeed: {
     paddingTop: 20,
     width: width,
+    height: height,
     flex: 1,
   },
 });
