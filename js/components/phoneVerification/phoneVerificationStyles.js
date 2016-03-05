@@ -13,6 +13,7 @@ var {width, height} = getDimensions();
 var styles = StyleSheet.create({
   container: {
     borderColor: 'white',
+    backgroundColor: 'white',
     height: height,
     width: width,
     alignItems: 'center',
