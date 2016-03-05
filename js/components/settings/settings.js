@@ -59,8 +59,6 @@ class Settings extends Component {
           <MenuButton
             text="Privacy Policy"
             onPress={this._transitionToPrivacyPolicy.bind(this)} />
-          <MenuButton
-            text="Send Feedback" />
         </ScrollView>
       </View>
     );
