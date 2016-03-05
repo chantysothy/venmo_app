@@ -9,6 +9,7 @@ import PaymentSelectUser from  '../createPayment/paymentSelectUser';
 import UserProfile from  '../userProfile/userProfile.js';
 import Charges from  '../charges/charges.js';
 import PhoneVerification from '../phoneVerification/phoneVerification.js';
+import PrivacyPolicy from '../privacyPolicy/privacyPolicy.js';
 import Settings from '../settings/settings.js';
 import codePush from "react-native-code-push";
 
@@ -78,6 +79,8 @@ export default class MelamineLaunch extends React.Component {
         return(<PhoneVerification navigator={nav}/>);
       case 'Settings':
         return(<Settings navigator={nav}/>);
+      case 'PrivacyPolicy':
+        return(<PrivacyPolicy navigator={nav}/>);
     }
   }
 

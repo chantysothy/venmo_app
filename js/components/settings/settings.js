@@ -59,7 +59,8 @@ class Settings extends Component {
             </Text>
           </View>
           <MenuButton
-            text="Help Center" />
+            text="Privacy Policy"
+            onPress={this._transitionToPrivacyPolicy.bind(this)} />
           <MenuButton
             text="Send Feedback" />
         </ScrollView>
@@ -79,6 +80,13 @@ class Settings extends Component {
   _transitionToChangePhone() {
     this.props.navigator.push({
       id: 'PhoneVerification',
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+    });
+  }
+
+  _transitionToPrivacyPolicy() {
+    this.props.navigator.push({
+      id: 'PrivacyPolicy',
       sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
     });
   }
