@@ -40,19 +40,22 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    fontSize: 20,
     width: width,
-    fontWeight: 'bold',
-    color: colors.mediumGrey,
     paddingLeft: 20,
     paddingTop: 15,
+    paddingBottom: 15,
   },
   chevron: {
     marginRight: 10,
   },
   body: {
     flex: 1,
-  }
+  },
+  sectionHeaderText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.mediumGrey,
+  },
 });
 
 module.exports = styles;

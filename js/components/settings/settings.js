@@ -43,24 +43,18 @@ class Settings extends Component {
           forward={() => this.props.navigator.pop()}/>
         <ScrollView style={styles.body}>
           <View style={styles.header}>
-            <Text style={[textStyles.text, styles.header]}>
+            <Text style={[textStyles.text, styles.sectionHeaderText]}>
               Account and Security
             </Text>
           </View>
           <MenuButton
-            text="Edit Profile" />
-          <MenuButton
-            text="Invite Your friends" />
-          <MenuButton
             text="Change Your Phone Number"
             onPress={this._transitionToChangePhone.bind(this)} />
-          <MenuButton
-            text="Withdraw to Bank" />
           <MenuButton
             text="Logout"
             onPress={this._logout.bind(this)} />
           <View style={styles.header}>
-            <Text style={[textStyles.text, styles.header]}>
+            <Text style={[textStyles.text, styles.sectionHeaderText]}>
               Information and Support
             </Text>
           </View>
