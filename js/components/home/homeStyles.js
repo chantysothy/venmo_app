@@ -50,18 +50,10 @@ var styles = StyleSheet.create({
     paddingBottom: 5,
     backgroundColor: 'rgba(0,0,0,0)',
   },
-  leftButton: {
-    borderTopLeftRadius: 5, // TODO Modify styles once borderTopRightRadius bug fixed in RN
-    borderBottomLeftRadius: 5,
-  },
   centerButton: {
     borderColor: "white",
     borderLeftWidth: 2,
     borderRightWidth: 2,
-  },
-  rightButton: {
-    borderTopRightRadius: 5,
-    borderBottomRightRadius: 5,
   },
   moreMenuButton: {
     position: 'absolute',
