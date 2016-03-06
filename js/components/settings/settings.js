@@ -16,6 +16,7 @@ import { connect } from 'react-redux/native';
 import TitleBar from '../titleBar/titleBar';
 import { withEmailAndToken } from '../../utils/utils';
 
+var FacebookLoginManager = require('../../utils/facebookLoginManager');
 
 var Button = require('react-native-button');
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -65,6 +66,7 @@ class Settings extends Component {
   }
 
   _logout() {
+    FacebookLoginManager.logout();
     store.save('email', '').then(() => {
       store.save('token', '').then(() => {
         this.props.navigator.pop();

@@ -10,6 +10,7 @@ import React, {
   TouchableHighlight,
   Animated,
   Easing,
+  Platform,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -169,9 +170,11 @@ class LaunchCarousel extends Component {
     FacebookLoginManager.newSession((error, data) => {
       if (error) {
         console.log('error ' + error);
-        FacebookLoginManager.logout(() => {
-          this._loginWithFacebook();
-        });
+        if (Platform.OS == 'android') {
+          FacebookLoginManager.logout(() => {
+            this._loginWithFacebook();
+          });
+        }
       } else {
         self.props.dispatch(fetchFacebookLogin(data.token, self.props.navigator));
       }
