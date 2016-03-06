@@ -9,7 +9,7 @@ import {
 
 import * as ajax from '../shared/ajax.js';
 
-import { fetchSocialFeed, fetchPrivateFeed } from './feedActions';
+import { refreshState } from './genericActions.js';
 
 import { braintreeNonce } from '../shared/braintree';
 
@@ -48,11 +48,7 @@ exports.pay = function pay(user, payment, navigator) {
       dispatch(requestPayment());
       return ajax.pay(email, token, payment, nonce)
                  .then(response => {
-                   var promiseAll = Promise.all([
-                     dispatch(fetchSocialFeed(email, token)),
-                     dispatch(fetchPrivateFeed(email, token))
-                   ])
-                   promiseAll.then(() => {
+                   dispatch(refreshState(email,token)).then(() => {
                        response.json()
                        .then(json => dispatch(receivePayment(json.data, navigator)))
                    });

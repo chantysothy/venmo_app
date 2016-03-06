@@ -113,3 +113,8 @@ export function getClientToken() {
   var requestUrl = API_BASE + '/client_token';
   return GET(requestUrl);
 }
+
+export function refreshState(email, authentication_token) {
+  var requestUrl = API_BASE + '/users/refresh_state/';
+  return GET(requestUrl, { email, authentication_token } );
+}

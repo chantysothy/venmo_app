@@ -5,6 +5,8 @@ import {
   RECEIVE_PRIVATE_FEED,
   REQUEST_PUBLIC_FEED,
   RECEIVE_PUBLIC_FEED,
+  REQUEST_REFRESH_STATE,
+  RECEIVE_REFRESH_STATE,
 } from '../constants/actionTypes';
 
 const PLACE_HOLDER = {
@@ -72,6 +74,23 @@ export default function socialFeed(state = defaultSocialFeedState, action) {
         return Object.assign({}, state, {
           isFetching: false,
           publicPayments: action.payments
+        });
+      }
+
+    case REQUEST_REFRESH_STATE:
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+    case RECEIVE_REFRESH_STATE:
+      if (action.error) {
+        // we got problem yo
+        return state
+      } else {
+        return Object.assign({}, state, {
+          isFetching: false,
+          publicPayments: action.publicPayments,
+          privatePayments: action.privatePayments,
+          friendPayments: action.friendPayments,
         });
       }
     default:

@@ -1,6 +1,8 @@
 import {
   REQUEST_CHARGES,
   RECEIVE_CHARGES,
+  REQUEST_REFRESH_STATE,
+  RECEIVE_REFRESH_STATE,
 } from '../constants/actionTypes';
 
 const defaultChargesState = {

@@ -16,6 +16,7 @@ import { Menu } from '../sideMenu/sideMenu.js';
 import colors from '../../constants/colors.js';
 
 import { fetchSocialFeed, fetchPrivateFeed, fetchPublicFeed } from '../../actions/feedActions.js';
+import { refreshState } from '../../actions/genericActions.js';
 import { withEmailAndToken } from '../../utils/utils';
 
 var Icon = require('react-native-vector-icons/Ionicons');
@@ -36,11 +37,7 @@ class Home extends Component {
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
-      withEmailAndToken((email, token) => {
-          this.props.dispatch(fetchPublicFeed(email, token));
-          this.props.dispatch(fetchSocialFeed(email, token));
-          this.props.dispatch(fetchPrivateFeed(email, token));
-      });
+      this._refreshState();
     });
 
     //PushNotificationManager.registerForPushNotifications();
@@ -77,24 +74,30 @@ class Home extends Component {
                 style={styles.socialFeed}
                 feed={this.props.feed.publicPayments}
                 isFetching={this.props.feed.isFetching}
-                refreshFeed={this._refreshPublicFeed.bind(this)} />
+                refreshFeed={this._refreshState.bind(this)} />
               <Feed
                 tabLabel="stalker-person"
                 style={styles.socialFeed}
                 feed={this.props.feed.friendPayments}
                 isFetching={this.props.feed.isFetching}
-                refreshFeed={this._refreshSocialFeed.bind(this)} />
+                refreshFeed={this._refreshState.bind(this)} />
               <Feed
                 tabLabel="person"
                 style={styles.socialFeed}
                 feed={this.props.feed.privatePayments}
                 isFetching={this.props.feed.isFetching}
-                refreshFeed={this._refreshPrivateFeed.bind(this)} />
+                refreshFeed={this._refreshState.bind(this)} />
             </ScrollableTabView>
           </View>
         </SideMenu>
       );
     }
+  }
+
+  _refreshState() {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(refreshState(email, token));
+    });
   }
 
   _refreshPublicFeed() {

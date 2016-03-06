@@ -9,8 +9,10 @@ import {
 
 import * as ajax from '../shared/ajax.js';
 import React from 'react-native'
+import { refreshState } from './genericActions.js';
 
 import { initBraintreeWithToken, braintreeNonce } from '../shared/braintree';
+
 var _ = require('lodash');
 
 function handleError(error) {
@@ -79,8 +81,7 @@ exports.payPendingCharge = function(user, paymentId) {
         ajax.payPendingCharge(email, token, paymentId, nonce)
             .then(response => {
               dispatch(fetchCharges(email, token));
-              dispatch(fetchSocialFeed(email, token));
-              dispatch(fetchPrivateFeed(email, token));
+              dispatch(refreshState(email, token));
               response.json().then(json => dispatch(receiveChargePayment(json.data)));
             })
             .catch(error => console.log(error));
@@ -95,8 +96,6 @@ exports.declinePendingCharge = function(email, token, paymentId) {
     return ajax.declinePendingCharge(email, token, paymentId)
                .then(response => {
                  dispatch(fetchCharges(email, token));
-                 dispatch(fetchSocialFeed(email, token));
-                 dispatch(fetchPrivateFeed(email, token));
                  response.json().then(json => dispatch(receiveChargePayment(json.data)));
                })
                .catch(error => console.log(error));
