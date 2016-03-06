@@ -15,8 +15,11 @@ import ca.jaysoo.extradimensions.ExtraDimensionsPackage;
 import com.surialabs.rn.braintree.BraintreePackage;
 import android.content.Intent;
 
+import com.microsoft.codepush.react.CodePush;
+
 public class MainActivity extends ReactActivity {
     private BraintreePackage mBraintreePackage;
+    private CodePush _codePush;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -25,6 +28,11 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "venmo_app";
+    }
+
+    @Override
+    protected String getJSBundleFile() {
+      return this._codePush.getBundleUrl("index.android.bundle");
     }
 
     /**
@@ -42,9 +50,11 @@ public class MainActivity extends ReactActivity {
    */
     @Override
     protected List<ReactPackage> getPackages() {
+      this._codePush = new CodePush("26k3nb_w3gDB-fnkPAY4kwEeRnExNyKqgv0sx", this, BuildConfig.DEBUG);
       mBraintreePackage = new BraintreePackage(this);
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          this._codePush.getReactPackage(),
           new VectorIconsPackage(),
           new FacebookLoginPackage(),
           new ExtraDimensionsPackage(this),
