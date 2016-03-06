@@ -50,7 +50,7 @@ class Settings extends Component {
             text="Change Your Phone Number"
             onPress={this._transitionToChangePhone.bind(this)} />
           <MenuButton
-            text="Logout"
+            text="Log out"
             onPress={this._logout.bind(this)} />
           <View style={styles.header}>
             <Text style={[textStyles.text, styles.sectionHeaderText]}>
