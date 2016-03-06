@@ -33,3 +33,4 @@ local.properties
 npm-debug.log
 
 *.swp
+/release
