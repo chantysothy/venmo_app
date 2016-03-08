@@ -29,11 +29,14 @@ var styles = StyleSheet.create({
   },
   profileName: {
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
+    flexDirection: 'row',
   },
   rightContainer: {
     paddingLeft: 10,
     justifyContent: 'center',
+    height: 60,
+    flex: 1,
   },
   menuItems: {
     marginTop: 100,

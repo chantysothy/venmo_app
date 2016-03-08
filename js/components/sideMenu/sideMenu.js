@@ -37,11 +37,8 @@ class ProfileSummary extends Component {
     var balance = this.props.balance;
     return (
       <View style={styles.profile}>
-        <Image
-          style={styles.profilePhoto}
-          source={{uri: imageUrl }} />
-        <View
-          style={styles.rightContainer}>
+        <Image style={styles.profilePhoto} source={{ uri: imageUrl }} />
+        <View style={styles.rightContainer}>
           <Text style={styles.profileName}> { fullName } </Text>
           <Text style={styles.profileName}> { balance.balance_formatted } </Text>
         </View>
