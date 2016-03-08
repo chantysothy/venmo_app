@@ -19,7 +19,7 @@ var styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   numberTextContainer: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
   },
   messagesContainer: {
@@ -32,7 +32,7 @@ var styles = StyleSheet.create({
     fontSize: 18,
   },
   numberButtonsContainer: {
-    flex: 6,
+    flex: 5,
   },
   numberButton: {
     width: width / 3.5,
