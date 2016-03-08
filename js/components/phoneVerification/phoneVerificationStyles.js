@@ -12,50 +12,43 @@ var {width, height} = getDimensions();
 
 var styles = StyleSheet.create({
   container: {
-    borderColor: 'white',
-    backgroundColor: 'white',
+    backgroundColor: colors.green,
     height: height,
     width: width,
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  textInput: {
-    fontSize: 20,
-    paddingHorizontal: 10,
-    color: 'black',
-    marginBottom: 10,
-    height: 50,
-    width: width - 40,
-    borderColor: 'black',
-    borderWidth: 1,
+  numberTextContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
-  explanation: {
-    fontSize: 20,
-    paddingHorizontal: 10,
-    color: 'black',
+  messagesContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    paddingHorizontal: 30,
+  },
+  messageText: {
     textAlign: 'center',
+    fontSize: 18,
   },
-  body: {
-    padding: 15,
+  numberButtonsContainer: {
+    flex: 6,
+  },
+  numberButton: {
+    width: width / 3.5,
+    height: height / 11,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
-  dialog: {
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+  numberButtonText: {
+    fontSize: 24,
   },
-  verifyButtonContainer: {
-    borderColor: colors.green,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingVertical: 5,
-    paddingHorizontal: 25,
-    marginHorizontal: 5,
-    marginTop: 5,
+  numberText: {
+    fontSize: 30,
   },
-  verifyButton: {
-    color: colors.green,
-    fontSize: 20,
+  placeholderNumber: {
+    fontSize: 18,
+    color: colors.lightGreen,
   },
 });
 

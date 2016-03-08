@@ -23,7 +23,7 @@ export default class TitleBar extends Component {
     var backButton = this.props.back ? (
       <Button containerStyle={styles.backButton} onPress={this.props.back}
         style={[textStyles.text, styles.text]}>
-        Back
+        {this.props.backView ? this.props.backView : "Back"}
       </Button>
     ) : null;
 
@@ -33,6 +33,7 @@ export default class TitleBar extends Component {
         styleDisabled={styles.forwardTextDisabled}
         style={[textStyles.text, styles.text]}>
         {this.props.forwardText}
+        {this.props.forwardView}
         </Button>
     ) : null;
 
