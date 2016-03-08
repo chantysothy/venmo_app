@@ -16,7 +16,7 @@ RCT_EXPORT_METHOD(newSession:(RCTResponseSenderBlock)callback) {
     
     
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    NSArray *permissions = @[@"public_profile", @"user_friends", @"email", @"user_education_history"];
+    NSArray *permissions = @[@"public_profile", @"user_friends", @"email"];
     [login logInWithReadPermissions:permissions handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
       
       if (error) {
