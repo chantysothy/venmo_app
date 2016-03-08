@@ -24,6 +24,8 @@ var Animatable = require('react-native-animatable');
 var styles = require('./phoneVerificationStyles.js');
 var textStyles = require('../../shared/textStyles');
 
+var LoadingOverlay = require('../../shared/loadingOverlay');
+
 class PhoneVerification extends Component {
   constructor(props) {
     super(props);
@@ -84,6 +86,8 @@ class PhoneVerification extends Component {
 
     return (
       <View>
+        <LoadingOverlay style={styles.loadingIndicator}
+          isVisible={this.props.phoneVerification.isRegistering || this.props.phoneVerification.isVerifying} />
         <TitleBar text="Verification" forwardView={forwardView}
           forward={forwardFunction} forwardDisabled={forwardDisabled}
           back={backFunction} backView={backView}/>

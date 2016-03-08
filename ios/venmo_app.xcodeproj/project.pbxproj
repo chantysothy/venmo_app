@@ -25,6 +25,8 @@
 		2737CDBE1C84DBC5008846CE /* PushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2737CDBD1C84DBC5008846CE /* PushNotificationManager.m */; };
 		2737CE251C85AA8A008846CE /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2737CE1C1C85AA64008846CE /* libCodePush.a */; };
 		2737CE271C85AAA6008846CE /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2737CE261C85AAA6008846CE /* libz.tbd */; };
+		27B8C1B31C8F424F002C3677 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B8C1B21C8F41E6002C3677 /* libRNBlur.a */; };
+		27B8C1B41C8F4254002C3677 /* libRNOverlay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B8C1AA1C8F41D7002C3677 /* libRNOverlay.a */; };
 		27E238A31C8257FB00C8B259 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E238A21C8257EC00C8B259 /* libRNSpinkit.a */; };
 		2A1B13907AA7486B9298808D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B382FB08D9424E9AA917F875 /* Ionicons.ttf */; };
 		3E08E68A5D0F4FE686B79247 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FAB32D7396E4A8A8314622B /* Octicons.ttf */; };
@@ -86,6 +88,20 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		27B8C1A91C8F41D7002C3677 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27B8C19E1C8F41D7002C3677 /* RNOverlay.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNOverlay;
+		};
+		27B8C1B11C8F41E6002C3677 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 27B8C1AD1C8F41E6002C3677 /* RNBlur.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A68BD7BC1BC31318005F02DF;
+			remoteInfo = RNBlur;
+		};
 		27E238A11C8257EC00C8B259 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 27E2389D1C8257EC00C8B259 /* RNSpinkit.xcodeproj */;
@@ -129,6 +145,8 @@
 		2737CDBD1C84DBC5008846CE /* PushNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushNotificationManager.m; path = venmo_app/PushNotificationManager.m; sourceTree = "<group>"; };
 		2737CE171C85AA64008846CE /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		2737CE261C85AAA6008846CE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		27B8C19E1C8F41D7002C3677 /* RNOverlay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNOverlay.xcodeproj; path = "../node_modules/react-native-overlay/RNOverlay.xcodeproj"; sourceTree = "<group>"; };
+		27B8C1AD1C8F41E6002C3677 /* RNBlur.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
 		27E2389D1C8257EC00C8B259 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		2C9B4CC0BC8C4198A833881A /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		501AC8BFCBFD41E5AB0CB375 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -150,6 +168,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27B8C1B41C8F4254002C3677 /* libRNOverlay.a in Frameworks */,
+				27B8C1B31C8F424F002C3677 /* libRNBlur.a in Frameworks */,
 				2737CE271C85AAA6008846CE /* libz.tbd in Frameworks */,
 				27E238A31C8257FB00C8B259 /* libRNSpinkit.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
@@ -272,6 +292,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		27B8C19F1C8F41D7002C3677 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27B8C1AA1C8F41D7002C3677 /* libRNOverlay.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27B8C1AE1C8F41E6002C3677 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				27B8C1B21C8F41E6002C3677 /* libRNBlur.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		27E2389E1C8257EC00C8B259 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +342,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				27B8C1AD1C8F41E6002C3677 /* RNBlur.xcodeproj */,
+				27B8C19E1C8F41D7002C3677 /* RNOverlay.xcodeproj */,
 				2737CE171C85AA64008846CE /* CodePush.xcodeproj */,
 				27E2389D1C8257EC00C8B259 /* RNSpinkit.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -441,6 +479,14 @@
 					ProjectRef = 00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */;
 				},
 				{
+					ProductGroup = 27B8C1AE1C8F41E6002C3677 /* Products */;
+					ProjectRef = 27B8C1AD1C8F41E6002C3677 /* RNBlur.xcodeproj */;
+				},
+				{
+					ProductGroup = 27B8C19F1C8F41D7002C3677 /* Products */;
+					ProjectRef = 27B8C19E1C8F41D7002C3677 /* RNOverlay.xcodeproj */;
+				},
+				{
 					ProductGroup = 27E2389E1C8257EC00C8B259 /* Products */;
 					ProjectRef = 27E2389D1C8257EC00C8B259 /* RNSpinkit.xcodeproj */;
 				},
@@ -504,6 +550,20 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = 274853EE1C7A0AB4003521B2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27B8C1AA1C8F41D7002C3677 /* libRNOverlay.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNOverlay.a;
+			remoteRef = 27B8C1A91C8F41D7002C3677 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		27B8C1B21C8F41E6002C3677 /* libRNBlur.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNBlur.a;
+			remoteRef = 27B8C1B11C8F41E6002C3677 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		27E238A21C8257EC00C8B259 /* libRNSpinkit.a */ = {
@@ -654,6 +714,7 @@
 					ode_modules,
 					"eact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-code-push/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
 				);
 				INFOPLIST_FILE = venmo_app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -689,6 +750,7 @@
 					ode_modules,
 					"eact-native-vector-iconsRNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-code-push/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
 				);
 				INFOPLIST_FILE = venmo_app/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
