@@ -79,7 +79,20 @@ var styles = StyleSheet.create({
   },
   commentText: {
     color: "#999999"
-  }
+  },
+  noActivityView: {
+    backgroundColor: 'white',
+    height: height,
+    width: width,
+    alignItems: 'center',
+    paddingVertical: 50,
+  },
+  noActivityText: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 25,
+    paddingVertical: 20,
+  },
 });
 
 module.exports = styles;

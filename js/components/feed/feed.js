@@ -50,20 +50,33 @@ class Feed extends Component {
   }
 
   render() {
-    return (
-      <ListView
-        style={styles.container}
-        renderHeader={this.props.renderHeader}
-        dataSource={ this.state.dataSource }
-        renderRow={this.renderRow}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.props.isFetching}
-            onRefresh={this.props.refreshFeed.bind(this)}
-            enabled={true}
-          />}
-       />
-    );
+    if (this.props.feed.length === 0) {
+      return (
+        <View style={styles.noActivityView}>
+          <Text style={[textStyles.text, styles.noActivityText]}>
+            You've got no activity yet.
+          </Text>
+          <Text style={[textStyles.text, styles.noActivityText]}>
+            Go make some payments!
+          </Text>
+        </View>
+      );
+    } else {
+      return (
+        <ListView
+          style={styles.container}
+          renderHeader={this.props.renderHeader}
+          dataSource={ this.state.dataSource }
+          renderRow={this.renderRow}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.props.isFetching}
+              onRefresh={this.props.refreshFeed.bind(this)}
+              enabled={true}
+            />}
+         />
+      );
+    }
   }
 
   renderRow(item) {
