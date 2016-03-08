@@ -47,6 +47,12 @@ class PhoneVerification extends Component {
       message
     } = this.props.phoneVerification;
 
+    if (this.props.user.params.user.phone_number) {
+      // user has phone number registered, is changing number
+      var backFunction = () => this.props.navigator.pop();
+      var backView = <Icon name="arrow-left-c" size={25} color="white"/>;
+    }
+
     if (!registeredPhoneNumber) {
       var forwardFunction = () => this._registerPhoneNumber();
       var forwardDisabled = true;
