@@ -57,7 +57,6 @@ function receiveVerifyPhoneNumber(parsedResponse, navigator) {
     }
   } else {
     return dispatch => {
-      dispatch(resetPhoneVerification(''));
       dispatch({
         type: RECEIVE_VERIFY_PHONE_NUMBER,
         message: parsedResponse.message,
@@ -67,6 +66,7 @@ function receiveVerifyPhoneNumber(parsedResponse, navigator) {
       navigator.push({
         id: 'Home'
       });
+      dispatch(resetPhoneVerification(''));
     }
   }
 }
