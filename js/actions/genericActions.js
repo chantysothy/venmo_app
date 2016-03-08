@@ -3,9 +3,7 @@ import * as ajax from '../shared/ajax.js';
 import React from 'react-native'
 
 function receiveRefreshState(parsedResponse) {
-  debugger;
   return dispatch => {
-    debugger;
     dispatch({
       type: RECEIVE_REFRESH_STATE,
       friendPayments: parsedResponse.friend_feed,
