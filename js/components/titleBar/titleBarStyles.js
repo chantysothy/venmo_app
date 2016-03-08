@@ -27,16 +27,25 @@ var styles = StyleSheet.create({
     position: 'absolute',
     left: 20,
     top: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 35,
   },
   forwardButton: {
     position: 'absolute',
     right: 20,
     top: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 35,
   },
   text: {
     fontWeight: '600',
     fontSize: 20,
     alignSelf: 'center',
+  },
+  sideText: {
+    marginBottom: 5,
   },
   titleText: {
     fontSize: 26,

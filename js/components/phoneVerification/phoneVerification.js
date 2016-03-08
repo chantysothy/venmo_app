@@ -50,13 +50,13 @@ class PhoneVerification extends Component {
     if (this.props.user.params.user.phone_number) {
       // user has phone number registered, is changing number
       var backFunction = () => this.props.navigator.pop();
-      var backView = <Icon name="arrow-left-c" size={25} color="white"/>;
+      var backView = <Icon name="arrow-left-c" size={40} color="white"/>;
     }
 
     if (!registeredPhoneNumber) {
       var forwardFunction = () => this._registerPhoneNumber();
       var forwardDisabled = true;
-      var forwardView = <Icon name="ios-checkmark-outline" size={25} color={colors.lightGreen}/>;
+      var forwardView = <Icon name="ios-checkmark-outline" size={40} color={colors.lightGreen}/>;
 
       if (phoneNumber.length == 0) {
         var placeholderNumberStyle = styles.placeholderNumber;
@@ -66,13 +66,13 @@ class PhoneVerification extends Component {
           var numberToDisplay = phoneNumber.slice(0, 5) + " " + phoneNumber.slice(5);
           if (phoneNumber.length === 11) {
             forwardDisabled = false;
-            forwardView = <Icon name="ios-checkmark-outline" size={25} color="white"/>;
+            forwardView = <Icon name="ios-checkmark-outline" size={40} color="white"/>;
           }
         } else if (phoneNumber[0] !== "0" && phoneNumber.length > 4) {
           var numberToDisplay = phoneNumber.slice(0, 4) + " " + phoneNumber.slice(4);
           if (phoneNumber.length === 10) {
             forwardDisabled = false;
-            forwardView = <Icon name="ios-checkmark-outline" size={25} color="white"/>;
+            forwardView = <Icon name="ios-checkmark-outline" size={40} color="white"/>;
           }
         } else {
           var numberToDisplay = phoneNumber;
@@ -80,7 +80,7 @@ class PhoneVerification extends Component {
       }
     } else {
       var backFunction = () => this._resetPhoneVerification();
-      var backView = <Icon name="arrow-left-c" size={25} color="white"/>;
+      var backView = <Icon name="arrow-left-c" size={40} color="white"/>;
       var pin = this.state.pin;
       if (pin.length == 0) {
         var placeholderNumberStyle = styles.placeholderNumber;
@@ -157,7 +157,7 @@ class PhoneVerification extends Component {
   }
   _renderNumberButton(item) {
     if(item === "back") {
-      var text = <Icon name="backspace-outline" size={30} color="white"/>;
+      var text = <Icon name="backspace-outline" size={40} color="white"/>;
     } else if (item === null) {
       return(<View key="null" style={styles.numberButton}/>);
     } else {
