@@ -71,7 +71,7 @@
 }
 
 - (NSString *)merchantAppId {
-    return [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleIdentifierKey];
+    return @"su.davidh.notifsta";
 }
 
 - (NSString *)merchantAppVersion {
@@ -79,7 +79,7 @@
 }
 
 - (NSString *)merchantAppName {
-    return [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleNameKey];
+    return @"Notifsta";
 }
 
 - (BOOL)deviceRooted {
