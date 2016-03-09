@@ -92,7 +92,7 @@ class PhoneVerification extends Component {
     }
 
     var loadingIndicatorVisible = this.props.phoneVerification.isRegistering || this.props.phoneVerification.isVerifying;
-    var loadingOverlay = (<LoadingOverlay style={styles.loadingIndicator} isVisible={loadingIndicatorVisible} />);
+    var loadingOverlay = (<LoadingOverlay isVisible={loadingIndicatorVisible} />);
     if (Platform.OS === 'android') {
       if (loadingIndicatorVisible) {
         var androidLoadingOverlay = loadingOverlay;
