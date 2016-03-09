@@ -26,6 +26,10 @@ var textStyles = require('../../shared/textStyles');
 var SideMenu = require('react-native-side-menu');
 var PushNotificationManager = require('../../utils/pushNotificationManager');
 
+function isPlaceholderFeed(feed) {
+  return (feed.length > 0) && feed[0].isPlaceholder;
+}
+
 class Home extends Component {
   constructor(props){
     super(props)
@@ -68,7 +72,7 @@ class Home extends Component {
           <View style={homeStyles}>
             <ScrollableTabView
               initialPage={1}
-              renderTabBar={this._renderSideMenu.bind(this)}>
+              renderTabBar={this._renderTabBar.bind(this)}>
               <Feed
                 tabLabel="earth"
                 style={styles.socialFeed}
@@ -125,9 +129,10 @@ class Home extends Component {
     this.setState({sideMenuOpen: isOpen });
   }
 
-  _renderSideMenu() {
+  _renderTabBar() {
     return (
       <HomeNavBar
+        friendPayments={this.props.feed.friendPayments}
         toggleSideMenu={this._toggleSideMenu.bind(this)}
         navigator={this.props.navigator}/>
     )
@@ -135,6 +140,17 @@ class Home extends Component {
 }
 
 class HomeNavBar extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.friendPayments !== this.props.friendPayments) {
+      if (isPlaceholderFeed(this.props.friendPayments)) {
+        if (nextProps.friendPayments.length == 0) {
+           this.props.goToPage(0);
+        }
+      }
+    }
+  }
+
   renderButton(iconName, pageId) {
     var buttonStyles = [styles.feedButton];
     var iconColor = "white";
