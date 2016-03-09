@@ -1,4 +1,4 @@
-package com.venmo_app;
+package com.cashew;
 
 import com.facebook.react.ReactActivity;
 import com.oblador.vectoricons.VectorIconsPackage;

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.venmo_app">
+    package="com.cashew">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
