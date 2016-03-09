@@ -50,7 +50,7 @@ public class MainActivity extends ReactActivity {
    */
     @Override
     protected List<ReactPackage> getPackages() {
-      this._codePush = new CodePush("26k3nb_w3gDB-fnkPAY4kwEeRnExNyKqgv0sx", this, BuildConfig.DEBUG);
+      this._codePush = new CodePush("F1Pc_uEtJMIVSUauK1B-xVwoAvwINkl59oS2l", this, BuildConfig.DEBUG);
       mBraintreePackage = new BraintreePackage(this);
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),

@@ -49,6 +49,14 @@ export default class MelamineLaunch extends React.Component {
 
   componentWillMount() {
     codePush.sync();
+    codePush.checkForUpdate()
+    .then((update) => {
+      if (!update) {
+        console.log("The app is up to date!"); 
+      } else {
+        console.log("An update is available! Should we download it?");
+      }
+    });
     PushNotificationManager.getUserId();
     this.subscription = NativeAppEventEmitter.addListener('onesignalIdReceived', (onesignalId) => {
         console.log(onesignalId);
