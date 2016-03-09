@@ -65,3 +65,7 @@
 # stetho
 
 -dontwarn com.facebook.stetho.**
+
+# braintree
+-dontwarn com.braintreepayments.**
+-dontwarn com.paypal.android.sdk.**

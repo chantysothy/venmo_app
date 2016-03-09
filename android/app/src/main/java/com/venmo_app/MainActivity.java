@@ -30,10 +30,11 @@ public class MainActivity extends ReactActivity {
         return "venmo_app";
     }
 
-    @Override
-    protected String getJSBundleFile() {
-      return this._codePush.getBundleUrl("index.android.bundle");
-    }
+    // TODO: Look into codepush for android at a later point
+    // @Override
+    // protected String getJSBundleFile() {
+    //   return this._codePush.getBundleUrl("index.android.bundle");
+    // }
 
     /**
      * Returns whether dev mode should be enabled.
