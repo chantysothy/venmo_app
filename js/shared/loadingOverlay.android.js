@@ -1,11 +1,8 @@
 var React = require('react-native');
-var Overlay = require('react-native-overlay');
-var VibrancyView = require('react-native-blur').VibrancyView;
 import getDimensions from './dimensions';
 
 var {
   View,
-  ActivityIndicatorIOS,
   StyleSheet,
 } = React;
 
@@ -18,11 +15,8 @@ var LoadingOverlay = React.createClass({
 
   render(): ReactElement {
     return (
-      <Overlay isVisible={this.props.isVisible}>
-        <VibrancyView style={styles.background} blurType="dark">
-          <ActivityIndicatorIOS size="large" animating={true} />
-        </VibrancyView>
-      </Overlay>
+      <View isVisible={this.props.isVisible}>
+      </View>
     );
   }
 });

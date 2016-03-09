@@ -171,9 +171,11 @@ class LaunchCarousel extends Component {
       if (error) {
         console.log('error ' + error);
         if (Platform.OS == 'android') {
-          FacebookLoginManager.logout(() => {
-            this._loginWithFacebook();
-          });
+          if (error.message.indexOf('CONNECTION_FAILURE') == -1) {
+            FacebookLoginManager.logout(() => {
+              this._loginWithFacebook();
+            });
+          }
         }
       } else {
         self.props.dispatch(fetchFacebookLogin(data.token, self.props.navigator));
