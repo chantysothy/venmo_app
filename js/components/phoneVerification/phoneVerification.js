@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {
+  Platform,
   Component,
   Text,
   View,
@@ -90,10 +91,23 @@ class PhoneVerification extends Component {
       }
     }
 
+    var loadingIndicatorVisible = this.props.phoneVerification.isRegistering || this.props.phoneVerification.isVerifying;
+    var loadingOverlay = (<LoadingOverlay style={styles.loadingIndicator} isVisible={loadingIndicatorVisible} />);
+    if (Platform.OS === 'android') {
+      if (loadingIndicatorVisible) {
+        var androidLoadingOverlay = loadingOverlay;
+      } else {
+        var androidLoadingOverlay = null;
+      }
+      var iosLoadingOverlay = null;
+    } else if (Platform.OS === 'ios') {
+      var iosLoadingOverlay = loadingOverlay;
+      var androidLoadingOverlay = null;
+    }
+
     return (
       <View>
-        <LoadingOverlay style={styles.loadingIndicator}
-          isVisible={this.props.phoneVerification.isRegistering || this.props.phoneVerification.isVerifying} />
+        { iosLoadingOverlay }
         <TitleBar text="Verification" forwardView={forwardView}
           forward={forwardFunction} forwardDisabled={forwardDisabled}
           back={backFunction} backView={backView}/>
@@ -108,6 +122,7 @@ class PhoneVerification extends Component {
           </View>
           <GridView items={this.numberButtons} itemsPerRow={3} renderItem={(item) => this._renderNumberButton(item)} scrollEnabled={false} style={styles.numberButtonsContainer}/>
         </View>
+        {androidLoadingOverlay}
       </View>
     );
   }

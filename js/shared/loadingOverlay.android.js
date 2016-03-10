@@ -1,5 +1,7 @@
 var React = require('react-native');
 import getDimensions from './dimensions';
+import Spinner from 'react-native-loading-spinner-overlay';
+var {width, height} = getDimensions();
 
 var {
   View,
@@ -15,7 +17,8 @@ var LoadingOverlay = React.createClass({
 
   render(): ReactElement {
     return (
-      <View isVisible={this.props.isVisible}>
+      <View style={styles.background}>
+        <Spinner visible={this.props.isVisible} />
       </View>
     );
   }
@@ -26,16 +29,20 @@ var styles = StyleSheet.create({
   background: {
     flex: 1,
     position: 'absolute',
-    top: height / 2 - 50,
-    left: width / 2 - 50,
-    height: 100,
-    width: 100,
+    top: 0,
+    left: 0,
+    height: height,
+    width: width,
     justifyContent: 'center',
-    borderRadius: 10,
-    borderWidth: 5,
     borderColor: 'transparent',
-    overflow: 'hidden',
   },
+  hidden:{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: 0,
+    width: 0,
+  }
 })
 
 module.exports = LoadingOverlay;

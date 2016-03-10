@@ -17,6 +17,7 @@
     "react-native-extra-dimensions-android": "^0.17.0",
     "react-native-facebook-login": "^1.0.3",
     "react-native-grid-view": "^0.3.7",
+    "react-native-loading-spinner-overlay": "0.0.6",
     "react-native-overlay": "^0.4.1",
     "react-native-scrollable-tab-view": "^0.3.7",
     "react-native-side-menu": "^0.18.0",
