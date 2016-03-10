@@ -94,7 +94,7 @@ class PaymentSelectUser extends Component {
         <TitleBar text={"£" + this.props.amount.replace("-", "")}
           back={() => this.props.navigator.pop()}
           forwardText={this.props.amount < 0 ? "Request" : "Pay"}
-          forwardDisabled={!(this.state.to && this.state.note.length > 0)}
+          forwardDisabled={!(this.state.to && this.state.note.length > 0) || this.props.paymentIsFetching }
           forward={() => this._submitPayment()}/>
         <View style={styles.row}>
           <Text style={[textStyles.text, styles.text]}>To:</Text>
