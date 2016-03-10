@@ -151,6 +151,7 @@ class PaymentSelectUser extends Component {
   }
 
   _submitPayment() {
+    this.refs.textInputNote.blur();
     this.props.dispatch(pay(this.props.user, {
       note: this.state.note,
       other_id: this.state.to.id,
