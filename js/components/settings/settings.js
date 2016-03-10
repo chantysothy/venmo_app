@@ -70,7 +70,7 @@ class Settings extends Component {
     store.save('email', '').then(() => {
       store.save('token', '').then(() => {
         this.props.navigator.pop();
-        this.props.navigator.pop();
+        this.props.navigator.popToTop();
       })
     });
   }
