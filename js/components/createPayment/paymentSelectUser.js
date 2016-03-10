@@ -21,6 +21,7 @@ import { initBraintreeWithToken } from '../../shared/braintree';
 
 import TitleBar from '../titleBar/titleBar';
 import { green } from '../../constants/colors';
+var LoadingOverlay = require('../../shared/loadingOverlay');
 
 var styles = require('./paymentSelectUserStyles');
 var textStyles = require('../../shared/textStyles');
@@ -81,16 +82,22 @@ class PaymentSelectUser extends Component {
     }
 
     if (Platform.OS == 'ios') {
-      var spinner = <Spinner style={styles.spinner}
+      var iosSpinner = <Spinner style={styles.spinner}
         isVisible={this.props.paymentIsFetching} size={100}
         type='Pulse' color={green} />
+      var androidSpinner = null;
     } else {
-      // set spinner here
+      var iosSpinner = null;
+      if (this.props.paymentIsFetching) {
+        var androidSpinner = (<LoadingOverlay isVisible={this.props.paymentIsFetching} />);
+      } else {
+        var androidSpinner = null;
+      }
     }
 
     return(
       <View style={styles.container}>
-        {spinner}
+        {iosSpinner}
         <TitleBar text={"£" + this.props.amount.replace("-", "")}
           back={() => this.props.navigator.pop()}
           forwardText={this.props.amount < 0 ? "Request" : "Pay"}
@@ -102,6 +109,7 @@ class PaymentSelectUser extends Component {
         </View>
         {noteView}
         {resultsContainer}
+        {androidSpinner}
       </View>
     );
   }
