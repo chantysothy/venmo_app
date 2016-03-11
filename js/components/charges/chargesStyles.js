@@ -13,6 +13,7 @@ var styles = StyleSheet.create({
   container: {
     height: height,
     width: width,
+    backgroundColor: 'white',
   },
   chargeListContainer: {
     flex: 1,
