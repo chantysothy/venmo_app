@@ -59,6 +59,10 @@ var styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+  },
+  text: {
+    fontWeight: 'bold',
+    fontSize: 20,
   }
 });
 
