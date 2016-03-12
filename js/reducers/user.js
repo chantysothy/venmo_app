@@ -3,6 +3,8 @@ import {
   RECEIVE_LOGIN,
   REQUEST_REFRESH_STATE,
   RECEIVE_REFRESH_STATE,
+  REQUEST_USER,
+  RECEIVE_USER,
   LOGOUT,
 } from '../constants/actionTypes';
 
@@ -22,6 +24,19 @@ export default function user(state = defaultUserState, action) {
       if (action.error) {
         // we got problem yo
         return state
+      } else {
+        return Object.assign({}, state, {
+          isFetching: false,
+          params: action.user,
+        });
+      }
+    case REQUEST_USER:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case RECEIVE_USER:
+      if (action.error) {
+        return state;
       } else {
         return Object.assign({}, state, {
           isFetching: false,

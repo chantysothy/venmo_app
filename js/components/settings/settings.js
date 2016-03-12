@@ -52,6 +52,9 @@ class Settings extends Component {
           <MenuButton
             text="Log out"
             onPress={this._logout.bind(this)} />
+          <MenuButton
+            text="Withdraw Money"
+            onPress={this._transitionToWithdraw.bind(this)} />
           <View style={styles.header}>
             <Text style={[textStyles.text, styles.sectionHeaderText]}>
               Information and Support
@@ -78,6 +81,13 @@ class Settings extends Component {
   _transitionToChangePhone() {
     this.props.navigator.push({
       id: 'PhoneVerification',
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+    });
+  }
+
+  _transitionToWithdraw() {
+    this.props.navigator.push({
+      id: 'Withdraw',
       sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
     });
   }

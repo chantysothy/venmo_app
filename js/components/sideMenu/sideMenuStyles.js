@@ -13,7 +13,7 @@ var {width, height} = getDimensions();
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.verydarkgrey,
+    backgroundColor: colors.darkGreen,
     height: height,
     width: 200,
   },

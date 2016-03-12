@@ -19,6 +19,7 @@
     "react-native-grid-view": "^0.3.7",
     "react-native-loading-spinner-overlay": "0.0.6",
     "react-native-overlay": "^0.4.1",
+    "react-native-popup": "git://github.com/dvdhsu/react-native-popup.git",
     "react-native-scrollable-tab-view": "^0.3.7",
     "react-native-side-menu": "^0.18.0",
     "react-native-simple-store": "^0.1.0",

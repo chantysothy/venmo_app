@@ -118,3 +118,21 @@ export function refreshState(email, authentication_token) {
   var requestUrl = API_BASE + '/users/refresh_state/';
   return GET(requestUrl, { email, authentication_token } );
 }
+
+export function updateUser(email, authentication_token, userChangeset) {
+  var requestUrl = API_BASE + '/users';
+  return PUT(requestUrl, {
+    email,
+    authentication_token,
+    user: userChangeset,
+  });
+}
+
+export function withdraw(email, authentication_token, withdrawalParams) {
+  var requestUrl = API_BASE + '/users/withdraw';
+  return POST(requestUrl, {
+    email,
+    authentication_token,
+    withdrawal: withdrawalParams,
+  });
+}

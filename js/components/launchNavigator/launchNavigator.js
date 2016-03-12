@@ -11,6 +11,8 @@ import Charges from  '../charges/charges.js';
 import PhoneVerification from '../phoneVerification/phoneVerification.js';
 import PrivacyPolicy from '../privacyPolicy/privacyPolicy.js';
 import Settings from '../settings/settings.js';
+import Withdraw from '../withdraw/withdraw.js';
+import EditBank from '../withdraw/editBank.js';
 import codePush from "react-native-code-push";
 
 var PushNotificationManager = require('../../utils/pushNotificationManager');
@@ -79,6 +81,10 @@ export default class MelamineLaunch extends React.Component {
         return(<Charges navigator={nav}/>);
       case 'PhoneVerification':
         return(<PhoneVerification navigator={nav}/>);
+      case 'Withdraw':
+        return(<Withdraw navigator={nav}/>);
+      case 'EditBank':
+        return(<EditBank navigator={nav}/>);
       case 'Settings':
         return(<Settings navigator={nav}/>);
       case 'PrivacyPolicy':

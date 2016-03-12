@@ -12,6 +12,7 @@ const logger = createLogger(); // XXX Remove in production
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,
+  logger,
 )(createStore);
 
 const store = createStoreWithMiddleware(rootReducer);
