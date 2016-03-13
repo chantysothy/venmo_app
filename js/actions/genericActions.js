@@ -10,6 +10,7 @@ function receiveRefreshState(parsedResponse) {
       privatePayments: parsedResponse.private_feed,
       publicPayments: parsedResponse.public_feed,
       user: parsedResponse.user.data,
+      charges: parsedResponse.charges,
       receivedAt: Date.now(),
     });
   }

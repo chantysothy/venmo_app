@@ -17,6 +17,7 @@ export default function socialFeed(state = defaultChargesState, action) {
         isFetching: true
       });
     case RECEIVE_CHARGES:
+    case RECEIVE_REFRESH_STATE:
       if (action.error) {
         // we got problem yo
         return state
@@ -26,6 +27,8 @@ export default function socialFeed(state = defaultChargesState, action) {
           charges: action.charges,
         });
       }
+    case REQUEST_REFRESH_STATE:
+      return state;
     default:
       return state;
   }
