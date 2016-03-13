@@ -54,48 +54,43 @@ class Home extends Component {
       homeStyles.push(styles.iosContainer);
     }
 
+    var user = this.props.user.params.user;
+    var balance = this.props.user.params.balance;
+    var menu = <Menu user={user} balance={balance} navigator={this.props.navigator}/>
 
-    if (this.props.user.isFetching) {
-      return(<View><Text>Fetching...</Text></View>);
-    } else {
-      var user = this.props.user.params.user;
-      var balance = this.props.user.params.balance;
-      var menu = <Menu user={user} balance={balance} navigator={this.props.navigator}/>
-
-      return (
-        <SideMenu
-          menu={menu}
-          openMenuOffset={200}
-          disableGestures={true}
-          onChange={this._onSideMenuToggle.bind(this)}
-          isOpen={this.state.sideMenuOpen}>
-          <View style={homeStyles}>
-            <ScrollableTabView
-              initialPage={1}
-              renderTabBar={this._renderTabBar.bind(this)}>
-              <Feed
-                tabLabel="earth"
-                style={styles.socialFeed}
-                feed={this.props.feed.publicPayments}
-                isFetching={this.props.feed.isFetching}
-                refreshFeed={this._refreshState.bind(this)} />
-              <Feed
-                tabLabel="stalker-person"
-                style={styles.socialFeed}
-                feed={this.props.feed.friendPayments}
-                isFetching={this.props.feed.isFetching}
-                refreshFeed={this._refreshState.bind(this)} />
-              <Feed
-                tabLabel="person"
-                style={styles.socialFeed}
-                feed={this.props.feed.privatePayments}
-                isFetching={this.props.feed.isFetching}
-                refreshFeed={this._refreshState.bind(this)} />
-            </ScrollableTabView>
-          </View>
-        </SideMenu>
-      );
-    }
+    return (
+      <SideMenu
+        menu={menu}
+        openMenuOffset={200}
+        disableGestures={true}
+        onChange={this._onSideMenuToggle.bind(this)}
+        isOpen={this.state.sideMenuOpen}>
+        <View style={homeStyles}>
+          <ScrollableTabView
+            initialPage={1}
+            renderTabBar={this._renderTabBar.bind(this)}>
+            <Feed
+              tabLabel="earth"
+              style={styles.socialFeed}
+              feed={this.props.feed.publicPayments}
+              isFetching={this.props.feed.isFetching}
+              refreshFeed={this._refreshState.bind(this)} />
+            <Feed
+              tabLabel="stalker-person"
+              style={styles.socialFeed}
+              feed={this.props.feed.friendPayments}
+              isFetching={this.props.feed.isFetching}
+              refreshFeed={this._refreshState.bind(this)} />
+            <Feed
+              tabLabel="person"
+              style={styles.socialFeed}
+              feed={this.props.feed.privatePayments}
+              isFetching={this.props.feed.isFetching}
+              refreshFeed={this._refreshState.bind(this)} />
+          </ScrollableTabView>
+        </View>
+      </SideMenu>
+    );
   }
 
   _refreshState() {
