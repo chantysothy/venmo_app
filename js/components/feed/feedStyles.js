@@ -47,8 +47,6 @@ var styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     margin: 5,
-    borderColor: 'black',
-    borderWidth: 1,
   },
   feedItemRightContainer: {
     flex: 1,
