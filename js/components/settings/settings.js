@@ -47,14 +47,14 @@ class Settings extends Component {
             </Text>
           </View>
           <MenuButton
+            text="Withdraw Money"
+            onPress={this._transitionToWithdraw.bind(this)} />
+          <MenuButton
             text="Change Your Phone Number"
             onPress={this._transitionToChangePhone.bind(this)} />
           <MenuButton
-            text="Log out"
+            text="Log Out"
             onPress={this._logout.bind(this)} />
-          <MenuButton
-            text="Withdraw Money"
-            onPress={this._transitionToWithdraw.bind(this)} />
           <View style={styles.header}>
             <Text style={[textStyles.text, styles.sectionHeaderText]}>
               Information and Support
