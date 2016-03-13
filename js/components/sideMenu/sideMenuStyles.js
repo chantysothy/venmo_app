@@ -45,7 +45,7 @@ var styles = StyleSheet.create({
   },
   menuItem: {
     padding: 10,
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
     borderBottomColor: colors.grey,
     flexDirection: "row",
     justifyContent: "flex-start",
