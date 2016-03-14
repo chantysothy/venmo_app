@@ -25,13 +25,25 @@ function isCharge(payment) {
   return payment.status == "pending";
 }
 
+function notDeclined(item) {
+  return item.payment.status !== "declined";
+}
+
+var GO_MAKE_PAYMENTS = {
+  isGoMakePayments: true,
+  payment: { id: 1 },
+  payee: {},
+  payer: {}
+};
+
 var dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
 class Feed extends Component {
   constructor(props) {
     super(props);
     this.state =  {
-      dataSource: dataSource.cloneWithRows(this.props.feed)
+      dataSource: dataSource.cloneWithRows(this.props.feed.filter(notDeclined)),
+      emptyDataSource: dataSource.cloneWithRows([GO_MAKE_PAYMENTS])
     };
   }
 
@@ -43,40 +55,32 @@ class Feed extends Component {
 
       setTimeout(() => {
         this.setState({
-          dataSource: dataSource.cloneWithRows(nextProps.feed)
+          dataSource: dataSource.cloneWithRows(nextProps.feed.filter(notDeclined))
         });
       }, 1);
     }
   }
 
   render() {
-    if (this.props.feed.length === 0) {
-      return (
-        <View style={styles.noActivityView}>
-          <Text style={[textStyles.text, styles.noActivityText]}>
-            You've got no activity yet.
-          </Text>
-          <Text style={[textStyles.text, styles.noActivityText]}>
-            Go make some payments!
-          </Text>
-        </View>
-      );
-    } else {
-      return (
-        <ListView
-          style={styles.container}
-          renderHeader={this.props.renderHeader}
-          dataSource={ this.state.dataSource }
-          renderRow={this.renderRow.bind(this)}
-          refreshControl={
-            <RefreshControl
-              refreshing={this.props.isFetching}
-              onRefresh={this.props.refreshFeed.bind(this)}
-              enabled={true}
-            />}
-         />
-      );
+    var datasource = this.state.dataSource;
+    if (this.props.feed.filter(notDeclined).length === 0) {
+      datasource = this.state.emptyDataSource;
     }
+
+    return (
+      <ListView
+        style={styles.container}
+        renderHeader={this.props.renderHeader}
+        dataSource={ datasource }
+        renderRow={this.renderRow.bind(this)}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.props.isFetching}
+            onRefresh={this.props.refreshFeed.bind(this)}
+            enabled={true}
+          />}
+        />
+    );
   }
 
   renderRow(item) {
@@ -107,6 +111,21 @@ class FeedItem extends Component {
         </View>
       );
     }
+
+    // If it's a GO_MAKE_PAYMENTS, display the message to go make some payments
+    if (this.props.item.isGoMakePayments) {
+      return (
+        <View style={styles.noActivityView}>
+          <Text style={[textStyles.text, styles.noActivityText]}>
+            You've got no activity yet.
+          </Text>
+          <Text style={[textStyles.text, styles.noActivityText]}>
+            Go make some payments!
+          </Text>
+        </View>
+      )
+    }
+
     var payee = this.props.item.payee.user.first_name + " " + this.props.item.payee.user.last_name;
     var payer = this.props.item.payer.user.first_name + " " + this.props.item.payer.user.last_name;
 
