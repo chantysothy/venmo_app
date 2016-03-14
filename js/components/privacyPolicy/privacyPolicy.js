@@ -41,8 +41,7 @@ export default class PrivacyPolicy extends Component {
             address is used to provide you with email updates when payments go through.
           </Text>
           <Text style={[textStyles.text, styles.bodyText]}>
-            We do not retain payment information. All of that is kept securely with Stripe, who
-            are fully PCI compliant. For more information, please visit their privacy policy.
+            We do not retain payment information. All of that is kept securely with our payment processor, who are fully PCI compliant. For more information, please visit their privacy policy.
           </Text>
         </ScrollView>
       </View>
