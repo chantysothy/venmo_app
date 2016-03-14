@@ -110,7 +110,6 @@ class FeedItem extends Component {
     var payee = this.props.item.payee.user.first_name + " " + this.props.item.payee.user.last_name;
     var payer = this.props.item.payer.user.first_name + " " + this.props.item.payer.user.last_name;
 
-    var amountText = <Text> { this.props.item.payment.amount.amount_formatted } </Text>;
     if (isCharge(this.props.item.payment)) {
       var imageUrl = this.props.item.payee.user.profile_photo_url;
       var summary = (
@@ -118,7 +117,7 @@ class FeedItem extends Component {
           <Text style={[styles.feedItemName]}>{payee} </Text>
           charged
           <Text style={styles.feedItemName}> {payer}</Text>
-          { amountText }
+          <Text> { this.props.item.payment.amount.amount_formatted } </Text>
         </Text>
       )
     } else {
@@ -128,7 +127,7 @@ class FeedItem extends Component {
           <Text style={[styles.feedItemName]}>{payer} </Text>
           paid
           <Text style={[styles.feedItemName]}> {payee}</Text>
-          { amountText }
+          <Text> { this.props.item.payment.amount.amount_formatted } </Text>
         </Text>
       )
     }

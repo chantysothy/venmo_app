@@ -20,15 +20,25 @@ export default class TitleBar extends Component {
   }
 
   render() {
+    var backStyles = [styles.backButton]
+    var forwardStyles = [styles.forwardButton]
+    var barStyles = [styles.bar];
+
+    if (Platform.OS == 'ios') {
+      barStyles.push(styles.iosBar);
+      forwardStyles.push(styles.iosButton);
+      backStyles.push(styles.iosButton);
+    }
+
     var backButton = this.props.back ? (
-      <Button containerStyle={styles.backButton} onPress={this.props.back}
+      <Button containerStyle={backStyles} onPress={this.props.back}
         style={[textStyles.text, styles.text, styles.sideText]}>
         {this.props.backView ? this.props.backView : "Back"}
       </Button>
     ) : null;
 
     var forwardButton = this.props.forward ? (
-      <Button containerStyle={styles.forwardButton} onPress={this.props.forward}
+      <Button containerStyle={forwardStyles} onPress={this.props.forward}
         disabled={this.props.forwardDisabled}
         styleDisabled={styles.forwardTextDisabled}
         style={[textStyles.text, styles.text, styles.sideText]}>
@@ -36,11 +46,6 @@ export default class TitleBar extends Component {
         {this.props.forwardView}
         </Button>
     ) : null;
-
-    var barStyles = [styles.bar];
-    if (Platform.OS == 'ios') {
-      barStyles.push(styles.iosBar);
-    }
 
     return (
       <View style={barStyles}>

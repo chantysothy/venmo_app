@@ -14,19 +14,24 @@ var {width, height} = getDimensions();
 var styles = StyleSheet.create({
   iosBar: {
     paddingTop: 35,
+    height: 75,
+  },
+  iosButton: {
+    top: 35,
   },
   bar: {
     flexDirection: 'row',
     backgroundColor: colors.green,
-    height: 75,
+    height: 55,
     width: width,
     justifyContent: 'center',
     paddingBottom: 10,
+    paddingTop: 15,
   },
   backButton: {
     position: 'absolute',
     left: 20,
-    top: 35,
+    top: 15,
     justifyContent: 'center',
     alignItems: 'center',
     height: 35,
@@ -34,7 +39,7 @@ var styles = StyleSheet.create({
   forwardButton: {
     position: 'absolute',
     right: 20,
-    top: 35,
+    top: 15,
     justifyContent: 'center',
     alignItems: 'center',
     height: 35,
