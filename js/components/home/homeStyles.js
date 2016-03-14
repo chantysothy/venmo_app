@@ -64,7 +64,12 @@ var styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     right: 10,
-  }
+  },
+  composeIcon: {
+    height: 40,
+    width: 40,
+    marginBottom: 20,
+  },
 });
 
 module.exports = styles;
