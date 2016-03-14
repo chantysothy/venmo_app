@@ -6,7 +6,7 @@ var {
 var moment = require('moment');
 var TimerMixin = require('react-timer-mixin');
 
-function fromNowShortHand(t){
+function fromNowShortHandHelper(t){
   var now = moment();
   var daysDiff = now.diff(moment(t), 'days');
   var hoursDiff = now.diff(moment(t), 'hours');
@@ -26,6 +26,19 @@ function fromNowShortHand(t){
   }
 
   return "Just now";
+}
+
+function fromNowShortHand(t, addAgo) {
+  var shortHand = fromNowShortHandHelper(t);
+  if (addAgo) {
+    if (shortHand == "Just now") {
+      return shortHand;
+    } else {
+      return shortHand + " ago"
+    }
+  } else {
+    return shortHand;
+  }
 }
 
 var TimeAgo = React.createClass({
@@ -62,7 +75,7 @@ var TimeAgo = React.createClass({
   render() {
     return (
       <Text {...this.props}>
-        {fromNowShortHand(this.props.time)}
+        {fromNowShortHand(this.props.time, this.props.addAgo)}
       </Text>
     );
   }

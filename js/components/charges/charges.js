@@ -140,7 +140,8 @@ class Charge extends Component {
           </Text>
           <Text style={[textStyles.text, styles.timeAgo]} >
             <TimeAgo
-              time = {this.props.payment.updated_at} /> ago
+              addAgo = { true }
+              time = {this.props.payment.updated_at} />
           </Text>
           <View style={styles.buttonContainer}>
             <TouchableHighlight
