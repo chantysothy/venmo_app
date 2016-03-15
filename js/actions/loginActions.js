@@ -32,6 +32,11 @@ function receiveLogin(status, user, navigator) {
         user,
         receivedAt: Date.now(),
       });
+    } else {
+      dispatch({
+        type: RECEIVE_LOGIN,
+        error: 'Invalid credentials'
+      });
     }
   }
 }

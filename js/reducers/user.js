@@ -22,6 +22,11 @@ export default function user(state = defaultUserState, action) {
       });
     case RECEIVE_LOGIN:
       if (action.error) {
+        if (action.error == 'Invalid credentials') {
+          return Object.assign({}, state, {
+            isFetching: false,
+          });
+        }
         // we got problem yo
         return state
       } else {

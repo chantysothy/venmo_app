@@ -27,6 +27,7 @@ var {width, height} = getDimensions();
 var FacebookLoginManager = require('../../utils/facebookLoginManager')
 
 var ViewPager = require('react-native-viewpager');
+var LoadingOverlay = require('../../shared/loadingOverlay');
 
 class LaunchCarousel extends Component {
   constructor(props) {
@@ -78,14 +79,30 @@ class LaunchCarousel extends Component {
       );
     }
 
+    var loadingIndicatorVisible = this.props.user.isFetching;
+    var loadingOverlay = (<LoadingOverlay isVisible={loadingIndicatorVisible} />);
+    if (Platform.OS === 'android') {
+      if (loadingIndicatorVisible) {
+        var androidLoadingOverlay = loadingOverlay;
+      } else {
+        var androidLoadingOverlay = null;
+      }
+      var iosLoadingOverlay = null;
+    } else if (Platform.OS === 'ios') {
+      var iosLoadingOverlay = loadingOverlay;
+      var androidLoadingOverlay = null;
+    }
+
     return(
       <View style={styles.container}>
+        { iosLoadingOverlay }
         { underPage }
         <ViewPager
           dataSource={this.dataSource}
           renderPage={this._renderPage.bind(this)}
           willChangePage={this._onChangePage.bind(this)}
           isLoop={false}/>
+        { androidLoadingOverlay }
       </View>
     );
   }
@@ -103,22 +120,25 @@ class LaunchCarousel extends Component {
             </View>
         </View>);
       case 2:
-        return (<View style={styles.page}>
-          <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>Send or request money, with just a tap.</Text>
-        </View>);
+        return (
+          <View style={styles.page}>
+            <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>Send or request money, with just a tap.</Text>
+          </View>);
       case 3:
-        return (<View style={styles.page}>
-          <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>See what your friends are paying for.</Text>
-        </View>);
+        return (
+          <View style={styles.page}>
+            <Text style={[textStyles.text, textStyles.subheaderText, textStyles.centered]}>See what your friends are paying for.</Text>
+          </View>);
       case 4:
-        return (<View style={styles.page}>
-          <TouchableHighlight
-            underlayColor='#3B0B0B'
-            style={styles.loginButton}
-            onPress={() => this._loginWithFacebook()} >
-            <Text style={textStyles.text}> Login with Facebook </Text>
-          </TouchableHighlight>
-        </View>);
+        return (
+          <View style={styles.page}>
+            <TouchableHighlight
+              underlayColor='#3B0B0B'
+              style={styles.loginButton}
+              onPress={() => this._loginWithFacebook()} >
+              <Text style={textStyles.text}> Login with Facebook </Text>
+            </TouchableHighlight>
+          </View>);
       default:
         return (<View/>);
     }
@@ -244,4 +264,9 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = connect()(LaunchCarousel);
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+  };
+}
+module.exports = connect(mapStateToProps)(LaunchCarousel);
