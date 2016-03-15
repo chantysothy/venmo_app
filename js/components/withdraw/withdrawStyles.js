@@ -17,6 +17,9 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 30,
   },
+  scrollViewContainer: {
+    alignItems: 'center',
+  },
   textInputContainer: {
     borderBottomWidth: 1,
     borderBottomColor: '#d7ccd0',
@@ -31,7 +34,12 @@ var styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 22,
-    paddingVertical: 30,
+    paddingBottom: 0,
+    marginBottom: 0,
+    display: 'flex',
+  },
+  bottomInfo: {
+    paddingBottom: 10,
   },
   inputContainer: {
     paddingVertical: 30,

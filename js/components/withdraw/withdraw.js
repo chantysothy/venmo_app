@@ -8,6 +8,7 @@ import React, {
   Navigator,
   TextInput,
   ScrollView,
+  Platform,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -55,31 +56,42 @@ class Withdraw extends Component {
       buttonContainerStyle = [styles.buttonContainer];
     }
 
+    var withdrawTextInputStyles = [textStyles.text, styles.textInput, styles.withdrawInput];
+    if (Platform.OS == 'android') {
+      withdrawTextInputStyles.push({height: 60});
+    }
+
     if (bank && bank.account_number && bank.sort_code) {
       var view =
-        <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps scrollEnabled={false}>
-          <Text style={[textStyles.text, styles.info]}>
-            Available balance: {this.props.user.params.balance.balance_formatted}
-          </Text>
-          <View>
-            <TextInput style={[textStyles.text, styles.textInput, styles.withdrawInput]}
-              value={"£" + this.state.amount}
-              keyboardType="numeric"
-              autoFocus
-              maxLength={maxLength}
-              onChangeText={(amount) => this._changeAmount(amount)}/>
-          </View>
-          <Text style={[textStyles.text, styles.info]}>
-            We'll be sending the money to
-            account ending in {this.state.account_number.substr(this.state.account_number.length - 4)}.
-          </Text>
-          <Button containerStyle={buttonContainerStyle} onPress={() => this._requestWithdrawal()}
-            styleDisabled={styles.buttonDisabled} disabled={buttonDisabled}
-            style={[textStyles.text, styles.buttonText]} >
-            <Icon style={iconStyle} name="lock-combination" size={20}/>
-            Withdraw
-          </Button>
-        </ScrollView>
+        <View style={styles.container}>
+          <ScrollView
+            contentContainerStyle={styles.scrollViewContainer}
+            keyboardShouldPersistTaps scrollEnabled={false}>
+            <View>
+              <Text style={[textStyles.text, styles.info]}>
+                Available balance: {this.props.user.params.balance.balance_formatted}
+              </Text>
+            </View>
+            <View>
+              <TextInput style={withdrawTextInputStyles}
+                value={"£" + this.state.amount}
+                keyboardType="numeric"
+                autoFocus
+                maxLength={maxLength}
+                onChangeText={(amount) => this._changeAmount(amount)}/>
+            </View>
+            <Text style={[textStyles.text, styles.info, styles.bottomInfo]}>
+              We'll be sending the money to
+              account ending in {this.state.account_number.substr(this.state.account_number.length - 4)}.
+            </Text>
+            <Button containerStyle={buttonContainerStyle} onPress={() => this._requestWithdrawal()}
+              styleDisabled={styles.buttonDisabled} disabled={buttonDisabled}
+              style={[textStyles.text, styles.buttonText]} >
+              <Icon style={iconStyle} name="lock-combination" size={20}/>
+              Withdraw
+            </Button>
+          </ScrollView>
+        </View>
     } else {
       var view =
         <View style={styles.container}>
