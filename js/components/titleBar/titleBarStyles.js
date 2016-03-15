@@ -18,6 +18,8 @@ var styles = StyleSheet.create({
   },
   iosButton: {
     top: 35,
+    paddingTop: 0,
+    paddingBottom: 5,
   },
   bar: {
     flexDirection: 'row',
@@ -34,7 +36,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 35,
-    paddingBottom: 5,
+    paddingTop: 5,
   },
   forwardButton: {
     position: 'absolute',
@@ -42,7 +44,7 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 35,
-    paddingBottom: 5,
+    paddingTop: 5,
   },
   text: {
     fontWeight: '600',
