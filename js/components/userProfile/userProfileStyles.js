@@ -24,6 +24,8 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
     paddingBottom: 10,
+    borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,
   },
   profilePhoto: {
     height: 80,

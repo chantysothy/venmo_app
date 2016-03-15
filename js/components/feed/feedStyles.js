@@ -39,8 +39,8 @@ var styles = StyleSheet.create({
     paddingBottom: 10,
     paddingTop: 10,
     paddingLeft: 15,
-    borderTopColor: 'lightgrey',
-    borderTopWidth: 1,
+    borderBottomColor: 'lightgrey',
+    borderBottomWidth: 1,
   },
   feedItemThumbnail: {
     width: 80,
