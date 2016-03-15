@@ -36,7 +36,6 @@ var styles = StyleSheet.create({
     fontSize: 22,
     paddingBottom: 0,
     marginBottom: 0,
-    display: 'flex',
   },
   bottomInfo: {
     paddingBottom: 10,
