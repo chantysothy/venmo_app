@@ -76,6 +76,7 @@ class Withdraw extends Component {
               <TextInput style={withdrawTextInputStyles}
                 value={"£" + this.state.amount}
                 keyboardType="numeric"
+                ref="withdrawTextInput"
                 autoFocus
                 maxLength={maxLength}
                 onChangeText={(amount) => this._changeAmount(amount)}/>
@@ -122,6 +123,7 @@ class Withdraw extends Component {
 
   _requestWithdrawal() {
     var user = this.props.user.params;
+    this.refs.withdrawTextInput.blur();
     this.props.dispatch(withdraw(user, {
       amount: this.state.amount.replace("£",""),
     }, () => {
