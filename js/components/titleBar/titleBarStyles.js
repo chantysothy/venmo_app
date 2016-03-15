@@ -25,8 +25,8 @@ var styles = StyleSheet.create({
     height: 55,
     width: width,
     justifyContent: 'center',
-    paddingBottom: 15,
-    paddingTop: 15,
+    paddingBottom: 10,
+    paddingTop: 10,
   },
   backButton: {
     position: 'absolute',

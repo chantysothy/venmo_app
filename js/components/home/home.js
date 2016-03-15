@@ -177,7 +177,7 @@ class HomeNavBar extends Component {
           underlayColor={colors.green}
           onPress={this.props.toggleSideMenu}
           style={[styles.feedButton, styles.moreMenuButton]} >
-          <Icon name="navicon" size ={45} color="white"/>
+          <Icon name="navicon" size ={35} color="white"/>
         </TouchableHighlight>
         <View style={styles.feedButtons}>
           { this.renderButton("earth", 0) }
@@ -190,7 +190,6 @@ class HomeNavBar extends Component {
           style={[styles.feedButton, styles.createPaymentButton]}
           onPress={this._transitionToCreatePayment.bind(this)}>
           <Image
-            resizeMode="contain"
             style={[styles.composeIcon]}
             source={require('./composeIcon.png')} />
         </TouchableHighlight>

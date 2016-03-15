@@ -66,9 +66,8 @@ var styles = StyleSheet.create({
     right: 10,
   },
   composeIcon: {
-    height: 40,
-    width: 40,
-    marginBottom: 20,
+    height: 35,
+    width: 35,
   },
 });
 
