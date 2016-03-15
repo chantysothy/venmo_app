@@ -88,8 +88,17 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   noChargesText: {
-    padding: 30,
     color: 'black',
+    textAlign: 'center',
+    fontSize: 25,
+    paddingVertical: 20,
+  },
+  noChargeView: {
+    backgroundColor: 'white',
+    height: height,
+    width: width,
+    alignItems: 'center',
+    paddingVertical: 50,
   },
 });
 

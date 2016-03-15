@@ -25,6 +25,13 @@ var styles = require('./chargesStyles.js');
 var textStyles = require('../../shared/textStyles');
 var TimeAgo = require('../../utils/timeAgo.js');
 
+var NO_CHARGES = {
+  isNoCharge: true,
+  payment: { id: 1 },
+  payee: {},
+  payer: {}
+};
+
 class Charges extends Component {
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
@@ -38,27 +45,21 @@ class Charges extends Component {
     var charges = this.props.charges.charges;
 
     if (charges.length == 0) {
-      var charges =
-        <View>
-          <Text style={[textStyles.text, styles.noChargesText]}>
-            You've got no charges. Hooray!
-          </Text>
-        </View>
-    } else {
-      var charges = <ChargeList
-          user={this.props.user}
-          style={styles.socialFeed}
-          isFetching={this.props.charges.isFetching}
-          refreshCharges={this._refreshCharges.bind(this)}
-          dispatch={this.props.dispatch}
-          charges={charges} />
+      charges = [NO_CHARGES];
     }
+    var chargeList = <ChargeList
+        user={this.props.user}
+        style={styles.socialFeed}
+        isFetching={this.props.charges.isFetching}
+        refreshCharges={this._refreshCharges.bind(this)}
+        dispatch={this.props.dispatch}
+        charges={charges} />
 
     return(
       <View style={styles.container}>
         <TitleBar text="Charges" back={() => this.props.navigator.pop()} />
           <View style={styles.chargeListContainer}>
-            {charges}
+            {chargeList}
           </View>
       </View>
     );
@@ -109,6 +110,7 @@ class ChargeList extends Component {
       <Charge
         key = { item.payment.id }
         dispatch={this.props.dispatch}
+        isNoCharge = { item.isNoCharge }
         payment = { item.payment }
         user = { this.props.user }
         payee = { item.payee }
@@ -119,6 +121,16 @@ class ChargeList extends Component {
 
 class Charge extends Component {
   render() {
+    // if no charges to display:
+    if (this.props.isNoCharge) {
+      return (
+        <View style={styles.noChargeView}>
+          <Text style={[textStyles.text, styles.noChargesText]}>
+            You've got no charges. Hooray!
+          </Text>
+        </View>
+      )
+    }
     var payee = this.props.payee.user.first_name + " " + this.props.payee.user.last_name;
     var payer = this.props.payer.user.first_name + " " + this.props.payer.user.last_name;
     var imageUrl = this.props.payee.user.profile_photo_url;
