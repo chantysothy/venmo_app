@@ -17,6 +17,7 @@ import { connect } from 'react-redux/native';
 
 import { fetchFacebookLogin, fetchLoginWithToken } from '../../actions/loginActions.js';
 import { withEmailAndToken } from '../../utils/utils';
+import Popup from 'react-native-popup';
 
 import * as colors from '../../constants/colors';
 import * as textStyles from '../../shared/textStyles';
@@ -103,6 +104,7 @@ class LaunchCarousel extends Component {
           renderPage={this._renderPage.bind(this)}
           willChangePage={this._onChangePage.bind(this)}
           isLoop={false}/>
+        <Popup ref={(popup) => { this.popup = popup }}/>
         { androidLoadingOverlay }
       </View>
     );
@@ -190,15 +192,19 @@ class LaunchCarousel extends Component {
     var self = this;
     FacebookLoginManager.newSession((error, data) => {
       if (error) {
-        console.log('error ' + error);
         if (Platform.OS == 'android') {
-          if (this.state.hasLoggedOut) {
+          if (!this.state.hasLoggedOut) {
             this.setState({ hasLoggedOut: true });
-            FacebookLoginManager.logout(() => {
+            return FacebookLoginManager.logout(() => {
               this._loginWithFacebook();
             });
           }
         }
+        this.popup.tip({
+          title: 'Login Error.',
+          content: [ `Sorry, we encountered an error:`, `${error.message}` ],
+          btn: { text: 'Okay' },
+        });
       } else {
         self.props.dispatch(fetchFacebookLogin(data.token, self.props.navigator));
       }
