@@ -47,6 +47,7 @@ class LaunchCarousel extends Component {
     this.state = {
       pan: new Animated.ValueXY(this.mockStartCoordinates),
       underPageVisible: false,
+      hasLoggedOut: false,
     };
   }
 
@@ -191,7 +192,8 @@ class LaunchCarousel extends Component {
       if (error) {
         console.log('error ' + error);
         if (Platform.OS == 'android') {
-          if (error.message.indexOf('CONNECTION_FAILURE') == -1) {
+          if (this.state.hasLoggedOut) {
+            this.setState({ hasLoggedOut: true });
             FacebookLoginManager.logout(() => {
               this._loginWithFacebook();
             });
