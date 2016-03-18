@@ -17,6 +17,8 @@ import android.content.Intent;
 
 import com.microsoft.codepush.react.CodePush;
 
+import com.geektime.reactnativeonesignal.ReactNativeOneSignalPackage;
+
 public class MainActivity extends ReactActivity {
     private BraintreePackage mBraintreePackage;
     private CodePush _codePush;
@@ -59,6 +61,7 @@ public class MainActivity extends ReactActivity {
           new VectorIconsPackage(),
           new FacebookLoginPackage(),
           new ExtraDimensionsPackage(this),
+          new ReactNativeOneSignalPackage(this),
           mBraintreePackage
         );
     }

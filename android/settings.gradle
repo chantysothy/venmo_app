@@ -13,3 +13,6 @@ project(':ExtraDimensions').projectDir = new File(rootProject.projectDir, '../no
 
 include ':react-native-braintree'
 project(':react-native-braintree').projectDir = new File(settingsDir, '../node_modules/react-native-braintree-android')
+
+include ':react-native-onesignal'
+project(':react-native-onesignal').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-onesignal/android')

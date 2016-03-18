@@ -18,6 +18,7 @@
     "react-native-facebook-login": "^1.0.3",
     "react-native-grid-view": "^0.3.7",
     "react-native-loading-spinner-overlay": "0.0.6",
+    "react-native-onesignal": "^1.1.1",
     "react-native-overlay": "^0.4.1",
     "react-native-popup": "git://github.com/dvdhsu/react-native-popup.git",
     "react-native-scrollable-tab-view": "^0.3.7",
