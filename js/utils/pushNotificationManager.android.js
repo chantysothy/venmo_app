@@ -15,7 +15,7 @@ OneSignal.configure({
 exports = module.exports = {}
 exports.getUserId = function(cb) {
   OneSignal.idsAvailable((idsAvailable) => {
-    cb(idsAvailable.playerId);
+    cb(idsAvailable.userId);
   });
 };
 

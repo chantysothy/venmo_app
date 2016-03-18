@@ -19,6 +19,7 @@ import colors from '../../constants/colors.js';
 import { fetchSocialFeed, fetchPrivateFeed, fetchPublicFeed } from '../../actions/feedActions.js';
 import { refreshState } from '../../actions/genericActions.js';
 import { withEmailAndToken } from '../../utils/utils';
+import { updateOnesignalId } from '../../actions/userActions.js';
 
 var Icon = require('react-native-vector-icons/Ionicons');
 var styles = require('./homeStyles');
@@ -43,9 +44,19 @@ class Home extends Component {
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       this._refreshState();
+      PushNotificationManager.getUserId((onesignalId) => {
+        console.log(onesignalId);
+        this._sendOnesignalId(onesignalId);
+      });
     });
 
     //PushNotificationManager.registerForPushNotifications();
+  }
+
+  _sendOnesignalId(onesignal_id) {
+    withEmailAndToken((email, token) => {
+      this.props.dispatch(updateOnesignalId(email, token, onesignal_id));
+    });
   }
 
   render() {

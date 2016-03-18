@@ -33,3 +33,9 @@ exports.updateUser = function(user, changeset, navigator) {
     .catch(error => console.log(error));
   }
 }
+
+exports.updateOnesignalId = function(email, token, onesignal_id) {
+  return dispatch => {
+    return ajax.updateUser(email, token, {onesignal_id});
+  }
+}
