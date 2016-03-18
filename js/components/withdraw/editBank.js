@@ -7,6 +7,7 @@ import React, {
   TouchableHighlight,
   Navigator,
   TextInput,
+  Platform,
 } from 'react-native';
 
 import { connect } from 'react-redux/native';
@@ -54,12 +55,18 @@ class EditBank extends Component {
       buttonContainerStyle = [styles.buttonContainer];
     }
 
+    var sortCodeStyles = [textStyles.text, styles.textInput, styles.sortCodeField];
+    var accountNumberStyles = [textStyles.text, styles.textInput, styles.accountNumberField];
+    if (Platform.OS == 'android') {
+      sortCodeStyles.push({height: 45});
+      accountNumberStyles.push({height: 45});
+    }
     return(
       <View style={styles.container}>
         <TitleBar text="Bank Details" back={() => this.props.navigator.pop()} />
         <View style={styles.inputContainer}>
           <View style={styles.textInputContainer}>
-            <TextInput style={[textStyles.text, styles.textInput, styles.sortCodeField]}
+            <TextInput style={sortCodeStyles}
               value={sortCode}
               keyboardType="number-pad"
               maxLength={6}
@@ -71,7 +78,7 @@ class EditBank extends Component {
               }} />
           </View>
           <View style={styles.textInputContainer}>
-            <TextInput style={[textStyles.text, styles.textInput, styles.accountNumberField]}
+            <TextInput style={accountNumberStyles}
               value={accountNumber}
               keyboardType="number-pad"
               ref="accountNumberField"
@@ -84,7 +91,7 @@ class EditBank extends Component {
               }} />
           </View>
           <View style={styles.textInputContainer}>
-            <TextInput style={[textStyles.text, styles.textInput, styles.accountNumberField]}
+            <TextInput style={accountNumberStyles}
               value={accountNumberConfirmed}
               keyboardType="number-pad"
               ref="accountNumberConfirmedField"

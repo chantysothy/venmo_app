@@ -96,7 +96,7 @@ class Withdraw extends Component {
     } else {
       var view =
         <View style={styles.container}>
-          <Text style={[textStyles.text, styles.info]}>
+          <Text style={[textStyles.text, styles.info, {marginBottom: 10}]}>
             You'll need to add your bank account first.
           </Text>
           <Button containerStyle={buttonContainerStyle} onPress={() => this._transitionToBankAccount()}
