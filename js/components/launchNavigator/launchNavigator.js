@@ -17,15 +17,12 @@ import codePush from "react-native-code-push";
 
 import { updateUser } from '../../actions/loginActions.js';
 
-var PushNotificationManager = require('../../utils/pushNotificationManager');
-
 var {
   View,
   Navigator,
   Text,
   Platform,
   StatusBarIOS,
-  NativeAppEventEmitter,
 } = React;
 
 export default class MelamineLaunch extends React.Component {
@@ -55,25 +52,6 @@ export default class MelamineLaunch extends React.Component {
     if (Platform.OS == 'ios') {
       codePush.sync();
     }
-    PushNotificationManager.getUserId((onesignalId) => {
-      console.log(onesignalId);
-      this._sendOnesignalId(onesignalId);
-    });
-
-    this.subscription = NativeAppEventEmitter.addListener('onesignalIdReceived', (onesignalId) => {
-      console.log(onesignalId);
-      this._sendOnesignalId(onesignalId);
-    });
-  }
-
-  componentWillUnmount() {
-    this.subscription.remove();
-  }
-
-  _sendOnesignalId(onesignal_id) {
-    withEmailAndToken((email, authentication_token) => {
-      this.props.dispatch(updateUser({email, authentication_token}, { onesignal_id }, this._navigator));
-    });
   }
 
   renderScene(route, nav) {

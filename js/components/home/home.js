@@ -8,6 +8,7 @@ import React, {
   Navigator,
   Platform,
   InteractionManager,
+  NativeAppEventEmitter,
   Image,
 } from 'react-native';
 
@@ -42,15 +43,22 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    this.subscription = NativeAppEventEmitter.addListener('onesignalIdReceived', (onesignalId) => {
+      this._sendOnesignalId(onesignalId);
+    });
+
     InteractionManager.runAfterInteractions(() => {
       this._refreshState();
       PushNotificationManager.getUserId((onesignalId) => {
-        console.log(onesignalId);
         this._sendOnesignalId(onesignalId);
       });
     });
 
     //PushNotificationManager.registerForPushNotifications();
+  }
+
+  componentWillUnmount() {
+    this.subscription.remove();
   }
 
   _sendOnesignalId(onesignal_id) {
