@@ -698,6 +698,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = venmo_app/venmo_app.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -725,6 +726,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = su.davidh.cashew;
 				PRODUCT_NAME = Cashew;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -735,6 +737,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = venmo_app/venmo_app.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -761,6 +764,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = su.davidh.cashew;
 				PRODUCT_NAME = Cashew;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
