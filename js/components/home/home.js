@@ -5,6 +5,7 @@ import React, {
   Text,
   View,
   TouchableHighlight,
+  TouchableOpacity,
   Navigator,
   Platform,
   InteractionManager,
@@ -182,7 +183,7 @@ class HomeNavBar extends Component {
     }
     return (
       <TouchableHighlight
-        underlayColor="green"
+        underlayColor={colors.darkGreen}
         style={buttonStyles}
         onPress={() => this.props.goToPage(pageId)}>
         <Icon name={iconName} size ={30} color={iconColor}/>
@@ -193,27 +194,25 @@ class HomeNavBar extends Component {
   render() {
     return (
       <View style={styles.navbar}>
-        <TouchableHighlight
+        <TouchableOpacity
           activeOpacity={0.5}
-          underlayColor={colors.green}
           onPress={this.props.toggleSideMenu}
           style={[styles.feedButton, styles.moreMenuButton]} >
           <Icon name="navicon" size ={35} color="white"/>
-        </TouchableHighlight>
+        </TouchableOpacity>
         <View style={styles.feedButtons}>
           { this.renderButton("earth", 0) }
           { this.renderButton("person-stalker", 1) }
           { this.renderButton("person", 2) }
         </View>
-        <TouchableHighlight
+        <TouchableOpacity
           activeOpacity={0.5}
-          underlayColor={colors.green}
           style={[styles.feedButton, styles.createPaymentButton]}
           onPress={this._transitionToCreatePayment.bind(this)}>
           <Image
             style={[styles.composeIcon]}
             source={require('./composeIcon.png')} />
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     )
   }

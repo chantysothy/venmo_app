@@ -136,7 +136,7 @@ class LaunchCarousel extends Component {
         return (
           <View style={styles.page}>
             <TouchableHighlight
-              underlayColor='#3B0B0B'
+              underlayColor={colors.darkGreen}
               style={styles.loginButton}
               onPress={() => this._loginWithFacebook()} >
               <Text style={textStyles.text}> Login with Facebook </Text>

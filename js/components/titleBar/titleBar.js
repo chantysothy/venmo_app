@@ -9,7 +9,6 @@ var textStyles = require('../../shared/textStyles');
 var {
   Text,
   View,
-  TouchableHighlight,
   Component,
   Platform
 } = React;

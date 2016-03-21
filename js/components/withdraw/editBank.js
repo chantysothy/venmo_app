@@ -4,7 +4,6 @@ import React, {
   Component,
   Text,
   View,
-  TouchableHighlight,
   Navigator,
   TextInput,
   Platform,

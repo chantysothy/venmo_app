@@ -9,7 +9,6 @@ import React, {
   View,
   ListView,
   Dimensions,
-  TouchableHighlight,
   RefreshControl,
 } from 'react-native';
 

@@ -3,7 +3,6 @@
 import React, {
   Component,
   Text,
-  TouchableHighlight,
   TouchableOpacity,
   TextInput,
   View,
@@ -44,12 +43,12 @@ class PaymentSelectUser extends Component {
   render() {
     if (this.state.to) {
       var toView =
-      <TouchableHighlight style={styles.targetNameContainer}
+      <TouchableOpacity style={styles.targetNameContainer}
         onPress={() => this._clearSearch()}>
         <Text style={[textStyles.text, styles.targetNameText]}>
           {this.state.to.display_name}
         </Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
       var noteView =
         <View style={styles.noteContainer}>
           <TextInput

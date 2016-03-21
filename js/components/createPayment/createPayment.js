@@ -86,7 +86,7 @@ class CreatePayment extends Component {
       var text = <Text style={[textStyles.text, styles.numberButtonText]}>{item}</Text>;
     }
     return(
-      <TouchableHighlight key={item} activeOpacity={.9} underlayColor={"#0b777f"}
+      <TouchableHighlight key={item} activeOpacity={.9} underlayColor={colors.darkGreen}
         onPress={() => this._onNumberButtonPress(item)} style={styles.numberButton}>
         {text}
       </TouchableHighlight>
