@@ -170,6 +170,7 @@ class PhoneVerification extends Component {
       }
     }
   }
+
   _renderNumberButton(item) {
     if(item === "back") {
       var text = <Icon name="backspace-outline" size={40} color="white"/>;

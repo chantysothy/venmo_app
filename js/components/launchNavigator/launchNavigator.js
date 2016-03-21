@@ -53,6 +53,16 @@ export default class MelamineLaunch extends React.Component {
     if (Platform.OS == 'ios') {
       codePush.sync();
     }
+    PushNotificationManager.getUserId();
+
+    this.subscription = NativeAppEventEmitter.addListener('onesignalIdReceived', (onesignalId) => {
+        console.log(onesignalId);
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    this.subscription.remove();
   }
 
   renderScene(route, nav) {
