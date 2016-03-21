@@ -43,9 +43,9 @@ var styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   feedItemThumbnail: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
     margin: 5,
   },
   feedItemRightContainer: {
@@ -88,7 +88,7 @@ var styles = StyleSheet.create({
   noActivityText: {
     color: 'black',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 18,
     paddingVertical: 20,
   },
 });

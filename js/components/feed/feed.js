@@ -119,9 +119,6 @@ class FeedItem extends Component {
           <Text style={[textStyles.text, styles.noActivityText]}>
             You've got no activity yet.
           </Text>
-          <Text style={[textStyles.text, styles.noActivityText]}>
-            Go make some payments!
-          </Text>
         </View>
       )
     }

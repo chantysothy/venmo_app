@@ -9,7 +9,7 @@ var {
 var styles = StyleSheet.create({
   text: {
     fontFamily: 'Avenir',
-    fontSize: 15,
+    fontSize: 14,
     color: 'white',
   },
   centered: {

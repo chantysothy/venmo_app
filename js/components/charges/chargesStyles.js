@@ -90,7 +90,7 @@ var styles = StyleSheet.create({
   noChargesText: {
     color: 'black',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: 18,
     paddingVertical: 20,
   },
   noChargeView: {
