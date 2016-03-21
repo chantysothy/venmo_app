@@ -177,7 +177,7 @@ class PhoneVerification extends Component {
 
   _onNumberButtonPress(item) {
     if (this.props.phoneVerification.registeredPhoneNumber) {
-      if (this.state.pin.length <= 4) {
+      if (this.state.pin.length < 4 || item === "back") {
         this.setState({
           pin: item === "back" ? this.state.pin.slice(0, -1) : this.state.pin + item,
         }, () => {
