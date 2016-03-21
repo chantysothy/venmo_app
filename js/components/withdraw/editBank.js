@@ -62,50 +62,52 @@ class EditBank extends Component {
       accountNumberStyles.push({height: 45});
     }
     return(
-      <View style={styles.container}>
+      <View style={styles.outerContainer}>
         <TitleBar text="Bank Details" back={() => this.props.navigator.pop()} />
-        <View style={styles.inputContainer}>
-          <View style={styles.textInputContainer}>
-            <TextInput style={sortCodeStyles}
-              value={sortCode}
-              keyboardType="number-pad"
-              maxLength={6}
-              placeholder="Sort code"
-              autoFocus={!sortCode || (!!sortCode && !!accountNumber)}
-              onChangeText={(sc) => {
-                if (sc.length == 6) { this.refs.accountNumberField.focus() };
-                this.setState({sortCode: sc});
-              }} />
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
+            <View style={styles.textInputContainer}>
+              <TextInput style={sortCodeStyles}
+                value={sortCode}
+                keyboardType="number-pad"
+                maxLength={6}
+                placeholder="Sort code"
+                autoFocus={!sortCode || (!!sortCode && !!accountNumber)}
+                onChangeText={(sc) => {
+                  if (sc.length == 6) { this.refs.accountNumberField.focus() };
+                  this.setState({sortCode: sc});
+                }} />
+            </View>
+            <View style={styles.textInputContainer}>
+              <TextInput style={accountNumberStyles}
+                value={accountNumber}
+                keyboardType="number-pad"
+                ref="accountNumberField"
+                maxLength={8}
+                placeholder="Account number"
+                autoFocus={sortCode && !accountNumber}
+                onChangeText={(an) => {
+                  if (an.length === 8) { this.refs.accountNumberConfirmedField.focus() }
+                  this.setState({accountNumber: an});
+                }} />
+            </View>
+            <View style={styles.textInputContainer}>
+              <TextInput style={accountNumberStyles}
+                value={accountNumberConfirmed}
+                keyboardType="number-pad"
+                ref="accountNumberConfirmedField"
+                maxLength={8}
+                placeholder="Confirm account number"
+                onChangeText={(an) => this.setState({accountNumberConfirmed: an})} />
+            </View>
           </View>
-          <View style={styles.textInputContainer}>
-            <TextInput style={accountNumberStyles}
-              value={accountNumber}
-              keyboardType="number-pad"
-              ref="accountNumberField"
-              maxLength={8}
-              placeholder="Account number"
-              autoFocus={sortCode && !accountNumber}
-              onChangeText={(an) => {
-                if (an.length === 8) { this.refs.accountNumberConfirmedField.focus() }
-                this.setState({accountNumber: an});
-              }} />
-          </View>
-          <View style={styles.textInputContainer}>
-            <TextInput style={accountNumberStyles}
-              value={accountNumberConfirmed}
-              keyboardType="number-pad"
-              ref="accountNumberConfirmedField"
-              maxLength={8}
-              placeholder="Confirm account number"
-              onChangeText={(an) => this.setState({accountNumberConfirmed: an})} />
-          </View>
+          <Button containerStyle={buttonContainerStyle} onPress={() => this._saveBank()}
+            styleDisabled={styles.buttonDisabled} disabled={buttonDisabled}
+            style={[textStyles.text, styles.buttonText]} >
+            <Icon style={iconStyle} name="lock-combination" size={20}/>
+            Save
+          </Button>
         </View>
-        <Button containerStyle={buttonContainerStyle} onPress={() => this._saveBank()}
-          styleDisabled={styles.buttonDisabled} disabled={buttonDisabled}
-          style={[textStyles.text, styles.buttonText]} >
-          <Icon style={iconStyle} name="lock-combination" size={20}/>
-          Save
-        </Button>
       </View>
     );
   }

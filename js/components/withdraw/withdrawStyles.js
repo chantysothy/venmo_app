@@ -10,12 +10,17 @@ var {width, height} = getDimensions();
 var colors = require('../../constants/colors.js');
 
 var styles = StyleSheet.create({
+  outerContainer: {
+    height: height,
+    width: width,
+  },
   container: {
     height: height,
     width: width,
     backgroundColor: colors.green,
     alignItems: 'center',
     paddingHorizontal: 30,
+    paddingTop: 20,
   },
   scrollViewContainer: {
     alignItems: 'center',
@@ -34,14 +39,17 @@ var styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 22,
-    paddingBottom: 0,
-    marginBottom: 0,
+    paddingBottom: 30,
+  },
+  topInfo: {
+    paddingBottom: 20,
   },
   bottomInfo: {
-    paddingBottom: 10,
+    paddingTop: 20,
+    paddingBottom: 25,
   },
   inputContainer: {
-    paddingVertical: 30,
+    paddingBottom: 30,
   },
   button: {
     height: 50,

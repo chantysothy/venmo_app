@@ -68,7 +68,7 @@ class Withdraw extends Component {
             contentContainerStyle={styles.scrollViewContainer}
             keyboardShouldPersistTaps scrollEnabled={false}>
             <View>
-              <Text style={[textStyles.text, styles.info]}>
+              <Text style={[textStyles.text, styles.info, styles.topInfo]}>
                 Available balance: {this.props.user.params.balance.balance_formatted}
               </Text>
             </View>
@@ -83,7 +83,7 @@ class Withdraw extends Component {
             </View>
             <Text style={[textStyles.text, styles.info, styles.bottomInfo]}>
               We'll be sending the money to
-              account ending in {this.state.account_number.substr(this.state.account_number.length - 4)}.
+              account ending in {bank.account_number.substr(bank.account_number.length - 4)}.
             </Text>
             <Button containerStyle={buttonContainerStyle} onPress={() => this._requestWithdrawal()}
               styleDisabled={styles.buttonDisabled} disabled={buttonDisabled}
@@ -99,7 +99,7 @@ class Withdraw extends Component {
           <Text style={[textStyles.text, styles.info, {marginBottom: 10}]}>
             You'll need to add your bank account first.
           </Text>
-          <Button containerStyle={buttonContainerStyle} onPress={() => this._transitionToBankAccount()}
+          <Button containerStyle={styles.buttonContainer} onPress={() => this._transitionToBankAccount()}
             style={[textStyles.text, styles.buttonText]} >
             <Icon style={iconStyle} name="lock-combination" size={20}/>
             Add bank account
@@ -107,7 +107,7 @@ class Withdraw extends Component {
         </View>
     }
     return(
-      <View style={styles.container}>
+      <View style={styles.outerContainer}>
         <TitleBar text="Withdraw" back={() => this.props.navigator.pop()} />
         {view}
         <Popup ref={(popup) => { this.popup = popup }}/>
@@ -123,6 +123,8 @@ class Withdraw extends Component {
 
   _requestWithdrawal() {
     var user = this.props.user.params;
+    var bank = user.user ? user.user.bank : null;
+
     this.refs.withdrawTextInput.blur();
     this.props.dispatch(withdraw(user, {
       amount: this.state.amount.replace("£",""),
@@ -133,7 +135,7 @@ class Withdraw extends Component {
       this.popup.tip({
         title: 'Thanks!',
         content: [
-          `We've just sent £${this.state.amount} to account ${this.state.account_number.substr(this.state.account_number.length - 4)}. `,
+          `We've just sent £${this.state.amount} to account ${bank.account_number.substr(bank.account_number.length - 4)}. `,
           "You should receive it within 48h."],
         btn: {
           text: 'Okay',
