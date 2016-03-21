@@ -27,7 +27,7 @@ var styles = require('./homeStyles');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var textStyles = require('../../shared/textStyles');
 var SideMenu = require('react-native-side-menu');
-var PushNotificationManager = require('../../utils/pushNotificationManager');
+var PushNotificationManager = require('NativeModules').PushNotificationManager;
 
 function isPlaceholderFeed(feed) {
   return (feed.length > 0) && feed[0].isPlaceholder;
@@ -43,18 +43,20 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.subscription = NativeAppEventEmitter.addListener('onesignalIdReceived', (onesignalId) => {
-      this._sendOnesignalId(onesignalId);
+    this.subscription = NativeAppEventEmitter.addListener('onesignalIdReceived', (onesignal) => {
+      this._sendOnesignalId(onesignal.onesignalId);
     });
 
     InteractionManager.runAfterInteractions(() => {
       this._refreshState();
-      PushNotificationManager.getUserId((onesignalId) => {
-        this._sendOnesignalId(onesignalId);
-      });
+      if (Platform.OS == 'android') {
+        PushNotificationManager.getUserId((onesignalId) => {
+          this._sendOnesignalId(onesignalId);
+        });
+      } else {
+        PushNotificationManager.getUserId();
+      }
     });
-
-    //PushNotificationManager.registerForPushNotifications();
   }
 
   componentWillUnmount() {

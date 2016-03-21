@@ -42,7 +42,7 @@ function resetPhoneVerification(message){
   }
 }
 
-function receiveVerifyPhoneNumber(parsedResponse, navigator) {
+function receiveVerifyPhoneNumber(parsedResponse, callback) {
   if (parsedResponse.status === "failure"){
     if (parsedResponse.error === "More than 5 incorrect verification attempts") {
       return resetPhoneVerification(parsedResponse.error);
@@ -63,9 +63,7 @@ function receiveVerifyPhoneNumber(parsedResponse, navigator) {
         receivedAt: Date.now(),
         pin: parsedResponse.pin
       });
-      navigator.push({
-        id: 'Home'
-      });
+      callback();
       dispatch(resetPhoneVerification(''));
     }
   }
@@ -89,14 +87,14 @@ exports.registerPhoneNumber = function(email, token, phone_number) {
   }
 }
 
-exports.verifyPhoneNumber = function(email, token, phone_number, pin, navigator) {
+exports.verifyPhoneNumber = function(email, token, phone_number, pin, callback) {
   return dispatch => {
     dispatch({ type:  REQUEST_VERIFY_PHONE_NUMBER });
 
     return ajax.verifyPhoneNumber(email, token, phone_number, pin)
                .then( response => {
                  response.json()
-                 .then((json) => receiveVerifyPhoneNumber(json, navigator))
+                 .then((json) => receiveVerifyPhoneNumber(json, callback))
                    .then(dispatch);
                })
                .catch(handleError);

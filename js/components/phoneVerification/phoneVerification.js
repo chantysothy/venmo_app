@@ -16,6 +16,8 @@ import TitleBar from '../titleBar/titleBar';
 import { registerPhoneNumber, verifyPhoneNumber, resetPhoneVerification } from '../../actions/phoneVerificationActions.js';
 import { withEmailAndToken } from '../../utils/utils';
 import colors from '../../constants/colors';
+import Popup from 'react-native-popup';
+var PushNotificationManager = require('../../utils/pushNotificationManager');
 
 var GridView = require('react-native-grid-view');
 var Button = require('react-native-button');
@@ -123,6 +125,7 @@ class PhoneVerification extends Component {
           <GridView items={this.numberButtons} itemsPerRow={3} renderItem={(item) => this._renderNumberButton(item)} scrollEnabled={false} style={styles.numberButtonsContainer}/>
         </View>
         {androidLoadingOverlay}
+        <Popup ref={(popup) => { this.popup = popup }}/>
       </View>
     );
   }
@@ -141,7 +144,34 @@ class PhoneVerification extends Component {
 
   _verifyPhoneNumber() {
     withEmailAndToken((email, token) => {
-      this.props.dispatch(verifyPhoneNumber(email, token, this.state.phoneNumber, this.state.pin, this.props.navigator));
+      this.props.dispatch(verifyPhoneNumber(email, token, this.state.phoneNumber, this.state.pin, () => {
+        this.popup.confirm({
+          title: 'Get notified of payments',
+          content: [
+            "When a friend sends you money, we'd like to let you know.",
+            "We'll never notify you otherwise.",
+          ],
+          ok: {
+            text: 'Notify me',
+            callback: () => {
+              PushNotificationManager.registerForPushNotifications();
+
+              this.props.navigator.push({
+                id: 'Home',
+              });
+            },
+          },
+          cancel: {
+            text: 'No thanks',
+            callback: () => {
+              this.props.navigator.push({
+                id: 'Home',
+              });
+            },
+          }
+        });
+
+      }));
     });
   }
 
