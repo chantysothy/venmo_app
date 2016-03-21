@@ -200,11 +200,13 @@ class LaunchCarousel extends Component {
             });
           }
         }
-        this.popup.tip({
-          title: 'Login Error.',
-          content: [ `Sorry, we encountered an error:`, `${error.message}` ],
-          btn: { text: 'Okay' },
-        });
+        if (error !== "Canceled") {
+          this.popup.tip({
+            title: 'Login Error',
+            content: ["There was a problem authenticating you. Please contact us."],
+            btn: { text: 'Okay' },
+          });
+        }
       } else {
         self.props.dispatch(fetchFacebookLogin(data.token, self.props.navigator));
       }
