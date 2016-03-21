@@ -58,16 +58,16 @@ var styles = StyleSheet.create({
   moreMenuButton: {
     position: 'absolute',
     top: 10,
-    left: width > 350 ? 25 :20,
+    left: 10,
   },
   createPaymentButton: {
     position: 'absolute',
     top: 10,
-    right: width > 350 ? 18 : 14,
+    right: 10,
   },
   composeIcon: {
-    height: 40,
-    width: 40,
+    height: 35,
+    width: 35,
   },
 });
 

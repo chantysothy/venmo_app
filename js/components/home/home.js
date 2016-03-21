@@ -197,8 +197,8 @@ class HomeNavBar extends Component {
           activeOpacity={0.5}
           underlayColor={colors.green}
           onPress={this.props.toggleSideMenu}
-          style={styles.moreMenuButton} >
-          <Icon name="navicon" size ={45} color="white"/>
+          style={[styles.feedButton, styles.moreMenuButton]} >
+          <Icon name="navicon" size ={35} color="white"/>
         </TouchableHighlight>
         <View style={styles.feedButtons}>
           { this.renderButton("earth", 0) }
@@ -208,7 +208,7 @@ class HomeNavBar extends Component {
         <TouchableHighlight
           activeOpacity={0.5}
           underlayColor={colors.green}
-          style={styles.createPaymentButton}
+          style={[styles.feedButton, styles.createPaymentButton]}
           onPress={this._transitionToCreatePayment.bind(this)}>
           <Image
             style={[styles.composeIcon]}
