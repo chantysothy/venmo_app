@@ -28,7 +28,8 @@ var styles = require('./homeStyles');
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var textStyles = require('../../shared/textStyles');
 var SideMenu = require('react-native-side-menu');
-var PushNotificationManager = require('NativeModules').PushNotificationManager;
+
+var PushNotificationManager = require('../../utils/pushNotificationManager');
 
 function isPlaceholderFeed(feed) {
   return (feed.length > 0) && feed[0].isPlaceholder;
