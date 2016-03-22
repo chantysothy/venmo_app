@@ -35,7 +35,7 @@ var styles = StyleSheet.create({
     left: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 35,
+    height: 40,
     paddingTop: 5,
   },
   forwardButton: {
@@ -43,7 +43,7 @@ var styles = StyleSheet.create({
     right: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 35,
+    height: 40,
     paddingTop: 5,
   },
   text: {

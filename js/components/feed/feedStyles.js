@@ -16,13 +16,13 @@ var styles = StyleSheet.create({
   },
   longBox: {
     flex: 1,
-    height: 15,
+    height: 13,
     marginRight: 10,
     marginBottom: 10,
   },
   shortBox: {
     width: 80,
-    height: 15,
+    height: 13,
     marginRight: 10,
     marginBottom: 10,
   },
@@ -80,7 +80,7 @@ var styles = StyleSheet.create({
   },
   noActivityView: {
     backgroundColor: 'white',
-    height: height,
+    height: height - 60,
     width: width,
     alignItems: 'center',
     paddingVertical: 50,
