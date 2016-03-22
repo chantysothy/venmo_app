@@ -3,14 +3,15 @@ import {
   RECEIVE_CHARGES,
   REQUEST_CHARGE_PAYMENT,
   RECEIVE_CHARGE_PAYMENT,
-  REQUEST_DECLINE_PAYMENT,
-  RECEIVE_DECLINE_PAYMENT,
+  REQUEST_DECLINE_CHARGE,
+  RECEIVE_DECLINE_CHARGE,
 } from '../constants/actionTypes';
 
 import * as ajax from '../shared/ajax.js';
 import React from 'react-native'
 import { refreshState } from './genericActions.js';
 
+var { NativeAppEventEmitter } = require('react-native');
 import { initBraintreeWithToken, braintreeNonce } from '../shared/braintree';
 
 var _ = require('lodash');
@@ -31,6 +32,14 @@ function receiveCharges(parsedResponse) {
 }
 
 function receiveChargePayment(parsedResponse) {
+  if (parsedResponse.error !== undefined) {
+    NativeAppEventEmitter.emit("showPopup", {
+      title: "Payment Error",
+      content: [parsedResponse.error],
+      buttonText: "Okay",
+    });
+  }
+
   return dispatch => {
     dispatch({
       type: RECEIVE_CHARGE_PAYMENT,
@@ -40,9 +49,17 @@ function receiveChargePayment(parsedResponse) {
 }
 
 function receiveDeclinePayment(parsedResponse) {
+  if (parsedResponse.error !== undefined) {
+    NativeAppEventEmitter.emit("showPopup", {
+      title: "Error in declining charge",
+      content: [parsedResponse.error],
+      buttonText: "Okay",
+    });
+  }
+
   return dispatch => {
     dispatch({
-      type: RECEIVE_DECLINE_PAYMENT,
+      type: RECEIVE_DECLINE_CHARGE,
       receivedAt: Date.now()
     });
   }
@@ -81,7 +98,7 @@ exports.payPendingCharge = function(user, paymentId) {
         ajax.payPendingCharge(email, token, paymentId, nonce)
             .then(response => {
               dispatch(refreshState(email, token));
-              response.json().then(json => dispatch(receiveChargePayment(json.data)));
+              response.json().then(json => dispatch(receiveChargePayment(json)));
             })
             .catch(error => console.log(error));
       });
@@ -91,11 +108,11 @@ exports.payPendingCharge = function(user, paymentId) {
 
 exports.declinePendingCharge = function(email, token, paymentId) {
   return dispatch => {
-    dispatch({ type:  REQUEST_DECLINE_PAYMENT });
+    dispatch({ type:  REQUEST_DECLINE_CHARGE });
     return ajax.declinePendingCharge(email, token, paymentId)
                .then(response => {
                  dispatch(refreshState(email, token));
-                 response.json().then(json => dispatch(receiveChargePayment(json.data)));
+                 response.json().then(json => dispatch(receiveDeclinePayment(json.data)));
                })
                .catch(error => console.log(error));
   }

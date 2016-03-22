@@ -10,6 +10,7 @@ import React, {
   Navigator,
   InteractionManager,
   Platform,
+  NativeAppEventEmitter,
   RefreshControl,
 } from 'react-native';
 
@@ -57,7 +58,7 @@ class Charges extends Component {
         dispatch={this.props.dispatch}
         charges={charges} />
 
-    var loadingIndicatorVisible = this.props.charges.isFetching;
+    var loadingIndicatorVisible = this.props.charges.isFetching || this.props.charges.payingOrDecliningCharge;
     var loadingOverlay = (<LoadingOverlay isVisible={loadingIndicatorVisible} />);
     if (Platform.OS === 'android') {
       if (loadingIndicatorVisible) {

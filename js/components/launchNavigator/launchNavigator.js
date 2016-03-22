@@ -15,8 +15,12 @@ import Withdraw from '../withdraw/withdraw.js';
 import EditBank from '../withdraw/editBank.js';
 import codePush from "react-native-code-push";
 
+import Popup from 'react-native-popup';
 
 import { updateUser } from '../../actions/loginActions.js';
+
+import getDimensions from '../../shared/dimensions';
+var {width, height} = getDimensions();
 
 var {
   View,
@@ -24,6 +28,7 @@ var {
   Text,
   Platform,
   StatusBarIOS,
+  NativeAppEventEmitter,
 } = React;
 
 export default class MelamineLaunch extends React.Component {
@@ -53,13 +58,28 @@ export default class MelamineLaunch extends React.Component {
     if (Platform.OS == 'ios') {
       codePush.sync();
     }
+    this.popupListener = NativeAppEventEmitter.addListener('showPopup', (options) => {
+      this.global_popup.tip({
+        title: options.title,
+        content: options.content,
+        btn: { text: options.buttonText },
+      });
+    });
   }
 
   componentWillUnmount() {
-    this.subscription.remove();
+    this.popupListener.remove();
   }
 
-  renderScene(route, nav) {
+  renderScene(route, nav)  {
+    return (
+      <View style={{height: height, width: width}}>
+        { this.renderSceneHelper(route, nav) }
+        <Popup ref={(popup) => this.global_popup = popup}/>
+      </View>
+    );
+  }
+  renderSceneHelper(route, nav) {
     this._navigator = nav;
     switch(route.id) {
       case 'Home':

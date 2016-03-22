@@ -13,20 +13,31 @@ import { refreshState } from './genericActions.js';
 
 import { braintreeNonce } from '../shared/braintree';
 
+var { NativeAppEventEmitter } = require('react-native');
+
 function requestPayment() {
   return {
     type: REQUEST_PAYMENT
   };
 }
 
-function receivePayment(payment, navigator) {
-  var popTo = _.find(navigator.getCurrentRoutes(), (elem) => elem.id === "Home");
-  navigator.popToRoute(popTo);
+function receivePayment(parsedResponse, navigator) {
+  if (parsedResponse.error !== undefined) {
+    NativeAppEventEmitter.emit("showPopup", {
+      title: "Payment Error",
+      content: [parsedResponse.error],
+      buttonText: "Okay",
+    });
+  } else {
+    var popTo = _.find(navigator.getCurrentRoutes(), (elem) => elem.id === "Home");
+    navigator.popToRoute(popTo);
+  }
+
 
   return dispatch => {
     dispatch({
       type: RECEIVE_PAYMENT,
-      payment,
+      payment: parsedResponse.data,
       receivedAt: Date.now(),
     });
   }
@@ -50,7 +61,7 @@ exports.pay = function pay(user, payment, navigator) {
                  .then(response => {
                    dispatch(refreshState(email,token)).then(() => {
                        response.json()
-                       .then(json => dispatch(receivePayment(json.data, navigator)))
+                       .then(json => dispatch(receivePayment(json, navigator)))
                    });
                  })
                  .catch(error => console.log(error));
