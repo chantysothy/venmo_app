@@ -92,9 +92,9 @@ exports.payPendingCharge = function(user, paymentId) {
     noncePromise = braintreeNonce;
   }
   return dispatch => {
-    dispatch({ type:  REQUEST_CHARGE_PAYMENT });
     initBraintreeWithToken().then(() => {
       noncePromise().then((nonce) => {
+        dispatch({ type:  REQUEST_CHARGE_PAYMENT });
         ajax.payPendingCharge(email, token, paymentId, nonce)
             .then(response => {
               dispatch(refreshState(email, token));
