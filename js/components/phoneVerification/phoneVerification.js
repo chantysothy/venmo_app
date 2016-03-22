@@ -145,32 +145,37 @@ class PhoneVerification extends Component {
   _verifyPhoneNumber() {
     withEmailAndToken((email, token) => {
       this.props.dispatch(verifyPhoneNumber(email, token, this.state.phoneNumber, this.state.pin, () => {
-        this.popup.confirm({
-          title: 'Get notified of payments',
-          content: [
-            "When a friend sends you money, we'd like to let you know.",
-            "We'll never notify you otherwise.",
-          ],
-          ok: {
-            text: 'Notify me',
-            callback: () => {
-              PushNotificationManager.registerForPushNotifications();
+        if (Platform.OS === 'android') {
+          this.props.navigator.push({
+            id: 'Home',
+          });
+        } else {
+          this.popup.confirm({
+            title: 'Get notified of payments',
+            content: [
+              "When a friend sends you money, we'd like to let you know.",
+              "We'll never notify you otherwise.",
+            ],
+            ok: {
+              text: 'Notify me',
+              callback: () => {
+                PushNotificationManager.registerForPushNotifications();
 
-              this.props.navigator.push({
-                id: 'Home',
-              });
+                this.props.navigator.push({
+                  id: 'Home',
+                });
+              },
             },
-          },
-          cancel: {
-            text: 'No thanks',
-            callback: () => {
-              this.props.navigator.push({
-                id: 'Home',
-              });
-            },
-          }
-        });
-
+            cancel: {
+              text: 'No thanks',
+              callback: () => {
+                this.props.navigator.push({
+                  id: 'Home',
+                });
+              },
+            }
+          });
+        }
       }));
     });
   }
