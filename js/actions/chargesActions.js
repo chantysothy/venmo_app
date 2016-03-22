@@ -80,7 +80,6 @@ exports.payPendingCharge = function(user, paymentId) {
       noncePromise().then((nonce) => {
         ajax.payPendingCharge(email, token, paymentId, nonce)
             .then(response => {
-              dispatch(fetchCharges(email, token));
               dispatch(refreshState(email, token));
               response.json().then(json => dispatch(receiveChargePayment(json.data)));
             })
@@ -95,7 +94,7 @@ exports.declinePendingCharge = function(email, token, paymentId) {
     dispatch({ type:  REQUEST_DECLINE_PAYMENT });
     return ajax.declinePendingCharge(email, token, paymentId)
                .then(response => {
-                 dispatch(fetchCharges(email, token));
+                 dispatch(refreshState(email, token));
                  response.json().then(json => dispatch(receiveChargePayment(json.data)));
                })
                .catch(error => console.log(error));
