@@ -2,6 +2,8 @@ import { REQUEST_LOGIN, RECEIVE_LOGIN, LOGOUT } from '../constants/actionTypes';
 import * as ajax from '../shared/ajax.js';
 import React from 'react-native'
 
+var { NativeAppEventEmitter } = require('react-native');
+
 var store = require('react-native-simple-store');
 
 function requestLogin() {
@@ -10,7 +12,7 @@ function requestLogin() {
   };
 }
 
-function receiveLogin(status, user, navigator) {
+function receiveLogin(status, user, error, navigator) {
   return dispatch => {
     if (status == 200) {
       store.save('email', user.user.email).then(() => {
@@ -37,6 +39,14 @@ function receiveLogin(status, user, navigator) {
         type: RECEIVE_LOGIN,
         error: 'Invalid credentials'
       });
+
+      if (error !== undefined) {
+        NativeAppEventEmitter.emit("showPopup", {
+          title: "Login error",
+          content: [error],
+          buttonText: "Okay",
+        });
+      }
     }
   }
 }
@@ -62,7 +72,7 @@ exports.fetchLoginWithToken = function fetchLoginWithToken(email, token, navigat
     return ajax.loginWithToken(email, token)
                .then(response => {
                    response.json()
-                           .then(json => dispatch(receiveLogin(response.status, json.data, navigator)))
+                           .then(json => dispatch(receiveLogin(response.status, json.data, json.error, navigator)))
                })
                .catch(error => console.log(error));
   }
