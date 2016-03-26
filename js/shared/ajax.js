@@ -3,7 +3,10 @@
 import { API_BASE } from '../constants/urls.js';
 var queryString = require('query-string');
 
+
 import React from 'react-native'
+
+var { NativeAppEventEmitter } = require('react-native');
 var url = require('url');
 
 function formatData(data){
@@ -20,22 +23,41 @@ function formatData(data){
   return f;
 }
 
+function fetch_timeout(requestUrl, options) {
+  var req =  fetch(requestUrl, options);
+  return new Promise((resolve, reject) => {
+    var errorTimeout = setTimeout(() => {
+      NativeAppEventEmitter.emit("showPopup", {
+        title: "Connection error",
+        content: ['No internet'],
+        buttonText: "Okay",
+      });
+      reject('Network request timed out');
+    }, 10 * 1000);
+
+    req.then((result) => {
+      clearTimeout(errorTimeout);
+      resolve(result);
+    });
+  });
+}
+
 function PUT(requestUrl, data) {
-  return fetch(requestUrl, {
+  return fetch_timeout(requestUrl, {
     method: 'put',
     body: formatData(data)
   });
 }
 
 function POST(requestUrl, data) {
-  return fetch(requestUrl, {
+  return fetch_timeout(requestUrl, {
     method: 'post',
     body: formatData(data)
   });
 }
 
 function GET(requestUrl, data) {
-  return fetch(requestUrl + '?' + queryString.stringify(data), { method: 'get' } );
+  return fetch_timeout(requestUrl + '?' + queryString.stringify(data), { method: 'get' } );
 }
 
 export function facebookCreateOrLogin(facebookToken) {

@@ -17,6 +17,11 @@ function receiveLogin(status, user, error, navigator) {
     if (status == 200) {
       store.save('email', user.user.email).then(() => {
         store.save('token', user.authentication_token).then(() => {
+          dispatch({
+            type: RECEIVE_LOGIN,
+            user,
+            receivedAt: Date.now(),
+          });
           if (user.user.phone_number === null) {
             navigator.push({
               id: 'PhoneVerification',
@@ -26,14 +31,10 @@ function receiveLogin(status, user, error, navigator) {
               id: 'Home',
             });
           }
+
         });
       });
 
-      dispatch({
-        type: RECEIVE_LOGIN,
-        user,
-        receivedAt: Date.now(),
-      });
     } else {
       dispatch({
         type: RECEIVE_LOGIN,
@@ -51,15 +52,28 @@ function receiveLogin(status, user, error, navigator) {
   }
 }
 
+function handleLoginError(error) {
+  return dispatch => {
+    dispatch({
+      type: RECEIVE_LOGIN,
+      error: 'Connection error'
+    });
+  }
+}
+
 exports.fetchFacebookLogin = function fetchFacebookLogin(token, navigator) {
   return dispatch => {
     dispatch(requestLogin());
     return ajax.facebookCreateOrLogin(token)
-    .then(response => {
-      response.json()
-      .then(json => dispatch(receiveLogin(response.status, json.data, navigator)))
-    })
-    .catch(error => console.log(error));
+               .then(response => {
+                 response.json()
+                         .then(json => {
+                           dispatch(receiveLogin(response.status, json.data, json.error, navigator))
+                         })
+               })
+               .catch(error => {
+                 dispatch(handleLoginError());
+               });
   }
 }
 
@@ -71,10 +85,12 @@ exports.fetchLoginWithToken = function fetchLoginWithToken(email, token, navigat
     dispatch(requestLogin());
     return ajax.loginWithToken(email, token)
                .then(response => {
-                   response.json()
-                           .then(json => dispatch(receiveLogin(response.status, json.data, json.error, navigator)))
+                  response.json()
+                          .then(json => dispatch(receiveLogin(response.status, json.data, json.error, navigator)))
                })
-               .catch(error => console.log(error));
+               .catch(error => {
+                  dispatch(handleLoginError());
+               });
   }
 }
 
