@@ -67,6 +67,7 @@ class PaymentSelectUser extends Component {
         placeholder="Enter a name"
         autoCapitalize="none"
         autoFocus={true}
+        autoCorrect={false}
         value={this.state.query}
       />
 
