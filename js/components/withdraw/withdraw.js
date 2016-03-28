@@ -35,7 +35,7 @@ class Withdraw extends Component {
       };
     } else {
       this.state = this.props.user.params.user.bank;
-      this.state.amount = "1.00";
+      this.state.amount = this.props.user.params.balance.balance_cents > 0 ? "1.00" : "0.00";
     }
   }
 
