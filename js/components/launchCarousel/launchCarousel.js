@@ -192,12 +192,17 @@ class LaunchCarousel extends Component {
     var self = this;
     FacebookLoginManager.newSession((error, data) => {
       if (error) {
-        if (Platform.OS == 'android') {
-          if (!this.state.hasLoggedOut) {
-            this.setState({ hasLoggedOut: true });
+        if (!this.state.hasLoggedOut) {
+          this.setState({ hasLoggedOut: true });
+          if (Platform.OS == 'android') {
             return FacebookLoginManager.logout(() => {
               this._loginWithFacebook();
             });
+          } else {
+            // may be race conditions here
+            FacebookLoginManager.logout();
+            this._loginWithFacebook();
+            return;
           }
         }
         if (error !== "Canceled") {
