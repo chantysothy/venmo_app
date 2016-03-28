@@ -200,7 +200,7 @@ class Charge extends Component {
   }
 
   _payCharge() {
-    this.props.dispatch(payPendingCharge(this.props.user.params, this.props.payment.id));
+    this.props.dispatch(payPendingCharge(this.props.user.params, this.props.payment));
   }
 
   _declineCharge() {

@@ -83,19 +83,21 @@ function fetchCharges(email, token) {
 
 exports.fetchCharges = fetchCharges;
 
-exports.payPendingCharge = function(user, paymentId) {
+exports.payPendingCharge = function(user, payment) {
   var email = user.user.email;
   var token = user.authentication_token;
+  var parsedAmountCents = parseFloat(payment.amount) * 100;
 
   var noncePromise = () => new Promise((resolve) => { resolve("") });
-  if (!user.user.braintree_account) {
+  if (parsedAmountCents > 0 && parsedAmountCents > user.balance.balance_cents && !user.user.braintree_account) {
     noncePromise = braintreeNonce;
   }
+
   return dispatch => {
     initBraintreeWithToken().then(() => {
       noncePromise().then((nonce) => {
         dispatch({ type:  REQUEST_CHARGE_PAYMENT });
-        ajax.payPendingCharge(email, token, paymentId, nonce)
+        ajax.payPendingCharge(email, token, payment.id, nonce)
             .then(response => {
               dispatch(refreshState(email, token));
               response.json().then(json => dispatch(receiveChargePayment(json)));
