@@ -23,7 +23,7 @@ export default class PrivacyPolicy extends Component {
         <TitleBar text="Privacy"
           back={() => this.props.navigator.pop()} />
         <ScrollView contentContainerStyle={styles.policyContainer}>
-          <Text style={[textStyles.text, styles.headerText]}>This is our privacy policy.</Text>
+          <Text style={[textStyles.text, styles.headerText]}>We're here for you.</Text>
           <Text style={[textStyles.text, styles.bodyText]}>
             We collect your personal information only for processing purposes. We'll never use
             your personal information except to process payments and serve you better.
@@ -41,7 +41,7 @@ export default class PrivacyPolicy extends Component {
             address is used to provide you with email updates when payments go through.
           </Text>
           <Text style={[textStyles.text, styles.bodyText]}>
-            We do not retain payment information. All of that is kept securely with our payment processor, who are fully PCI compliant. For more information, please visit their privacy policy.
+            We do not retain payment information. All of that is kept securely with our payment processor, who are fully PCI compliant.
           </Text>
         </ScrollView>
       </View>

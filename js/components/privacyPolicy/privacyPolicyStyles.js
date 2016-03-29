@@ -17,8 +17,7 @@ var styles = StyleSheet.create({
   },
   policyContainer: {
     alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 20,
+    padding: 20,
   },
   headerText: {
     color: 'black',
