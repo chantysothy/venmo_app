@@ -9,7 +9,6 @@ import React, {
   ListView,
   Navigator,
   InteractionManager,
-  Platform,
   NativeAppEventEmitter,
   RefreshControl,
 } from 'react-native';
@@ -26,7 +25,6 @@ var ScrollableTabView = require('react-native-scrollable-tab-view');
 var styles = require('./chargesStyles.js');
 var textStyles = require('../../shared/textStyles');
 var TimeAgo = require('../../utils/timeAgo.js');
-var LoadingOverlay = require('../../shared/loadingOverlay');
 
 var NO_CHARGES = {
   isNoCharge: true,
@@ -53,33 +51,17 @@ class Charges extends Component {
     var chargeList = <ChargeList
         user={this.props.user}
         style={styles.socialFeed}
-        isFetching={this.props.charges.isFetching}
+        isFetching={this.props.charges.isFetching || this.props.charges.payingOrDecliningCharge}
         refreshCharges={this._refreshCharges.bind(this)}
         dispatch={this.props.dispatch}
         charges={charges} />
 
-    var loadingIndicatorVisible = this.props.charges.isFetching || this.props.charges.payingOrDecliningCharge;
-    var loadingOverlay = (<LoadingOverlay isVisible={loadingIndicatorVisible} />);
-    if (Platform.OS === 'android') {
-      if (loadingIndicatorVisible) {
-        var androidLoadingOverlay = loadingOverlay;
-      } else {
-        var androidLoadingOverlay = null;
-      }
-      var iosLoadingOverlay = null;
-    } else if (Platform.OS === 'ios') {
-      var iosLoadingOverlay = loadingOverlay;
-      var androidLoadingOverlay = null;
-    }
-
     return(
       <View style={styles.container}>
-        { iosLoadingOverlay }
         <TitleBar text="Charges" back={() => this.props.navigator.pop()} />
           <View style={styles.chargeListContainer}>
             {chargeList}
           </View>
-        { androidLoadingOverlay }
       </View>
     );
   }
