@@ -21,6 +21,7 @@ import Popup from 'react-native-popup';
 
 import * as colors from '../../constants/colors';
 import * as textStyles from '../../shared/textStyles';
+import FadeInView from '../../shared/fadeInView';
 
 import getDimensions from '../../shared/dimensions';
 var {width, height} = getDimensions();
@@ -96,7 +97,7 @@ class LaunchCarousel extends Component {
     }
 
     return(
-      <View style={styles.container}>
+      <FadeInView style={styles.container}>
         { iosLoadingOverlay }
         { underPage }
         <ViewPager
@@ -106,7 +107,7 @@ class LaunchCarousel extends Component {
           isLoop={false}/>
         <Popup ref={(popup) => { this.popup = popup }}/>
         { androidLoadingOverlay }
-      </View>
+      </FadeInView>
     );
   }
 
