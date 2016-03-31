@@ -71,13 +71,9 @@ var styles = StyleSheet.create({
   },
   payButton: {
     backgroundColor: colors.green,
-    borderColor: "green",
-    borderWidth: 1,
   },
   declineButton: {
     backgroundColor: colors.grey,
-    borderColor: "grey",
-    borderWidth: 1,
   },
   commentText: {
     color: "#999999"
